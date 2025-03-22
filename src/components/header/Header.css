@@ -111,6 +111,10 @@ nav {
   align-items: center;
 }
 
+.right-links {
+  gap: 30px;
+}
+
 .left-links li,
 .right-links li {
   display: inline;

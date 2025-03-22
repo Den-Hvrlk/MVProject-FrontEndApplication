@@ -31,6 +31,11 @@ const DownHeader: React.FC = () => {
             </Link>
           </li>
           <li>
+            <Link to="/VolunteerProjects">
+              <p className="a-link">ВОЛОНТЕРСЬКІ ПРОЕКТИ</p>
+            </Link>
+          </li>
+          <li>
             <Link to="/MilitaryGroups">
               <p className="a-link">ВІЙСЬКОВІ УГРУПУВАННЯ</p>
             </Link>

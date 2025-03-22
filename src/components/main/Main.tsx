@@ -8,6 +8,7 @@ import Reports from "./Reports/Reports";
 import ConfidentialityPolicy from "./ConfidentialityPolicy/ConfidentialityPolicy";
 import Support from "./Support/Support";
 import { Navigate, Route, Routes } from "react-router-dom";
+import VolunteerProjects from "./VolunteerProjects/VolunteerProjects";
 
 const Main: React.FC = () => {
   console.log("Main");
@@ -20,6 +21,7 @@ const Main: React.FC = () => {
         <Route path="/Donate" element={<Donate />} />
         <Route path="/MilitaryGroups" element={<MilitaryGroups />} />
         <Route path="/VolunteerFunds" element={<VolunteerFunds />} />
+        <Route path="/VolunteerProjects" element={<VolunteerProjects />} />
         <Route path="/AboutUs" element={<About />} />
         <Route path="/Reports" element={<Reports />} />
         <Route

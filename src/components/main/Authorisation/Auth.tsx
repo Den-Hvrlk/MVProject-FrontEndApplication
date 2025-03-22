@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Auth.css";
+import { Link } from "react-router-dom";
 
 const Auth: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -24,6 +25,9 @@ const Auth: React.FC = () => {
           required
         />
         <button type="submit">Увійти</button>
+        <p>
+          <Link to="/Registration">Зареєструватися</Link>
+        </p>
       </form>
     </div>
   );

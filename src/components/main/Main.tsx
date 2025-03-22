@@ -12,7 +12,7 @@ import { Route, Routes } from "react-router-dom";
 const Main: React.FC = () => {
   console.log("Main");
   return (
-    <>
+    <main className="main-content">
       <Routes>
         <Route path="/Fundraising" element={<Fundraising />} />
         <Route path="/Auth" element={<Auth />} />
@@ -27,7 +27,7 @@ const Main: React.FC = () => {
         />
         <Route path="/Support" element={<Support />} />
       </Routes>
-    </>
+    </main>
   );
 };
 

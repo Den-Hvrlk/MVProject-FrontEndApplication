@@ -7,13 +7,14 @@ import About from "./AboutUs/AboutUs";
 import Reports from "./Reports/Reports";
 import ConfidentialityPolicy from "./ConfidentialityPolicy/ConfidentialityPolicy";
 import Support from "./Support/Support";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 const Main: React.FC = () => {
   console.log("Main");
   return (
     <main className="main-content">
       <Routes>
+        <Route path="/" element={<Navigate to="/Fundraising" replace />} />
         <Route path="/Fundraising" element={<Fundraising />} />
         <Route path="/Auth" element={<Auth />} />
         <Route path="/Donate" element={<Donate />} />

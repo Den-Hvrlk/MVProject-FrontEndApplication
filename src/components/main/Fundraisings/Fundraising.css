@@ -1,0 +1,65 @@
+main {
+  padding-left: 48px;
+  padding-right: 48px;
+  padding-bottom: 48px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.fundraising-filter {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input {
+  font-size: medium;
+  border-radius: 10px;
+  width: 250px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+  border-color: #6c8ee6;
+  box-shadow: 0 0 5px rgba(108, 142, 230, 0.6);
+}
+
+p {
+  font-size: small;
+  margin-top: 10px;
+  color: #333;
+}
+
+p a {
+  color: #6c8ee6;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+p a:hover {
+  color: #4a6bbf;
+  text-decoration: underline;
+}
+
+#fundraising-list {
+  background-color: #eaeaea;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+#fundraising-list div {
+  background: white;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}

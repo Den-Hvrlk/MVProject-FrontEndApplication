@@ -28,19 +28,19 @@ header {
   gap: 10px;
 }
 
-.social-links a img {
+.social-links .a-link img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.social-links a img:hover {
+.social-links .a-link img:hover {
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.social-links button {
+.social-links .log-in {
   background-color: black;
   color: white;
   border: none;
@@ -52,7 +52,7 @@ header {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.social-links button:hover {
+.social-links .log-in:hover {
   background-color: #333;
   transform: scale(1.05);
   color: #6c8ee6 !important;
@@ -83,16 +83,19 @@ nav {
   border-radius: 50%;
 }
 
-.donate-a {
+.left-links .donate-a {
   background-color: black;
-  color: white !important;
+  color: white;
+  border: none;
   padding: 6px 12px;
+  cursor: pointer;
   border-radius: 5px;
-  display: inline-block;
-  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.donate-a:hover {
+.left-links .donate-a:hover {
   background-color: #333;
   transform: scale(1.05);
   color: #6c8ee6 !important;
@@ -113,17 +116,20 @@ nav {
   display: inline;
 }
 
-.left-links li a,
-.right-links li a {
-  text-decoration: none;
+.left-links li .a-link,
+.right-links li .a-link {
   color: #333;
   font-weight: bold;
   font-size: 16px;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.left-links li a:hover,
-.right-links li a:hover {
+.left-links li .a-link:hover,
+.right-links li .a-link:hover {
   color: #6c8ee6;
   transform: scale(1.1);
+}
+
+a {
+  text-decoration: none;
 }

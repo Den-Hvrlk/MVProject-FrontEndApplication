@@ -1,8 +1,6 @@
-import { useAppDispatch } from "../../store/hooks.ts";
-import { setPage } from "../../store/pageSlice.ts";
+import { Link } from "react-router-dom";
 
 const UpHeader: React.FC = () => {
-  const dispatch = useAppDispatch();
   const email = "megassv10122003@gmail.com";
   const phone = "+380685080882";
   console.log("UpHeader");
@@ -34,7 +32,9 @@ const UpHeader: React.FC = () => {
             className="social-facebook"
           />
         </a>
-        <button onClick={() => dispatch(setPage("Auth"))}>Log In</button>
+        <Link to="/Auth">
+          <p className="log-in">Log In</p>
+        </Link>
       </div>
     </div>
   );

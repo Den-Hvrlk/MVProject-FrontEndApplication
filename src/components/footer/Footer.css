@@ -30,7 +30,7 @@ footer {
   align-items: center;
 }
 
-.footer-links a {
+.footer-links .a-link {
   color: #333;
   text-decoration: none;
   font-size: 16px;
@@ -38,7 +38,7 @@ footer {
   transition: color 0.3s ease;
 }
 
-.footer-links a:hover {
+.footer-links .a-link:hover {
   color: #4a7be5;
 }
 
@@ -56,7 +56,8 @@ footer {
   margin-top: 15px;
 }
 
-.social-icons a {
+.social-icons a,
+.a-link {
   display: inline-block;
 }
 
@@ -76,4 +77,8 @@ footer p {
   margin-top: 20px;
   font-size: 14px;
   color: #666;
+}
+
+a {
+  text-decoration: none;
 }

@@ -1,8 +1,6 @@
-import { useAppDispatch } from "../../store/hooks";
-import { setPage } from "../../store/pageSlice";
+import { Link } from "react-router-dom";
 
 const DownHeader: React.FC = () => {
-  const dispatch = useAppDispatch();
   console.log("DownHeader");
   return (
     <nav>
@@ -14,42 +12,38 @@ const DownHeader: React.FC = () => {
         />
         <ul className="left-links">
           <li>
-            <a
-              className="donate-a"
-              href="#"
-              onClick={() => dispatch(setPage("Donate"))}
-            >
-              ЗАДОНАТИТИ
-            </a>
+            <Link to="/Donate">
+              <p className="donate-a">ЗАДОНАТИТИ</p>
+            </Link>
           </li>
           <li>
-            <a href="#" onClick={() => dispatch(setPage("AboutUs"))}>
-              Про нас
-            </a>
+            <Link to="/AboutUs">
+              <p className="a-link">Про нас</p>
+            </Link>
           </li>
         </ul>
       </div>
       <div className="right-section">
         <ul className="right-links">
           <li>
-            <a href="#" onClick={() => dispatch(setPage("Fundraising"))}>
-              ЗБОРИ КОШТІВ
-            </a>
+            <Link to="/Fundraising">
+              <p className="a-link">ЗБОРИ КОШТІВ</p>
+            </Link>
           </li>
           <li>
-            <a href="#" onClick={() => dispatch(setPage("MilitaryGroups"))}>
-              ВІЙСЬКОВІ УГРУПУВАННЯ
-            </a>
+            <Link to="/MilitaryGroups">
+              <p className="a-link">ВІЙСЬКОВІ УГРУПУВАННЯ</p>
+            </Link>
           </li>
           <li>
-            <a href="#" onClick={() => dispatch(setPage("VolunteerFunds"))}>
-              ВОЛОНТЕРСЬКІ ФОНДИ
-            </a>
+            <Link to="/VolunteerFunds">
+              <p className="a-link">ВОЛОНТЕРСЬКІ ФОНДИ</p>
+            </Link>
           </li>
           <li>
-            <a href="#" onClick={() => dispatch(setPage("Reports"))}>
-              ЗВІТИ
-            </a>
+            <Link to="/Reports">
+              <p className="a-link">ЗВІТИ</p>
+            </Link>
           </li>
         </ul>
       </div>

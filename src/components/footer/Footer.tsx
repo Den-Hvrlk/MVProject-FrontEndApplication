@@ -1,26 +1,30 @@
-import { useAppDispatch } from "../../store/hooks";
-import { setPage } from "../../store/pageSlice";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
-  const dispatch = useAppDispatch();
   return (
     <>
       <footer>
         <div className="footer-links">
           <div className="footer-links left">
-            <a href="#" onClick={() => dispatch(setPage("Fundraising"))}>
-              Збори <br />
-              коштів
-            </a>
-            <a href="#" onClick={() => dispatch(setPage("MilitaryGroups"))}>
-              Військові <br />
-              угрупування
-            </a>
-            <a href="#" onClick={() => dispatch(setPage("VolunteerFunds"))}>
-              Волонтерські <br />
-              фонди
-            </a>
+            <Link to="/Fundraising">
+              <p className="a-link">
+                Збори <br />
+                коштів
+              </p>
+            </Link>
+            <Link to="/MilitaryGroups">
+              <p className="a-link">
+                Військові <br />
+                угруповання
+              </p>
+            </Link>
+            <Link to="/VolunteerFunds">
+              <p className="a-link">
+                Волонтерські <br />
+                фонди
+              </p>
+            </Link>
           </div>
 
           <div className="logo-container">
@@ -28,14 +32,18 @@ function Footer() {
           </div>
 
           <div className="footer-links right">
-            <a href="#" onClick={() => dispatch(setPage("AboutUs"))}>
-              Про нас
-            </a>
-            <a href="#">
-              Політика <br />
-              конфіденційності
-            </a>
-            <a href="#">Підтримка</a>
+            <Link to="/AboutUs">
+              <p className="a-link">Про нас</p>
+            </Link>
+            <Link to="/ConfidentialityPolicy">
+              <p className="a-link">
+                Політика <br />
+                конфіденційності
+              </p>
+            </Link>
+            <Link to="/Support">
+              <p className="a-link">Підтримка</p>
+            </Link>
           </div>
         </div>
         <div className="social-icons">

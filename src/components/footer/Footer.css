@@ -4,6 +4,7 @@ footer {
   text-align: center;
   font-family: Arial, sans-serif;
   color: #333;
+  box-sizing: border-box; /* Учитываем padding и border */
 }
 
 .footer-container {
@@ -16,6 +17,7 @@ footer {
   display: flex;
   gap: 50px;
   align-items: center;
+  flex-wrap: wrap; /* Чтобы элементы переносились на мобильных устройствах */
 }
 
 .footer-links.left {
@@ -81,4 +83,47 @@ footer p {
 
 a {
   text-decoration: none;
+}
+
+/* ========== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
+@media (max-width: 768px) {
+  footer {
+    padding: 16px; /* Уменьшаем отступы */
+  }
+
+  .footer-container {
+    flex-direction: column;
+    align-items: center; /* Центрируем элементы */
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 15px; /* Уменьшаем gap между элементами */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer-links .a-link {
+    font-size: 14px; /* Меньше размер шрифта */
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .social-icons {
+    gap: 10px; /* Уменьшаем gap между иконками */
+    margin-top: 12px;
+  }
+
+  .social-icons img {
+    width: 30px;
+    height: 30px;
+  }
+
+  footer p {
+    font-size: 12px; /* Меньше размер шрифта для текста */
+    margin-top: 12px;
+  }
 }

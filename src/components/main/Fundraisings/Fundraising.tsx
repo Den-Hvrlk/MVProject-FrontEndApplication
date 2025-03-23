@@ -26,6 +26,35 @@ function Fundraising() {
         <div>Данные</div>
         <div>Данные</div>
         <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
       </section>
     </>
   );

@@ -21,6 +21,35 @@ const VolunteerProjects: React.FC = () => {
         <div>Данные</div>
         <div>Данные</div>
         <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
+        <div>Данные</div>
       </section>
     </>
   );

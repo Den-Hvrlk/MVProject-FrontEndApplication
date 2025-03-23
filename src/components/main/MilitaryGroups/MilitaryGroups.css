@@ -24,12 +24,36 @@ input:focus {
   border-radius: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
+  max-width: 1100px; /* Делаем ширину списка аналогичной Fundraising */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 элемента в ряд */
+  gap: 16px; /* Отступы */
 }
 
 #military-group-list div {
   background: white;
-  margin: 8px 0;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
+@media (max-width: 1024px) {
+  #military-group-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 в ряд на планшетах */
+  }
+
+  input {
+    width: 300px; /* Уменьшаем ширину инпута */
+  }
+}
+
+@media (max-width: 768px) {
+  #military-group-list {
+    grid-template-columns: repeat(1, 1fr); /* 1 в ряд на телефонах */
+  }
+
+  input {
+    width: 250px; /* Ещё меньше на мобилках */
+  }
 }

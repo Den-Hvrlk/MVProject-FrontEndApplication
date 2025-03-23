@@ -1,15 +1,16 @@
 main {
-  padding-left: 48px;
-  padding-right: 48px;
-  padding-bottom: 48px;
+  padding: 24px;
   font-family: Arial, sans-serif;
 }
 
+/* Заголовок */
 h1 {
-  font-size: 28px;
+  font-size: clamp(22px, 5vw, 28px); /* Плавное уменьшение на мобилках */
   font-weight: bold;
+  text-align: center;
 }
 
+/* Фильтр */
 .fundraising-filter {
   text-align: center;
   margin-bottom: 20px;
@@ -18,7 +19,8 @@ h1 {
 input {
   font-size: medium;
   border-radius: 10px;
-  width: 250px;
+  width: 100%;
+  max-width: 250px;
   padding: 8px 12px;
   border: 1px solid #ccc;
   outline: none;
@@ -30,10 +32,12 @@ input:focus {
   box-shadow: 0 0 5px rgba(108, 142, 230, 0.6);
 }
 
+/* Описание */
 p {
   font-size: small;
   margin-top: 10px;
   color: #333;
+  text-align: center;
 }
 
 p a {
@@ -48,18 +52,64 @@ p a:hover {
   text-decoration: underline;
 }
 
+/* Блоки сбора средств */
 #fundraising-list {
   background-color: #eaeaea;
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
+  max-width: 1100px; /* Оптимальная ширина для 3 колонок */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 в ряд */
+  gap: 16px; /* Отступы между элементами */
 }
 
 #fundraising-list div {
   background: white;
-  margin: 8px 0;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
+@media (max-width: 768px) {
+  main {
+    padding: 16px; /* Уменьшаем отступы */
+  }
+
+  h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .fundraising-filter {
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #fundraising-list {
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  #fundraising-list div {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 1024px) {
+  #fundraising-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 в ряд на планшетах */
+  }
+}
+
+@media (max-width: 768px) {
+  #fundraising-list {
+    grid-template-columns: repeat(1, 1fr); /* 1 в ряд на телефонах */
+  }
 }

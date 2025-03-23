@@ -7,7 +7,7 @@ import About from "./AboutUs/AboutUs";
 import Reports from "./Reports/Reports";
 import ConfidentialityPolicy from "./ConfidentialityPolicy/ConfidentialityPolicy";
 import Support from "./Support/Support";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import VolunteerProjects from "./VolunteerProjects/VolunteerProjects";
 import Registration from "./Registration/Registration";
 
@@ -16,7 +16,7 @@ const Main: React.FC = () => {
   return (
     <main className="main-content">
       <Routes>
-        <Route path="/" element={<Navigate to="/Fundraising" replace />} />
+        <Route path="/" element={<Fundraising />} />
         <Route path="/Fundraising" element={<Fundraising />} />
         <Route path="/Auth" element={<Auth />} />
         <Route path="/Registration" element={<Registration />} />

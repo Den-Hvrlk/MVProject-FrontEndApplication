@@ -1,22 +1,21 @@
 header {
   background-color: #eaeaea;
   border-bottom: 1px solid #ddd;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 12px 16px; /* Уменьшенные отступы */
   font-family: Arial, sans-serif;
 }
 
+/* Верхняя панель */
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
   color: #555;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 4px;
+  padding: 4px 16px;
 }
 
+/* Контактные данные */
 .contact-info {
   display: flex;
   gap: 15px;
@@ -29,17 +28,13 @@ header {
 }
 
 .social-links .a-link img {
-  width: 32px;
-  height: 32px;
+  width: 28px; /* Уменьшаем размер иконок */
+  height: 28px;
   border-radius: 50%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.social-links .a-link img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
+/* Кнопка входа */
 .social-links .log-in {
   background-color: black;
   color: white;
@@ -58,31 +53,33 @@ header {
   color: #6c8ee6 !important;
 }
 
+/* Навигация */
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 10px 16px;
 }
 
 .left-section {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 }
 
 .left-section,
 .right-section {
-  padding-left: 28px;
-  padding-right: 28px;
+  padding: 0 16px;
 }
 
+/* Логотип */
 .logo {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
 }
 
+/* Кнопка "Донат" */
 .left-links .donate-a {
   background-color: black;
   color: white;
@@ -101,18 +98,19 @@ nav {
   color: #6c8ee6 !important;
 }
 
+/* Основные ссылки */
 .left-links,
 .right-links {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 15px;
   margin: 0;
   padding: 0;
   align-items: center;
 }
 
 .right-links {
-  gap: 30px;
+  gap: 20px;
 }
 
 .left-links li,
@@ -136,4 +134,58 @@ nav {
 
 a {
   text-decoration: none;
+}
+
+/* ========== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .social-links {
+    gap: 5px;
+  }
+
+  .social-links .a-link img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .social-links .log-in {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .left-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .left-links,
+  .right-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
 }

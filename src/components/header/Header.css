@@ -25,6 +25,7 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-direction: row;
 }
 
 .social-links .a-link img {
@@ -152,7 +153,8 @@ a {
   }
 
   .social-links {
-    gap: 5px;
+    flex-direction: column;
+    align-items: center;
   }
 
   .social-links .a-link img {
@@ -187,5 +189,9 @@ a {
   .logo {
     width: 40px;
     height: 40px;
+  }
+
+  .log-in-container {
+    margin-top: 10px; /* Отступ сверху */
   }
 }

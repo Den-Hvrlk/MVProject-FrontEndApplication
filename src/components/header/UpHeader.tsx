@@ -32,9 +32,11 @@ const UpHeader: React.FC = () => {
             className="social-facebook"
           />
         </a>
-        <Link to="/Auth">
-          <p className="log-in">Log In</p>
-        </Link>
+        <div className="log-in-container">
+          <Link to="/Auth">
+            <p className="log-in">Log In</p>
+          </Link>
+        </div>
       </div>
     </div>
   );

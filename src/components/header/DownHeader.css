@@ -107,6 +107,7 @@ a {
   }
 
   .right-links {
+    columns: 2;
     display: flex;
     flex-wrap: wrap;
     gap: 20px; /* Отступы между элементами */

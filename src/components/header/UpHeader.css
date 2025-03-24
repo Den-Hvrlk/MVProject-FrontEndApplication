@@ -21,6 +21,7 @@
   gap: 10px;
 }
 
+/* Социальные иконки */
 .social-links {
   display: flex;
   align-items: center;
@@ -28,7 +29,7 @@
   flex-direction: row;
 }
 
-.social-links .a-link img {
+.social-links a img {
   width: 28px; /* Уменьшаем размер иконок */
   height: 28px;
   border-radius: 50%;
@@ -68,9 +69,14 @@
     gap: 6px;
   }
 
-  .social-links {
+  .social-container {
     flex-direction: column;
     align-items: center;
+    gap: 10px; /* Добавляем отступ между иконками и кнопкой */
+  }
+
+  .social-links {
+    flex-direction: row; /* Иконки идут в ряд */
   }
 
   .social-links .a-link img {
@@ -78,7 +84,7 @@
     height: 24px;
   }
 
-  .social-links .log-in {
+  .log-in-container .log-in {
     font-size: 12px;
     padding: 4px 8px;
   }

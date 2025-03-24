@@ -86,6 +86,7 @@ a {
 }
 
 /* ========== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
+/* ========== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
 @media (max-width: 768px) {
   footer {
     padding: 16px; /* Уменьшаем отступы */
@@ -103,8 +104,20 @@ a {
     align-items: center;
   }
 
-  .footer-links .a-link {
-    font-size: 14px; /* Меньше размер шрифта */
+  /* Левые ссылки в ряд */
+  .footer-links.left {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Расстояние между ссылками */
+    flex-wrap: wrap; /* Позволяет элементам переходить на следующую строку, если не помещаются */
+    width: 100%;
+  }
+
+  /* Логотип - ставим на новый ряд */
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
   }
 
   .logo {
@@ -112,9 +125,22 @@ a {
     height: 50px;
   }
 
+  /* Правые ссылки в ряд */
+  .footer-links.right {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Расстояние между ссылками */
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  /* Иконки соц. сетей в ряд */
   .social-icons {
-    gap: 10px; /* Уменьшаем gap между иконками */
-    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
   }
 
   .social-icons img {
@@ -125,5 +151,9 @@ a {
   footer p {
     font-size: 12px; /* Меньше размер шрифта для текста */
     margin-top: 12px;
+  }
+
+  .footer-links .a-link {
+    font-size: 14px; /* Меньше размер шрифта */
   }
 }

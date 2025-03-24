@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./DownHeader.css";
 
 const DownHeader: React.FC = () => {
   console.log("DownHeader");

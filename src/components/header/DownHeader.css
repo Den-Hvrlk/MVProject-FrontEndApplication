@@ -1,0 +1,139 @@
+/* Навигация */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.left-section,
+.right-section {
+  padding: 0 16px;
+}
+
+/* Логотип */
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+/* Кнопка "Донат" */
+.left-links .donate-a {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.left-links .donate-a:hover {
+  background-color: #333;
+  transform: scale(1.05);
+  color: #6c8ee6 !important;
+}
+
+/* Основные ссылки */
+.left-links,
+.right-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.right-links {
+  gap: 20px;
+}
+
+.left-links li,
+.right-links li {
+  display: inline;
+}
+
+.left-links li .a-link,
+.right-links li .a-link {
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.left-links li .a-link:hover,
+.right-links li .a-link:hover {
+  color: #6c8ee6;
+  transform: scale(1.1);
+}
+
+a {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .left-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .right-section {
+    display: flex;
+    justify-content: center;
+  }
+
+  .left-links,
+  .right-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .right-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Отступы между элементами */
+    width: 300px; /* Ширина для двух колонок */
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .log-in-container {
+    margin-top: 10px; /* Отступ сверху */
+  }
+
+  .right-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Отступы между элементами */
+    width: 300px; /* Ширина для двух колонок */
+  }
+
+  .right-links li {
+    width: 50%; /* Каждый элемент занимает половину ширины */
+  }
+
+  .a-link {
+    display: block;
+    text-decoration: none;
+  }
+}

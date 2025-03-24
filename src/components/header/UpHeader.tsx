@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./UpHeader.css";
 
 const UpHeader: React.FC = () => {
   const email = "megassv10122003@gmail.com";
@@ -10,31 +11,21 @@ const UpHeader: React.FC = () => {
         <span>Email: {email}</span>
         <span>Phone: {phone}</span>
       </div>
-      <div className="social-links">
-        <a href="#">
-          <img
-            src="/images/telegram.png"
-            style={{ width: "32px", height: "32px", borderRadius: "50%" }}
-            className="social-telegram"
-          />
-        </a>
-        <a href="#">
-          <img
-            src="/images/instagram.png"
-            style={{ width: "32px", height: "32px", borderRadius: "50%" }}
-            className="social-instagram"
-          />
-        </a>
-        <a href="#">
-          <img
-            src="/images/facebook.png"
-            style={{ width: "32px", height: "32px", borderRadius: "50%" }}
-            className="social-facebook"
-          />
-        </a>
+      <div className="social-container">
+        <div className="social-links">
+          <a href="#">
+            <img src="/images/telegram.png" alt="Telegram" />
+          </a>
+          <a href="#">
+            <img src="/images/instagram.png" alt="Instagram" />
+          </a>
+          <a href="#">
+            <img src="/images/facebook.png" alt="Facebook" />
+          </a>
+        </div>
         <div className="log-in-container">
           <Link to="/Auth">
-            <p className="log-in">Log In</p>
+            <p className="log-in">LOG IN</p>
           </Link>
         </div>
       </div>

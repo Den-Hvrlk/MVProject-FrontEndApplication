@@ -97,6 +97,7 @@ a {
   .right-section {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .left-links,
@@ -128,8 +129,9 @@ a {
     width: 300px; /* Ширина для двух колонок */
   }
 
-  .right-links li {
+  .right-section .right-links li {
     width: 50%; /* Каждый элемент занимает половину ширины */
+    padding: 5px;
   }
 
   .a-link {

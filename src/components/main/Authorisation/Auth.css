@@ -16,6 +16,7 @@
   font-weight: bold;
 }
 
+/* Контейнер формы */
 .auth-container form {
   display: flex;
   flex-direction: column;
@@ -87,10 +88,22 @@ p a:hover {
 @media (max-width: 480px) {
   .auth-container {
     padding: 20px;
+    margin: 20px auto;
+    width: 90%;
+  }
+
+  .auth-container h2 {
+    font-size: 22px;
   }
 
   .auth-container input,
   .auth-container button {
     max-width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .auth-container button {
+    font-size: 16px;
   }
 }

@@ -17,7 +17,7 @@ footer {
   display: flex;
   gap: 50px;
   align-items: center;
-  flex-wrap: wrap; /* Чтобы элементы переносились на мобильных устройствах */
+  flex-wrap: wrap;
 }
 
 .footer-links.left {
@@ -86,7 +86,6 @@ a {
 }
 
 /* ========== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
-/* ========== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
 @media (max-width: 768px) {
   footer {
     padding: 16px; /* Уменьшаем отступы */
@@ -98,19 +97,29 @@ a {
   }
 
   .footer-links {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-links.left {
+    justify-content: flex-end;
+    flex: 1;
+    align-items: center;
+  }
+
+  .footer-links.right {
+    justify-content: flex-start;
+    flex: 1;
+    align-items: center;
+  }
+
+  .footer-links {
     flex-direction: column;
     gap: 15px; /* Уменьшаем gap между элементами */
     justify-content: center;
     align-items: center;
-  }
-
-  /* Левые ссылки в ряд */
-  .footer-links.left {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* Расстояние между ссылками */
-    flex-wrap: wrap; /* Позволяет элементам переходить на следующую строку, если не помещаются */
-    width: 100%;
   }
 
   /* Логотип - ставим на новый ряд */
@@ -123,16 +132,6 @@ a {
   .logo {
     width: 50px;
     height: 50px;
-  }
-
-  /* Правые ссылки в ряд */
-  .footer-links.right {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* Расстояние между ссылками */
-    flex-wrap: wrap;
-    width: 100%;
-    margin-top: 15px;
   }
 
   /* Иконки соц. сетей в ряд */

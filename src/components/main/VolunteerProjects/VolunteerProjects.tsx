@@ -9,47 +9,21 @@ const VolunteerProjects: React.FC = () => {
       </div>
 
       <section id="volunteer-projects-list">
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
       </section>
     </>
   );

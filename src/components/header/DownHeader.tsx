@@ -19,7 +19,7 @@ const DownHeader: React.FC = () => {
           </li>
           <li>
             <Link to="/AboutUs">
-              <p className="a-link">Про нас</p>
+              <p className="a-link">ПРО НАС</p>
             </Link>
           </li>
         </ul>

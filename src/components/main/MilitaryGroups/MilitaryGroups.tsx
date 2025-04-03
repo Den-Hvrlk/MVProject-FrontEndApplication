@@ -12,47 +12,21 @@ const MilitaryGroups: React.FC = () => {
       </div>
 
       <section id="military-group-list">
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
-        <div>Данные</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
+        <div>Дані</div>
       </section>
     </>
   );

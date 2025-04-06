@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import "./UpHeader.css";
 
 const UpHeader: React.FC = () => {
-  const email = "megassv10122003@gmail.com";
-  const phone = "+380685080882";
+  const email: string = import.meta.env.VITE_EMAIL;
+  const phone: string = import.meta.env.VITE_PHONE;
+
   console.log("UpHeader");
   return (
     <div className="top-bar">

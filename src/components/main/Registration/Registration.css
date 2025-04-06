@@ -22,7 +22,8 @@
 }
 
 /* Поля ввода */
-.auth-container input {
+.auth-container input,
+.auth-container select {
   width: 100%;
   max-width: 320px;
   padding: 12px;
@@ -34,10 +35,19 @@
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.auth-container input:focus {
+.auth-container input:focus,
+.auth-container select:focus {
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.auth-container select {
+  appearance: none;
+}
+
+.auth-container select::-ms-expand {
+  display: none; /* Для IE/Edge */
 }
 
 /* Контейнеры для ввода */
@@ -110,6 +120,7 @@ p a:hover {
   }
 
   .auth-container input,
+  .auth-container select,
   .auth-container button {
     max-width: 100%;
     font-size: 14px;

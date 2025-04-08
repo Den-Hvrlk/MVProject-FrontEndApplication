@@ -1,4 +1,4 @@
-import { useDeferredValue, useState } from "react";
+import { useState } from "react";
 import "./Registration.css";
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,6 @@ const Registration: React.FC = () => {
   const [messageType, setMessageType] = useState<"success" | "error">(
     "success"
   );
-  const deferredFormData = useDeferredValue(formData);
 
   async function setMessageAfterRegistration(
     response: Response
@@ -31,25 +30,30 @@ const Registration: React.FC = () => {
     setRequestMessage(data);
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const validateDate = (date: string): boolean => {
     const year = new Date(date).getFullYear();
-    return year >= 1800 && year <= 9999;
+    return year >= 1000 && year <= 9999;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    console.log(formData);
+
     try {
+      if (!formData.sex) {
+        setRequestMessage("Стать не може бути пустою");
+        setMessageType("error");
+        return;
+      }
+
       if (!validateDate(formData.birthDate)) {
         setRequestMessage(
           "Некоректна дата народження. Будь ласка, перевірте введені дані"
@@ -84,44 +88,53 @@ const Registration: React.FC = () => {
           type="email"
           name="email"
           placeholder="Email"
-          value={deferredFormData.email}
-          onChange={handleInputChange}
+          value={formData.email}
+          onChange={handleChange}
           required
         />
         <input
           type="password"
           name="password"
           placeholder="Пароль"
-          value={deferredFormData.password}
-          onChange={handleInputChange}
+          value={formData.password}
+          onChange={handleChange}
           required
         />
         <input
           type="text"
           name="phone"
           placeholder="Номер телефону"
-          value={deferredFormData.phone}
-          onChange={handleInputChange}
+          value={formData.phone}
+          onChange={handleChange}
           required
         />
+        <br />
         <label htmlFor="sex">Стать</label>
-        <select
-          name="sex"
-          value={deferredFormData.sex}
-          onChange={handleSelectChange}
-          required
-        >
-          <option value="M">M (Чоловік)</option>
-          <option value="F">F (Жінка)</option>
-        </select>
-
+        <div className="sex-options">
+          <label>
+            <input
+              type="radio"
+              name="sex"
+              value="M"
+              checked={formData.sex === "M"}
+              onChange={handleChange}
+            />
+            Чоловік
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="sex"
+              value="F"
+              checked={formData.sex === "F"}
+              onChange={handleChange}
+            />
+            Жінка
+          </label>
+        </div>
+        <br />
         <label htmlFor="birthDate">Дата народження</label>
-        <input
-          type="date"
-          name="birthDate"
-          onChange={handleInputChange}
-          required
-        />
+        <input type="date" name="birthDate" onChange={handleChange} required />
 
         <button type="submit">Зареєструватися</button>
         <p>

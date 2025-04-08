@@ -107,6 +107,17 @@ p a:hover {
   text-decoration: underline;
 }
 
+.sex-options {
+  display: flex;
+  gap: 20px; /* Расстояние между радиокнопками */
+  align-items: center; /* Выравнивание по центру */
+}
+
+.sex-options label {
+  display: flex;
+  align-items: center;
+}
+
 /* Адаптивность */
 @media (max-width: 480px) {
   .auth-container {

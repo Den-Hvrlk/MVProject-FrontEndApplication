@@ -59,7 +59,7 @@ const Registration: React.FC = () => {
       }
 
       const response = await fetch(
-        "https://localhost:7285/api/users/CreateUser",
+        "https://mv-project-back-end-web-application.vercel.app/api/users/CreateUser",
         {
           method: "POST",
           headers: {

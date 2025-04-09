@@ -1,6 +1,16 @@
 import { useState } from "react";
 import "./Registration.css";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import DateField from "./DateField";
+import RadioGroup from "./RadioGroup";
+import InputField from "./InputField";
+import {
+  validateBirthDate,
+  validateForm,
+  validatePassword,
+  validateSex,
+} from "./Validation.ts";
 
 const Registration: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,23 +22,18 @@ const Registration: React.FC = () => {
   });
 
   const [requestMessage, setRequestMessage] = useState("");
-  const [messageType, setMessageType] = useState<"success" | "error">(
-    "success"
-  );
+  const [messageType, setMessageType] = useState<"success" | "error" | "">("");
 
-  async function setMessageAfterRegistration(
-    response: Response
-  ): Promise<void> {
-    const data = await response.text();
+  const setMessage = (message: string, type: "success" | "error") => {
+    setRequestMessage(message);
+    setMessageType(type);
 
-    if (response.ok) {
-      setMessageType("success");
+    if (type === "success") {
+      toast.success(message);
     } else {
-      setMessageType("error");
+      toast.error(message);
     }
-
-    setRequestMessage(data);
-  }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -37,31 +42,21 @@ const Registration: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const validateDate = (date: string): boolean => {
-    const year = new Date(date).getFullYear();
-    return year >= 1000 && year <= 9999;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(formData);
+    const validationResult = validateForm(formData, {
+      sex: validateSex,
+      birthDate: validateBirthDate,
+      password: validatePassword,
+    });
+
+    if (validationResult) {
+      setMessage(validationResult, "error");
+      return;
+    }
 
     try {
-      if (!formData.sex) {
-        setRequestMessage("Стать не може бути пустою");
-        setMessageType("error");
-        return;
-      }
-
-      if (!validateDate(formData.birthDate)) {
-        setRequestMessage(
-          "Некоректна дата народження. Будь ласка, перевірте введені дані"
-        );
-        setMessageType("error");
-        return;
-      }
-
       const response = await fetch(
         "https://mvproject-backendwebapplication.onrender.com/api/users/CreateUser",
         {
@@ -73,10 +68,10 @@ const Registration: React.FC = () => {
         }
       );
 
-      setMessageAfterRegistration(response);
+      const data = await response.text();
+      setMessage(data, response.ok ? "success" : "error");
     } catch (error) {
-      setRequestMessage("Помилка реєстрації");
-      setMessageType("error");
+      setMessage("Помилка реєстрації", "error");
     }
   };
 
@@ -84,7 +79,7 @@ const Registration: React.FC = () => {
     <div className="auth-container">
       <h2>Реєстрація</h2>
       <form onSubmit={handleSubmit}>
-        <input
+        <InputField
           type="email"
           name="email"
           placeholder="Email"
@@ -92,7 +87,7 @@ const Registration: React.FC = () => {
           onChange={handleChange}
           required
         />
-        <input
+        <InputField
           type="password"
           name="password"
           placeholder="Пароль"
@@ -100,7 +95,7 @@ const Registration: React.FC = () => {
           onChange={handleChange}
           required
         />
-        <input
+        <InputField
           type="text"
           name="phone"
           placeholder="Номер телефону"
@@ -109,33 +104,23 @@ const Registration: React.FC = () => {
           required
         />
         <br />
-        <label htmlFor="sex">Стать</label>
-        <div className="sex-options">
-          <label>
-            <input
-              type="radio"
-              name="sex"
-              value="M"
-              checked={formData.sex === "M"}
-              onChange={handleChange}
-            />
-            Чоловік
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="sex"
-              value="F"
-              checked={formData.sex === "F"}
-              onChange={handleChange}
-            />
-            Жінка
-          </label>
-        </div>
+        <label htmlFor="sex">Стать:</label>
+        <RadioGroup
+          name="sex"
+          options={[
+            { label: "Чоловік", value: "M" },
+            { label: "Жінка", value: "F" },
+          ]}
+          selectedValue={formData.sex}
+          onChange={handleChange}
+        />
         <br />
-        <label htmlFor="birthDate">Дата народження</label>
-        <input type="date" name="birthDate" onChange={handleChange} required />
-
+        <DateField
+          name="birthDate"
+          value={formData.birthDate}
+          onChange={handleChange}
+          required
+        />
         <button type="submit">Зареєструватися</button>
         <p>
           Уже зареєстровані? <Link to="/Auth">Увійдіть</Link>
@@ -152,6 +137,7 @@ const Registration: React.FC = () => {
           </div>
         )}
       </form>
+      <ToastContainer closeButton={false} autoClose={5000} />
     </div>
   );
 };

@@ -109,13 +109,15 @@ p a:hover {
 
 .sex-options {
   display: flex;
-  gap: 20px; /* Расстояние между радиокнопками */
-  align-items: center; /* Выравнивание по центру */
+  gap: 20px;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .sex-options label {
   display: flex;
   align-items: center;
+  gap: 5px;
 }
 
 /* Адаптивность */

@@ -15,6 +15,7 @@ import {
 const Registration: React.FC = () => {
   const [formData, setFormData] = useState({
     email: "",
+    username: "",
     password: "",
     phone: "",
     sex: "",
@@ -56,6 +57,8 @@ const Registration: React.FC = () => {
       return;
     }
 
+    console.log(formData);
+
     try {
       const response = await fetch(
         "https://mvproject-backendwebapplication.onrender.com/api/users/CreateUser",
@@ -84,6 +87,14 @@ const Registration: React.FC = () => {
           name="email"
           placeholder="Email"
           value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <InputField
+          type="text"
+          name="username"
+          placeholder="Ім'я користувача"
+          value={formData.username}
           onChange={handleChange}
           required
         />

@@ -26,7 +26,7 @@ const UpHeader: React.FC = () => {
         </div>
         <div className="log-in-container">
           <Link to="/Auth">
-            <p className="log-in">LOG IN</p>
+            <p className="log-in">УВІЙТИ</p>
           </Link>
         </div>
       </div>

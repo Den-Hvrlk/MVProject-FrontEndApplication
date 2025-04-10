@@ -1,10 +1,10 @@
-import { useState } from "react";
 import "./Registration.css";
-import { Link } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
 import DateField from "./DateField";
 import RadioGroup from "./RadioGroup";
 import InputField from "./InputField";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "../../../ToastContext.tsx";
 import {
   validateBirthDate,
   validateForm,
@@ -14,6 +14,9 @@ import {
 } from "./Validation.ts";
 
 const Registration: React.FC = () => {
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -30,11 +33,7 @@ const Registration: React.FC = () => {
     setRequestMessage(message);
     setMessageType(type);
 
-    if (type === "success") {
-      toast.success(message);
-    } else {
-      toast.error(message);
-    }
+    showToast(message, type);
   };
 
   const handleChange = (
@@ -46,6 +45,8 @@ const Registration: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    setRequestMessage("");
 
     const validationResult = validateForm(formData, {
       username: validateUserName,
@@ -75,6 +76,7 @@ const Registration: React.FC = () => {
 
       const data = await response.text();
       setMessage(data, response.ok ? "success" : "error");
+      response.ok ? navigate("/Auth") : null;
     } catch (error) {
       setMessage("Помилка реєстрації", "error");
     }
@@ -150,7 +152,6 @@ const Registration: React.FC = () => {
           </div>
         )}
       </form>
-      <ToastContainer closeButton={false} autoClose={5000} />
     </div>
   );
 };

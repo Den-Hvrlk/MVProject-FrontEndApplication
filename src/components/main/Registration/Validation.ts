@@ -25,6 +25,13 @@ export const validatePassword = (value: string): ValidationResult => {
   };
 };
 
+export const validateUserName = (value: string): ValidationResult => {
+  return {
+    valid: value !== null && value.length >= 3,
+    message: "Ім'я користувача повинно бути більше 3 символів",
+  };
+};
+
 export const validateForm = (
   formData: { [key: string]: string },
   validations: { [key: string]: (value: string) => ValidationResult }

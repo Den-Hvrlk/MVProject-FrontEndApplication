@@ -10,6 +10,7 @@ import {
   validateForm,
   validatePassword,
   validateSex,
+  validateUserName,
 } from "./Validation.ts";
 
 const Registration: React.FC = () => {
@@ -47,6 +48,7 @@ const Registration: React.FC = () => {
     e.preventDefault();
 
     const validationResult = validateForm(formData, {
+      username: validateUserName,
       sex: validateSex,
       birthDate: validateBirthDate,
       password: validatePassword,

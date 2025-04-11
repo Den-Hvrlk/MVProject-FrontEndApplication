@@ -125,6 +125,7 @@ nav {
 a,
 a:visited {
   text-decoration: none;
+  color: #6c8ee6;
 }
 
 /* 📱 Мобільна адаптація */

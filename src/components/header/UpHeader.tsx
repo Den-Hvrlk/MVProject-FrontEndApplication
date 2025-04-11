@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./UpHeader.css";
+import "./Header.css";
 
 const UpHeader: React.FC = () => {
   const email: string = import.meta.env.VITE_EMAIL;

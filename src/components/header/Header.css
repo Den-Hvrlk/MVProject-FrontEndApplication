@@ -1,6 +1,197 @@
+/* Загальний хедер */
 header {
   background-color: #eaeaea;
   border-bottom: 1px solid #ddd;
-  padding: 12px 16px; /* Уменьшенные отступы */
+  padding: 12px 16px;
   font-family: Arial, sans-serif;
+}
+
+/* Верхній бар */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+  padding: 4px 16px;
+}
+
+.contact-info {
+  display: flex;
+  gap: 15px;
+}
+
+/* Соцмережі */
+.social-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: row;
+}
+
+.social-links a img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Кнопка "Увійти" */
+.log-in-container .log-in,
+.left-links .donate-a {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.log-in:hover,
+.left-links .donate-a:hover {
+  background-color: #333;
+  transform: scale(1.05);
+  color: #6c8ee6 !important;
+}
+
+/* Навігація */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+}
+
+/* Лівий і правий блоки */
+.left-section,
+.right-section {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 20px;
+}
+
+/* Логотип */
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+/* Списки навігації */
+.left-links,
+.right-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.right-links {
+  gap: 20px;
+}
+
+.left-links li,
+.right-links li {
+  display: inline;
+}
+
+.a-link {
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.a-link:hover {
+  color: #6c8ee6;
+  transform: scale(1.1);
+  text-decoration: none;
+}
+
+/* Заборона підкреслення */
+a,
+a:visited {
+  text-decoration: none;
+}
+
+/* 📱 Мобільна адаптація */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+  }
+
+  .contact-info,
+  .left-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .social-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .social-links {
+    flex-direction: row;
+  }
+
+  .social-links a img {
+    width: 24px;
+    height: 24px;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .right-section {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .left-links,
+  .right-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .right-links {
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 300px;
+  }
+
+  .right-links li {
+    width: 50%;
+    padding: 5px;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .log-in-container {
+    margin-top: 10px;
+  }
 }

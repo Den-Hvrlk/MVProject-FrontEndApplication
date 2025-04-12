@@ -9,13 +9,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "../../../api/axios";
 import { useToast } from "../../../hooks/useToast";
-
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
-const PASSWORD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%_])[A-Za-z\d!@#$%_]{8,24}$/;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import {
+  validateUsername,
+  validatePassword,
+  validateEmail,
+} from "../../../utils/validation";
+import { createUser } from "../../../api/users";
 
 const Registration: React.FC = () => {
   const userRef = useRef<HTMLInputElement>(null);
@@ -50,7 +50,7 @@ const Registration: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (email != requestedEmail && EMAIL_REGEX.test(email)) {
+    if (email != requestedEmail && validateEmail(email)) {
       setValidEmail(true);
     } else if (email === requestedEmail && isAnotherTryRequest) {
       setValidEmail(false);
@@ -60,13 +60,13 @@ const Registration: React.FC = () => {
   }, [email]);
 
   useEffect(() => {
-    setValidName(USER_REGEX.test(user));
+    setValidName(validateUsername(user));
   }, [user]);
 
   useEffect(() => {
-    setValidPassword(PASSWORD_REGEX.test(password));
+    setValidPassword(validatePassword(password));
     setValidMatch(password === matchPassword);
-  });
+  }, [password, matchPassword]);
 
   useEffect(() => {
     setErrorMessage("");
@@ -77,40 +77,27 @@ const Registration: React.FC = () => {
 
     setErrorMessage("");
 
-    const v1 = USER_REGEX.test(user);
-    const v2 = PASSWORD_REGEX.test(password);
-    if (!v1 || !v2) {
+    if (!validateUsername(user) || !validatePassword(password)) {
       setErrorMessage("Invalid Entry");
       return;
     }
+
     setRequestedEmail(email);
 
     try {
-      const response = await axios.post(
-        "/users/CreateUser",
-        JSON.stringify({
-          email: email,
-          username: user,
-          password: password,
-        }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            WithCredentials: "true",
-          },
-        }
-      );
+      const response = await createUser(email, user, password);
 
       showToast("Реєстрація успішна", "success");
       navigate("/Auth");
 
+      console.log("RESPONSE", response);
       console.log(response.data);
-      console.log(response.data.accessToken);
+      // console.log(response.data.accessToken);
     } catch (err: any) {
       setIsAnotherTryRequest(true);
 
       let message = "Registration Failed";
-      if (!err.response) {
+      if (!err.response && !err.message?.includes("canceled")) {
         message = "No Server Response";
       } else if (err.response?.status === 400) {
         setValidEmail(false);
@@ -149,7 +136,7 @@ const Registration: React.FC = () => {
           </label>
           <input
             type="email"
-            name="email"
+            id="email"
             ref={userRef}
             value={email}
             onChange={(e) => setEmail(e.target.value)}

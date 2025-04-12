@@ -1,5 +1,5 @@
 import Fundraising from "./Fundraisings/Fundraising";
-import Auth from "./Authorisation/Auth";
+import Login from "./Login/Login";
 import Donate from "./Donate/Donate";
 import MilitaryGroups from "./MilitaryGroups/MilitaryGroups";
 import VolunteerFunds from "./VolunteerFunds/VolunteersFunds";
@@ -18,7 +18,7 @@ const Main: React.FC = () => {
       <Routes>
         <Route path="/" element={<Fundraising />} />
         <Route path="/Fundraising" element={<Fundraising />} />
-        <Route path="/Auth" element={<Auth />} />
+        <Route path="/Auth" element={<Login />} />
         <Route path="/Registration" element={<Registration />} />
         <Route path="/Donate" element={<Donate />} />
         <Route path="/MilitaryGroups" element={<MilitaryGroups />} />

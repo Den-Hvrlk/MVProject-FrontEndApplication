@@ -1,0 +1,74 @@
+/* Контейнер формы */
+.auth-container {
+  max-width: 420px;
+  margin: 50px auto;
+  padding: 25px;
+  background-color: #eaeaea;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Заголовок */
+.auth-container h1 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #333;
+}
+
+/* Сообщения об ошибках */
+.errmsg {
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 8px 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #f5c2c7;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+/* Кнопка */
+.auth-container form button {
+  width: 100%;
+  padding: 12px;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-container form button:hover {
+  background-color: #0056b3;
+}
+
+.auth-container form button:disabled {
+  background-color: #a2a2a2;
+  cursor: not-allowed;
+}
+
+.auth-container form button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Ссылка на регистрацию */
+.auth-container p {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.auth-container a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-container a:hover {
+  text-decoration: underline;
+}

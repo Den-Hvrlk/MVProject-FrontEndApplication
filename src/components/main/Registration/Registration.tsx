@@ -100,7 +100,6 @@ const Registration: React.FC = () => {
       );
 
       showToast("Реєстрація успішна", "success");
-
       navigate("/Auth");
 
       console.log(response.data);
@@ -124,189 +123,181 @@ const Registration: React.FC = () => {
   };
 
   return (
-    <div className="auth-container">
-      <section>
-        <p
-          ref={errRef}
-          className={errMessage ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
-          {errMessage}
-        </p>
+    <section className="reg-container">
+      <p
+        ref={errRef}
+        className={errMessage ? "errmsg" : "offscreen"}
+        aria-live="assertive"
+      >
+        {errMessage}
+      </p>
 
-        <h2>Створити аккаунт</h2>
+      <h2>Створити аккаунт</h2>
 
-        <form onSubmit={hadleSubmit}>
-          <div className="input-container">
-            <label htmlFor="email">
-              Email
-              <span className={validEmail && email ? "valid" : "hide"}>
-                <FontAwesomeIcon icon={faCheck} />
-              </span>
-              <span className={validEmail || !email ? "hide" : "invalid"}>
-                <FontAwesomeIcon icon={faTimes} />
-              </span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              ref={userRef}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+      <form onSubmit={hadleSubmit}>
+        <div className="input-container">
+          <label htmlFor="email">
+            Email
+            <span className={validEmail && email ? "valid" : "hide"}>
+              <FontAwesomeIcon icon={faCheck} />
+            </span>
+            <span className={validEmail || !email ? "hide" : "invalid"}>
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            ref={userRef}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-          <div className="input-container">
-            <label htmlFor="username">
-              Ім'я користувача:
-              <span className={validName ? "valid" : "hide"}>
-                <FontAwesomeIcon icon={faCheck} />
-              </span>
-              <span className={validName || !user ? "hide" : "invalid"}>
-                <FontAwesomeIcon icon={faTimes} />
-              </span>
-            </label>
-            <input
-              type="text"
-              id="username"
-              autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={user}
-              required
-              aria-invalid={validName ? "false" : "true"}
-              aria-describedby="uidnote"
-              onFocus={() => setUserFocus(true)}
-              onBlur={() => setUserFocus(false)}
-            />
-            <div
-              id="uidnote"
-              className={
-                userfocus && user && !validName ? "instructions" : "offscreen"
-              }
-              style={{
-                textAlign: "center",
-                gap: "4px",
-                margin: "4px",
-              }}
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              Ім'я користувача повинен складатися:
-              <ul style={{ textAlign: "left", gap: "4px" }}>
-                <li>Із 4 до 24 символів</li>
-                <li>Повинен починатись з букви</li>
-                <li>Допускаються літери, цифри, підкреслення, дефіси</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="input-container">
-            <label htmlFor="password">
-              Пароль:
-              <span className={validPassword ? "valid" : "hide"}>
-                <FontAwesomeIcon icon={faCheck} />
-              </span>
-              <span className={validPassword || !password ? "hide" : "invalid"}>
-                <FontAwesomeIcon icon={faTimes} />
-              </span>
-            </label>
-            <input
-              type="password"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              required
-              aria-invalid={validPassword ? "false" : "true"}
-              aria-describedby="passwordnote"
-              onFocus={() => setPasswordFocus(true)}
-              onBlur={() => setPasswordFocus(false)}
-            />
-            <div
-              id="passwordnote"
-              className={
-                passwordFocus && !validPassword ? "instructions" : "offscreen"
-              }
-              style={{
-                textAlign: "center",
-                gap: "4px",
-                margin: "4px",
-              }}
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              Пароль повинен складатися: <br />
-              <ul style={{ textAlign: "left", gap: "4px" }}>
-                <li>
-                  Із 8 до 24 символів <br />
-                </li>
-                <li>
-                  Повинен містити хоча б одну цифру, одну малу та одну велику
-                  літери, а також хоча б один спеціальний символ
-                  <br />
-                </li>
-                <li>
-                  Допущені спеціальні символи:
-                  <span aria-label="exclamation mark">!</span>
-                  <span aria-label="at symbol">@</span>
-                  <span aria-label="hashtag">#</span>
-                  <span aria-label="dollar sign">$</span>
-                  <span aria-label="percent">%</span>
-                  <span aria-label="underscore">_</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="input-container">
-            <label htmlFor="confirm_password">
-              Підтвердження пароля:
-              <span className={validMatch && matchPassword ? "valid" : "hide"}>
-                <FontAwesomeIcon icon={faCheck} />
-              </span>
-              <span
-                className={validMatch || !matchPassword ? "hide" : "invalid"}
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </span>
-            </label>
-            <input
-              type="password"
-              id="confirm_password"
-              onChange={(e) => setMatchPassword(e.target.value)}
-              value={matchPassword}
-              required
-              aria-invalid={validMatch ? "false" : "true"}
-              aria-describedby="confirmnote"
-              onFocus={() => setMatchFocus(true)}
-              onBlur={() => setMatchFocus(false)}
-            />
-            <p
-              id="confirmnote"
-              className={
-                matchFocus && !validMatch ? "instructions" : "offscreen"
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              Має збігатися з першим полем введення пароля.
-            </p>
-          </div>
-
-          <button
-            disabled={
-              !validEmail || !validName || !validPassword || !validMatch
+        <div className="input-container">
+          <label htmlFor="username">
+            Ім'я користувача:
+            <span className={validName ? "valid" : "hide"}>
+              <FontAwesomeIcon icon={faCheck} />
+            </span>
+            <span className={validName || !user ? "hide" : "invalid"}>
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+          </label>
+          <input
+            type="text"
+            id="username"
+            autoComplete="off"
+            onChange={(e) => setUser(e.target.value)}
+            value={user}
+            required
+            aria-invalid={validName ? "false" : "true"}
+            aria-describedby="uidnote"
+            onFocus={() => setUserFocus(true)}
+            onBlur={() => setUserFocus(false)}
+          />
+          <div
+            id="uidnote"
+            className={
+              userfocus && user && !validName ? "instructions" : "offscreen"
             }
+            style={{
+              textAlign: "center",
+              gap: "4px",
+              margin: "4px",
+            }}
           >
-            Створити аккаунт
-          </button>
-        </form>
+            <FontAwesomeIcon icon={faInfoCircle} />
+            Ім'я користувача повинен складатися:
+            <ul style={{ textAlign: "left", gap: "4px" }}>
+              <li>Із 4 до 24 символів</li>
+              <li>Повинен починатись з букви</li>
+              <li>Допускаються літери, цифри, підкреслення, дефіси</li>
+            </ul>
+          </div>
+        </div>
 
-        <p>
-          Вже маєте аккаунт?{" "}
-          <span className="line">
-            <Link to="/Auth">Увійти</Link>
-          </span>
-        </p>
-      </section>
-    </div>
+        <div className="input-container">
+          <label htmlFor="password">
+            Пароль:
+            <span className={validPassword ? "valid" : "hide"}>
+              <FontAwesomeIcon icon={faCheck} />
+            </span>
+            <span className={validPassword || !password ? "hide" : "invalid"}>
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+          </label>
+          <input
+            type="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            required
+            aria-invalid={validPassword ? "false" : "true"}
+            aria-describedby="passwordnote"
+            onFocus={() => setPasswordFocus(true)}
+            onBlur={() => setPasswordFocus(false)}
+          />
+          <div
+            id="passwordnote"
+            className={
+              passwordFocus && !validPassword ? "instructions" : "offscreen"
+            }
+            style={{
+              textAlign: "center",
+              gap: "4px",
+              margin: "4px",
+            }}
+          >
+            <FontAwesomeIcon icon={faInfoCircle} />
+            Пароль повинен складатися: <br />
+            <ul style={{ textAlign: "left", gap: "4px" }}>
+              <li>
+                Із 8 до 24 символів <br />
+              </li>
+              <li>
+                Повинен містити хоча б одну цифру, одну малу та одну велику
+                літери, а також хоча б один спеціальний символ
+                <br />
+              </li>
+              <li>
+                Допущені спеціальні символи:
+                <span aria-label="exclamation mark">!</span>
+                <span aria-label="at symbol">@</span>
+                <span aria-label="hashtag">#</span>
+                <span aria-label="dollar sign">$</span>
+                <span aria-label="percent">%</span>
+                <span aria-label="underscore">_</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="input-container">
+          <label htmlFor="confirm_password">
+            Підтвердження пароля:
+            <span className={validMatch && matchPassword ? "valid" : "hide"}>
+              <FontAwesomeIcon icon={faCheck} />
+            </span>
+            <span className={validMatch || !matchPassword ? "hide" : "invalid"}>
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+          </label>
+          <input
+            type="password"
+            id="confirm_password"
+            onChange={(e) => setMatchPassword(e.target.value)}
+            value={matchPassword}
+            required
+            aria-invalid={validMatch ? "false" : "true"}
+            aria-describedby="confirmnote"
+            onFocus={() => setMatchFocus(true)}
+            onBlur={() => setMatchFocus(false)}
+          />
+          <p
+            id="confirmnote"
+            className={matchFocus && !validMatch ? "instructions" : "offscreen"}
+          >
+            <FontAwesomeIcon icon={faInfoCircle} />
+            Має збігатися з першим полем введення пароля.
+          </p>
+        </div>
+
+        <button
+          disabled={!validEmail || !validName || !validPassword || !validMatch}
+        >
+          Створити аккаунт
+        </button>
+      </form>
+
+      <p>
+        Вже маєте аккаунт?{" "}
+        <span className="line">
+          <Link to="/Auth">Увійти</Link>
+        </span>
+      </p>
+    </section>
   );
 };
 

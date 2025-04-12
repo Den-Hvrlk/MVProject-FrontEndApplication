@@ -1,12 +1,8 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ToastContext = createContext<any>(null);
-
-export const useToast = () => {
-  return useContext(ToastContext);
-};
+export const ToastContext = createContext<any>(null);
 
 interface ToastProviderProps {
   children: React.ReactNode;

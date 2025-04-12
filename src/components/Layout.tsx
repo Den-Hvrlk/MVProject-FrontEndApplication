@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom";
+import HeaderComponent from "./header/HeaderComponent";
+import Footer from "./footer/Footer";
 
-const Layout = () => {
+const Layout: React.FC = () => {
   return (
-    <main className="App">
-      <Outlet />
-    </main>
+    <div className="layout-wrapper">
+      <HeaderComponent />
+      <main className="main-content">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
   );
 };
 

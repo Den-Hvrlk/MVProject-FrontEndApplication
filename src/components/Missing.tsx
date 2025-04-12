@@ -1,4 +1,4 @@
-const Missing = () => {
+const Missing: React.FC = () => {
   return (
     <div>
       <h1>404</h1>

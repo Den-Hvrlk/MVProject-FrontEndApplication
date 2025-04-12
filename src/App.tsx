@@ -1,7 +1,5 @@
-import Footer from "./components/footer/Footer.tsx";
-import HeaderComponent from "./components/header/HeaderComponent.tsx";
 import "./App.css";
-import { ToastProvider } from "./ToastContext.tsx";
+import { ToastProvider } from "./context/ToastContext.tsx";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout.tsx";
 import Fundraising from "./components/main/Fundraisings/Fundraising.tsx";
@@ -22,34 +20,26 @@ function App() {
   return (
     <div className="app">
       <ToastProvider>
-        <HeaderComponent />
-        <div className="main-content">
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="/" element={<Fundraising />} />
-              <Route path="/Fundraising" element={<Fundraising />} />
-              <Route path="/Auth" element={<Login />} />
-              <Route path="/Registration" element={<Registration />} />
-              <Route path="/Donate" element={<Donate />} />
-              <Route path="/MilitaryGroups" element={<MilitaryGroups />} />
-              <Route path="/VolunteerFunds" element={<VolunteerFunds />} />
-              <Route
-                path="/VolunteerProjects"
-                element={<VolunteerProjects />}
-              />
-              <Route path="/AboutUs" element={<About />} />
-              <Route path="/Reports" element={<Reports />} />
-              <Route
-                path="/ConfidentialityPolicy"
-                element={<ConfidentialityPolicy />}
-              />
-              <Route path="/Support" element={<Support />} />
-              <Route path="*" element={<Missing />} />
-            </Route>
-          </Routes>
-        </div>
-
-        <Footer />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Fundraising />} />
+            <Route path="/Fundraising" element={<Fundraising />} />
+            <Route path="/Auth" element={<Login />} />
+            <Route path="/Registration" element={<Registration />} />
+            <Route path="/Donate" element={<Donate />} />
+            <Route path="/MilitaryGroups" element={<MilitaryGroups />} />
+            <Route path="/VolunteerFunds" element={<VolunteerFunds />} />
+            <Route path="/VolunteerProjects" element={<VolunteerProjects />} />
+            <Route path="/AboutUs" element={<About />} />
+            <Route path="/Reports" element={<Reports />} />
+            <Route
+              path="/ConfidentialityPolicy"
+              element={<ConfidentialityPolicy />}
+            />
+            <Route path="/Support" element={<Support />} />
+            <Route path="*" element={<Missing />} />
+          </Route>
+        </Routes>
       </ToastProvider>
     </div>
   );

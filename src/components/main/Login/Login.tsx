@@ -1,9 +1,9 @@
 import "./Login.css";
 import axios from "../../../api/axios";
-import { useRef, useEffect, useState, useContext } from "react";
-import AuthContext from "../../../context/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
-import { useToast } from "../../../ToastContext";
+import { useRef, useEffect, useState } from "react";
+import { useAuth } from "../../../hooks/useAuth";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useToast } from "../../../hooks/useToast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
@@ -15,7 +15,12 @@ import {
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Login: React.FC = () => {
-  const { setAuth } = useContext(AuthContext)!;
+  const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLInputElement>(null);
 
@@ -26,8 +31,6 @@ const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const { showToast } = useToast();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     userRef.current?.focus();
@@ -71,10 +74,9 @@ const Login: React.FC = () => {
         "Ви успішно авторизувались!\nВітаю, " + response?.data?.username + "!",
         "success"
       );
-      navigate("/Fundraising");
-
       setEmail("");
       setPassword("");
+      navigate(from, { replace: true });
     } catch (err: any) {
       let message = "Login Failed";
       if (!err?.response) {

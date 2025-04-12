@@ -12,7 +12,8 @@ import { useToast } from "../../../ToastContext";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PASSWORD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%_])[A-Za-z\d!@#$%_]{8,24}$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Registration: React.FC = () => {
   const userRef = useRef<HTMLInputElement>(null);
@@ -47,9 +48,11 @@ const Registration: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (email != requestedEmail) {
+    if (email != requestedEmail && EMAIL_REGEX.test(email)) {
       setValidEmail(true);
     } else if (email === requestedEmail && isAnotherTryRequest) {
+      setValidEmail(false);
+    } else {
       setValidEmail(false);
     }
   }, [email]);
@@ -176,17 +179,25 @@ const Registration: React.FC = () => {
               onFocus={() => setUserFocus(true)}
               onBlur={() => setUserFocus(false)}
             />
-            <p
+            <div
               id="uidnote"
               className={
                 userfocus && user && !validName ? "instructions" : "offscreen"
               }
+              style={{
+                textAlign: "center",
+                gap: "4px",
+                margin: "4px",
+              }}
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              4 to 24 characters. <br />
-              Must begin with a letter. <br />
-              Letters, numbers, underscores, hyphens allowed.
-            </p>
+              Ім'я користувача повинен складатися:
+              <ul style={{ textAlign: "left", gap: "4px" }}>
+                <li>Із 4 до 24 символів</li>
+                <li>Повинен починатись з букви</li>
+                <li>Допускаються літери, цифри, підкреслення, дефіси</li>
+              </ul>
+            </div>
           </div>
 
           <div className="input-container">
@@ -210,23 +221,39 @@ const Registration: React.FC = () => {
               onFocus={() => setPasswordFocus(true)}
               onBlur={() => setPasswordFocus(false)}
             />
-            <p
+            <div
               id="passwordnote"
               className={
                 passwordFocus && !validPassword ? "instructions" : "offscreen"
               }
+              style={{
+                textAlign: "center",
+                gap: "4px",
+                margin: "4px",
+              }}
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              8 to 24 characters. <br />
-              Must include uppercase and lowercase letters, a number and a
-              special character. <br />
-              Allowed special characters:
-              <span aria-label="exclamation mark">!</span>
-              <span aria-label="at symbol">@</span>
-              <span aria-label="hashtag">#</span>
-              <span aria-label="dollar sign">$</span>
-              <span aria-label="percent">%</span>
-            </p>
+              Пароль повинен складатися: <br />
+              <ul style={{ textAlign: "left", gap: "4px" }}>
+                <li>
+                  Із 8 до 24 символів <br />
+                </li>
+                <li>
+                  Повинен містити хоча б одну цифру, одну малу та одну велику
+                  літери, а також хоча б один спеціальний символ
+                  <br />
+                </li>
+                <li>
+                  Допущені спеціальні символи:
+                  <span aria-label="exclamation mark">!</span>
+                  <span aria-label="at symbol">@</span>
+                  <span aria-label="hashtag">#</span>
+                  <span aria-label="dollar sign">$</span>
+                  <span aria-label="percent">%</span>
+                  <span aria-label="underscore">_</span>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="input-container">
@@ -259,7 +286,7 @@ const Registration: React.FC = () => {
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              Must match the first password input field.
+              Має збігатися з першим полем введення пароля.
             </p>
           </div>
 

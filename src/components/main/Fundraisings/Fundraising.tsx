@@ -1,6 +1,6 @@
 import "./Fundraising.css";
 
-function Fundraising() {
+const Fundraising: React.FC = function () {
   console.log("Fundraising");
   return (
     <>
@@ -32,6 +32,6 @@ function Fundraising() {
       </section>
     </>
   );
-}
+};
 
 export default Fundraising;

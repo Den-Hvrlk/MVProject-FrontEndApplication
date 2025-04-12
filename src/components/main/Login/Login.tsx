@@ -4,6 +4,13 @@ import { useRef, useEffect, useState, useContext } from "react";
 import AuthContext from "../../../context/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "../../../ToastContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faEye,
+  faEyeSlash,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -15,6 +22,7 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [validEmail, setValidEmail] = useState<boolean>(true);
   const [password, setPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const { showToast } = useToast();
@@ -96,26 +104,54 @@ const Login: React.FC = () => {
       <h1>Вхід</h1>
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">
+            Email
+            <span className={validEmail && email ? "valid" : "hide"}>
+              <FontAwesomeIcon icon={faCheck} />
+            </span>
+            <span className={validEmail || !email ? "hide" : "invalid"}>
+              <FontAwesomeIcon icon={faTimes} />
+            </span>
+          </label>
           <input
             type="email"
-            id="email"
+            name="email"
             ref={userRef}
+            value={email}
             autoComplete="off"
             onChange={(e) => setEmail(e.target.value)}
-            value={email}
             required
           />
         </div>
         <div className="input-container">
           <label htmlFor="password">Пароль</label>
-          <input
-            type="password"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            required
-          />
+          <div style={{ position: "relative", width: "100%" }}>
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+            />
+            <span
+              onClick={() => setShowPassword((prev) => !prev)}
+              style={{
+                position: "absolute",
+                right: "12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                fontSize: "1.1rem",
+                color: showPassword ? "#007bff" : "#888",
+                transition: "color 0.2s ease",
+                padding: "4px",
+                borderRadius: "50%",
+                backgroundColor: "transparent",
+              }}
+            >
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </span>
+          </div>
         </div>
 
         <button type="submit" disabled={!validEmail || !password}>

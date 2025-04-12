@@ -4,6 +4,8 @@ import {
   faCheck,
   faTimes,
   faInfoCircle,
+  faEyeSlash,
+  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,15 +29,15 @@ const Registration: React.FC = () => {
 
   const [user, setUser] = useState<string>("");
   const [validName, setValidName] = useState<boolean>(false);
-  const [userfocus, setUserFocus] = useState<boolean>(false);
 
   const [password, setPassword] = useState<string>("");
   const [validPassword, setValidPassword] = useState<boolean>(false);
-  const [passwordFocus, setPasswordFocus] = useState<boolean>(false);
 
   const [matchPassword, setMatchPassword] = useState<string>("");
   const [validMatch, setValidMatch] = useState<boolean>(false);
-  const [matchFocus, setMatchFocus] = useState<boolean>(false);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [errMessage, setErrorMessage] = useState<string>("");
 
@@ -174,14 +176,10 @@ const Registration: React.FC = () => {
             required
             aria-invalid={validName ? "false" : "true"}
             aria-describedby="uidnote"
-            onFocus={() => setUserFocus(true)}
-            onBlur={() => setUserFocus(false)}
           />
           <div
             id="uidnote"
-            className={
-              userfocus && user && !validName ? "instructions" : "offscreen"
-            }
+            className={!validName && user ? "instructions" : "offscreen"}
             style={{
               textAlign: "center",
               gap: "4px",
@@ -208,21 +206,40 @@ const Registration: React.FC = () => {
               <FontAwesomeIcon icon={faTimes} />
             </span>
           </label>
-          <input
-            type="password"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            required
-            aria-invalid={validPassword ? "false" : "true"}
-            aria-describedby="passwordnote"
-            onFocus={() => setPasswordFocus(true)}
-            onBlur={() => setPasswordFocus(false)}
-          />
+          <div style={{ position: "relative", width: "100%" }}>
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+              aria-invalid={validPassword ? "false" : "true"}
+              aria-describedby="passwordnote"
+              style={{ paddingRight: "40px" }} // место под глазик
+            />
+            <span
+              onClick={() => setShowPassword((prev) => !prev)}
+              style={{
+                position: "absolute",
+                right: "12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                fontSize: "1.1rem",
+                color: showPassword ? "#007bff" : "#888",
+                transition: "color 0.2s ease",
+                padding: "4px",
+                borderRadius: "50%",
+                backgroundColor: "transparent",
+              }}
+            >
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </span>
+          </div>
           <div
             id="passwordnote"
             className={
-              passwordFocus && !validPassword ? "instructions" : "offscreen"
+              !validPassword && password ? "instructions" : "offscreen"
             }
             style={{
               textAlign: "center",
@@ -233,23 +250,12 @@ const Registration: React.FC = () => {
             <FontAwesomeIcon icon={faInfoCircle} />
             Пароль повинен складатися: <br />
             <ul style={{ textAlign: "left", gap: "4px" }}>
+              <li>Із 8 до 24 символів</li>
               <li>
-                Із 8 до 24 символів <br />
+                Хоча б одна цифра, одна мала і одна велика літера, а також один
+                спецсимвол
               </li>
-              <li>
-                Повинен містити хоча б одну цифру, одну малу та одну велику
-                літери, а також хоча б один спеціальний символ
-                <br />
-              </li>
-              <li>
-                Допущені спеціальні символи:
-                <span aria-label="exclamation mark">!</span>
-                <span aria-label="at symbol">@</span>
-                <span aria-label="hashtag">#</span>
-                <span aria-label="dollar sign">$</span>
-                <span aria-label="percent">%</span>
-                <span aria-label="underscore">_</span>
-              </li>
+              <li>Дозволені: ! @ # $ % _</li>
             </ul>
           </div>
         </div>
@@ -264,20 +270,45 @@ const Registration: React.FC = () => {
               <FontAwesomeIcon icon={faTimes} />
             </span>
           </label>
-          <input
-            type="password"
-            id="confirm_password"
-            onChange={(e) => setMatchPassword(e.target.value)}
-            value={matchPassword}
-            required
-            aria-invalid={validMatch ? "false" : "true"}
-            aria-describedby="confirmnote"
-            onFocus={() => setMatchFocus(true)}
-            onBlur={() => setMatchFocus(false)}
-          />
+
+          <div style={{ position: "relative", width: "100%" }}>
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              id="confirm_password"
+              onChange={(e) => setMatchPassword(e.target.value)}
+              value={matchPassword}
+              required
+              aria-invalid={validMatch ? "false" : "true"}
+              aria-describedby="confirmnote"
+              style={{ paddingRight: "40px" }}
+            />
+            <span
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+              style={{
+                position: "absolute",
+                right: "12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+                fontSize: "1.1rem",
+                color: showConfirmPassword ? "#007bff" : "#888",
+                transition: "color 0.2s ease",
+                padding: "4px",
+                borderRadius: "50%",
+                backgroundColor: "transparent",
+              }}
+            >
+              <FontAwesomeIcon
+                icon={showConfirmPassword ? faEyeSlash : faEye}
+              />
+            </span>
+          </div>
+
           <p
             id="confirmnote"
-            className={matchFocus && !validMatch ? "instructions" : "offscreen"}
+            className={
+              !validMatch && matchPassword ? "instructions" : "offscreen"
+            }
           >
             <FontAwesomeIcon icon={faInfoCircle} />
             Має збігатися з першим полем введення пароля.

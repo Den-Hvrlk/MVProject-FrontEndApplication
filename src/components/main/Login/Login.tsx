@@ -58,19 +58,22 @@ const Login: React.FC = () => {
       const response = await loginUser(email, password);
 
       console.log(JSON.stringify(response?.data));
-      const accessToken = response?.token;
+      const accessToken = response?.accessToken;
       const roles = response?.roles;
-      setAuth({ email, password, roles, accessToken });
+      setAuth({ email, roles, accessToken });
 
       showToast(
         "Ви успішно авторизувались!\nВітаю, " + response?.userName + "!",
         "success"
       );
+
       setEmail("");
       setPassword("");
+
       navigate(from, { replace: true });
     } catch (err: any) {
       let message = "Login Failed";
+
       if (!err?.response) {
         message = "No Server Response";
       } else if (err.response?.status === 400) {

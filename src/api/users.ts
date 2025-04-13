@@ -6,7 +6,7 @@ export const createUser = async (
   password: string
 ) => {
   const response = await axios.post(
-    "/users/CreateUser",
+    "/users/Register",
     JSON.stringify({ email, username, password }),
     {
       headers: {

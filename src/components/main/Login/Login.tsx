@@ -58,9 +58,6 @@ const Login: React.FC = () => {
       const roles = response?.data?.roles;
       setAuth({ email, password, roles, accessToken });
 
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("roles", roles);
-
       showToast(
         "Ви успішно авторизувались!\nВітаю, " + response?.data?.username + "!",
         "success"

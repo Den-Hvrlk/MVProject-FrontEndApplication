@@ -54,12 +54,12 @@ const Login: React.FC = () => {
       const response = await loginUser(email, password);
 
       console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.token;
-      const roles = response?.data?.roles;
+      const accessToken = response?.token;
+      const roles = response?.roles;
       setAuth({ email, password, roles, accessToken });
 
       showToast(
-        "Ви успішно авторизувались!\nВітаю, " + response?.data?.userName + "!",
+        "Ви успішно авторизувались!\nВітаю, " + response?.userName + "!",
         "success"
       );
       setEmail("");

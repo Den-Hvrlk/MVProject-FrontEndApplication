@@ -24,6 +24,8 @@ const Login: React.FC = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLInputElement>(null);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [email, setEmail] = useState<string>("");
   const [validEmail, setValidEmail] = useState<boolean>(true);
   const [password, setPassword] = useState<string>("");
@@ -50,6 +52,8 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+
     try {
       const response = await loginUser(email, password);
 
@@ -72,13 +76,15 @@ const Login: React.FC = () => {
       } else if (err.response?.status === 400) {
         message = "Missing Email or Password";
       } else if (err.response?.status === 401) {
-        message = "Не авторизовано!\n" + err.response?.data;
+        message = err.response?.data;
       }
 
       setErrorMessage(message);
       showToast(message, "error");
 
       errRef.current?.focus();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -144,8 +150,23 @@ const Login: React.FC = () => {
           </div>
         </div>
 
-        <button type="submit" disabled={!validEmail || !password}>
-          Увійти
+        <button type="submit" disabled={!validEmail || !password || isLoading}>
+          {isLoading ? (
+            <div
+              className="spinner"
+              style={{
+                display: "inline-block",
+                width: "20px",
+                height: "20px",
+                border: "2px solid #f3f3f3",
+                borderTop: "2px solid #007bff",
+                borderRadius: "50%",
+                animation: "spin 0.8s linear infinite",
+              }}
+            ></div>
+          ) : (
+            "Увійти"
+          )}
         </button>
       </form>
       <p>

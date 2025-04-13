@@ -21,6 +21,8 @@ const Registration: React.FC = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLInputElement>(null);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [email, setEmail] = useState<string>("");
   const [validEmail, setValidEmail] = useState<boolean>(true);
   const [requestedEmail, setRequestedEmail] = useState<string>("");
@@ -74,6 +76,7 @@ const Registration: React.FC = () => {
 
   const hadleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     setErrorMessage("");
 
@@ -108,6 +111,8 @@ const Registration: React.FC = () => {
       showToast(message, "error");
 
       errRef.current?.focus();
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -303,9 +308,30 @@ const Registration: React.FC = () => {
         </div>
 
         <button
-          disabled={!validEmail || !validName || !validPassword || !validMatch}
+          disabled={
+            !validEmail ||
+            !validName ||
+            !validPassword ||
+            !validMatch ||
+            isLoading
+          }
         >
-          Створити аккаунт
+          {isLoading ? (
+            <div
+              className="spinner"
+              style={{
+                display: "inline-block",
+                width: "20px",
+                height: "20px",
+                border: "2px solid #f3f3f3",
+                borderTop: "2px solid #007bff",
+                borderRadius: "50%",
+                animation: "spin 0.8s linear infinite",
+              }}
+            ></div>
+          ) : (
+            "Зареєструватися"
+          )}
         </button>
       </form>
 

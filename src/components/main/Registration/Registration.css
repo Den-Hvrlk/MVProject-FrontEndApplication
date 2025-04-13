@@ -24,6 +24,8 @@
   margin-bottom: 15px;
   border-radius: 6px;
   border: 1px solid #f5c2c7;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .offscreen {
@@ -99,7 +101,7 @@
 }
 
 /* Кнопка */
-.reg-container button {
+.reg-container form button {
   width: 100%;
   padding: 12px;
   background-color: black;
@@ -108,29 +110,49 @@
   font-size: 16px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.1s;
 }
 
-.reg-container button:disabled {
+.reg-container form button:hover {
+  background-color: #0056b3;
+}
+
+.reg-container form button:disabled {
   background-color: #a2a2a2;
   cursor: not-allowed;
 }
 
-.reg-container button:hover:not(:disabled) {
+.reg-container form button:hover:not(:disabled) {
   background-color: #0056b3;
 }
 
-/* Ссылка на вход */
-.reg-container .line {
-  font-weight: 500;
-  color: #007bff;
+.reg-container form button:active:not(:disabled) {
+  background-color: #003d80;
+  transform: scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.reg-container .line a {
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ссылка на вход */
+.reg-container p {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.reg-container a {
   color: #007bff;
   text-decoration: none;
+  font-weight: 500;
 }
 
-.reg-container .line a:hover {
+.reg-container a:hover {
   text-decoration: underline;
 }

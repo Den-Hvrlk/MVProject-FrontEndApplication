@@ -59,7 +59,7 @@ const Login: React.FC = () => {
       setAuth({ email, password, roles, accessToken });
 
       showToast(
-        "Ви успішно авторизувались!\nВітаю, " + response?.data?.username + "!",
+        "Ви успішно авторизувались!\nВітаю, " + response?.data?.userName + "!",
         "success"
       );
       setEmail("");

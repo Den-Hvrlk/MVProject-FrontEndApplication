@@ -11,7 +11,7 @@ export const createUser = async (
     {
       headers: {
         "Content-Type": "application/json",
-        WithCredentials: true,
+        withCredentials: true,
       },
     }
   );
@@ -22,11 +22,11 @@ export const createUser = async (
 export const loginUser = async (email: string, password: string) => {
   const response = await axios.post(
     "/users/Login",
-    JSON.stringify({ email, password }),
+    { email, password },
     {
       headers: {
         "Content-Type": "application/json",
-        WithCredentials: "true",
+        withCredentials: true,
       },
     }
   );

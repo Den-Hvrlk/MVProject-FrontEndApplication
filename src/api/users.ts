@@ -18,3 +18,18 @@ export const createUser = async (
 
   return response.data;
 };
+
+export const loginUser = async (email: string, password: string) => {
+  const response = await axios.post(
+    "/users/Login",
+    JSON.stringify({ email, password }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+        WithCredentials: "true",
+      },
+    }
+  );
+
+  return response.data;
+};

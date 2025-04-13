@@ -1,5 +1,4 @@
 import "./Login.css";
-import axios from "../../../api/axios";
 import { useRef, useEffect, useState } from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -11,6 +10,7 @@ import {
   faEyeSlash,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import { loginUser } from "../../../api/users";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -51,19 +51,10 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "/users/LoginUser",
-        JSON.stringify({ email, password }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            WithCredentials: "true",
-          },
-        }
-      );
+      const response = await loginUser(email, password);
 
       console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.accessToken;
+      const accessToken = response?.data?.token;
       const roles = response?.data?.roles;
       setAuth({ email, password, roles, accessToken });
 

@@ -99,7 +99,7 @@ const Registration: React.FC = () => {
       let message = "Registration Failed";
       if (!err.response && !err.message?.includes("canceled")) {
         message = "No Server Response";
-      } else if (err.response?.status === 400) {
+      } else if (err.response?.status === 409) {
         setValidEmail(false);
         message = err.response.data;
       }

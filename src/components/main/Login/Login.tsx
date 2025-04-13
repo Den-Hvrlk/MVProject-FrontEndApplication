@@ -72,7 +72,7 @@ const Login: React.FC = () => {
       } else if (err.response?.status === 400) {
         message = "Missing Email or Password";
       } else if (err.response?.status === 401) {
-        message = "Unauthorized";
+        message = "Не авторизовано!\n" + err.response?.data;
       }
 
       setErrorMessage(message);

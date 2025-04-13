@@ -24,9 +24,9 @@ export const loginUser = async (email: string, password: string) => {
     "/users/Login",
     { email, password },
     {
+      withCredentials: true,
       headers: {
         "Content-Type": "application/json",
-        withCredentials: true,
       },
     }
   );

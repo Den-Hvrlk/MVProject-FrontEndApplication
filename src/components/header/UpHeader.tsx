@@ -39,7 +39,7 @@ const UpHeader: React.FC = () => {
 
       showToast(response.message, "success");
 
-      navigate("/Auth");
+      navigate("/login");
     } catch (err) {
       console.error("Logout error", err);
     }
@@ -65,7 +65,7 @@ const UpHeader: React.FC = () => {
         </div>
         <div className="log-in-container" ref={dropdownRef}>
           {!auth?.accessToken ? (
-            <Link to="/Auth">
+            <Link to="/login">
               <p className="log-in">УВІЙТИ</p>
             </Link>
           ) : (

@@ -92,22 +92,31 @@ nav {
 .left-links,
 .right-links {
   list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.left-links {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin: 0;
-  padding: 0;
 }
 
 .right-links {
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px 40px;
+  max-width: 800px;
 }
 
-.left-links li,
 .right-links li {
-  display: inline;
+  flex: 0 1 auto;
+  min-width: fit-content;
 }
 
+/* Посилання */
 .a-link {
   color: #333;
   font-weight: bold;
@@ -128,6 +137,7 @@ a:visited {
   color: #6c8ee6;
 }
 
+/* Авторизація */
 .user-name {
   font-weight: bold;
   color: #007bff;
@@ -224,14 +234,15 @@ a:visited {
   }
 
   .right-links {
+    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
-    width: 300px;
+    width: 100%;
   }
 
   .right-links li {
-    width: 50%;
-    padding: 5px;
+    flex: 0 1 40%;
     text-align: center;
   }
 
@@ -261,5 +272,18 @@ a:visited {
   .dropdown-item {
     font-size: 1rem;
     padding: 12px 16px;
+  }
+}
+
+@media (min-width: 769px) {
+  .right-links {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 40px;
+  }
+
+  .right-links li {
+    flex: none;
   }
 }

@@ -23,20 +23,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Fundraising />} />
-            <Route path="/Fundraising" element={<Fundraising />} />
-            <Route path="/Auth" element={<Login />} />
-            <Route path="/Registration" element={<Registration />} />
-            <Route path="/Donate" element={<Donate />} />
-            <Route path="/MilitaryGroups" element={<MilitaryGroups />} />
-            <Route path="/VolunteerFunds" element={<VolunteerFunds />} />
-            <Route path="/VolunteerProjects" element={<VolunteerProjects />} />
-            <Route path="/AboutUs" element={<About />} />
-            <Route path="/Reports" element={<Reports />} />
+            <Route path="/fundraising" element={<Fundraising />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registration" element={<Registration />} />
+            <Route path="/donate" element={<Donate />} />
+            <Route path="/military-groups" element={<MilitaryGroups />} />
+            <Route path="/volunteer-funds" element={<VolunteerFunds />} />
+            <Route path="/volunteer-projects" element={<VolunteerProjects />} />
+            <Route path="/about-us" element={<About />} />
+            <Route path="/reports" element={<Reports />} />
             <Route
-              path="/ConfidentialityPolicy"
+              path="/confidentiality-policy"
               element={<ConfidentialityPolicy />}
             />
-            <Route path="/Support" element={<Support />} />
+            <Route path="/support" element={<Support />} />
             <Route path="*" element={<Missing />} />
           </Route>
         </Routes>

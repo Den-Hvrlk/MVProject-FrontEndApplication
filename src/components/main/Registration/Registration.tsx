@@ -338,7 +338,7 @@ const Registration: React.FC = () => {
       <p>
         Вже маєте аккаунт?{" "}
         <span className="line">
-          <Link to="/Auth">Увійти</Link>
+          <Link to="/login">Увійти</Link>
         </span>
       </p>
     </section>

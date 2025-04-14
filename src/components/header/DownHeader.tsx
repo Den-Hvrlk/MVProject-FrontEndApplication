@@ -13,12 +13,12 @@ const DownHeader: React.FC = () => {
         />
         <ul className="left-links">
           <li>
-            <Link to="/Donate">
+            <Link to="/donate">
               <p className="donate-a">ЗАДОНАТИТИ</p>
             </Link>
           </li>
           <li>
-            <Link to="/AboutUs">
+            <Link to="/about-us">
               <p className="a-link">ПРО НАС</p>
             </Link>
           </li>
@@ -27,27 +27,27 @@ const DownHeader: React.FC = () => {
       <div className="right-section">
         <ul className="right-links">
           <li>
-            <Link to="/Fundraising">
+            <Link to="/fundraising">
               <p className="a-link">ЗБОРИ КОШТІВ</p>
             </Link>
           </li>
           <li>
-            <Link to="/VolunteerProjects">
+            <Link to="/volunteer-projects">
               <p className="a-link">ВОЛОНТЕРСЬКІ ПРОЕКТИ</p>
             </Link>
           </li>
           <li>
-            <Link to="/MilitaryGroups">
+            <Link to="/military-groups">
               <p className="a-link">ВІЙСЬКОВІ УГРУПУВАННЯ</p>
             </Link>
           </li>
           <li>
-            <Link to="/VolunteerFunds">
+            <Link to="/volunteer-funds">
               <p className="a-link">ВОЛОНТЕРСЬКІ ФОНДИ</p>
             </Link>
           </li>
           <li>
-            <Link to="/Reports">
+            <Link to="/reports">
               <p className="a-link">ЗВІТИ</p>
             </Link>
           </li>

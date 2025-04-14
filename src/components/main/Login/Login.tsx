@@ -15,7 +15,7 @@ import { loginUser } from "../../../api/users";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Login: React.FC = () => {
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,6 +33,12 @@ const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const { showToast } = useToast();
+
+  useEffect(() => {
+    if (auth?.accessToken) {
+      navigate("/", { replace: true });
+    }
+  }, [auth, navigate]);
 
   useEffect(() => {
     userRef.current?.focus();
@@ -115,6 +121,7 @@ const Login: React.FC = () => {
           </label>
           <input
             type="email"
+            id="email"
             name="email"
             ref={userRef}
             value={email}

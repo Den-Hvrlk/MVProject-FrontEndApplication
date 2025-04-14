@@ -60,7 +60,8 @@ const Login: React.FC = () => {
       console.log(JSON.stringify(response?.data));
       const accessToken = response?.accessToken;
       const roles = response?.roles;
-      setAuth({ email, roles, accessToken });
+      const userName = response?.userName;
+      setAuth({ email, roles, accessToken, userName });
 
       showToast(
         "Ви успішно авторизувались!\nВітаю, " + response?.userName + "!",

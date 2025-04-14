@@ -1,9 +1,11 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, useEffect, ReactNode } from "react";
+import axios from "../api/axios";
 
 interface AuthData {
   email?: string;
   roles?: string[];
   accessToken?: string;
+  userName?: string;
 }
 
 interface AuthContextType {
@@ -15,12 +17,34 @@ export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
 );
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [auth, setAuth] = useState<AuthData>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const verifyRefreshToken = async () => {
+      try {
+        const response = await axios.post("/auth/refresh", null, {
+          withCredentials: true,
+        });
+
+        setAuth({
+          accessToken: response.data.accessToken,
+          email: response.data.email,
+          roles: response.data.roles,
+          userName: response.data.userName,
+        });
+      } catch (err) {
+        console.error("⚠️ Could not refresh session", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verifyRefreshToken();
+  }, []);
+
+  if (loading) return null;
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

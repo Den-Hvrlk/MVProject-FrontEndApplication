@@ -5,47 +5,60 @@ function Footer() {
   return (
     <>
       <footer>
-        <div className="footer-links">
-          <div className="footer-links left">
+        <div className="footer-row row-1">
+          <div className="footer-item">
             <Link to="/Fundraising">
               <p className="a-link">
-                Збори <br />
+                Збори
+                <br />
                 коштів
               </p>
             </Link>
+          </div>
+          <div className="footer-item">
             <Link to="/MilitaryGroups">
               <p className="a-link">
-                Військові <br />
+                Військові
+                <br />
                 угруповання
               </p>
             </Link>
+          </div>
+          <div className="footer-item">
             <Link to="/VolunteerFunds">
               <p className="a-link">
-                Волонтерські <br />
+                Волонтерські
+                <br />
                 фонди
               </p>
             </Link>
           </div>
+        </div>
 
-          <div className="logo-container">
-            <img src="/images/Logo2.ico" className="logo" alt="Logo" />
-          </div>
+        <div className="footer-row row-2 logo-container">
+          <img src="/images/Logo2.ico" className="logo" alt="Logo" />
+        </div>
 
-          <div className="footer-links right">
+        <div className="footer-row row-3">
+          <div className="footer-item">
             <Link to="/AboutUs">
               <p className="a-link">Про нас</p>
             </Link>
+          </div>
+          <div className="footer-item">
             <Link to="/ConfidentialityPolicy">
               <p className="a-link">
-                Політика <br />
-                конфіденційності
+                Політика <br /> конфіденційності
               </p>
             </Link>
+          </div>
+          <div className="footer-item">
             <Link to="/Support">
               <p className="a-link">Підтримка</p>
             </Link>
           </div>
         </div>
+
         <div className="social-icons">
           <a href="#">
             <img src="/images/telegram.png" className="social-telegram" />
@@ -57,6 +70,7 @@ function Footer() {
             <img src="/images/facebook.png" className="social-facebook" />
           </a>
         </div>
+
         <p>&copy; 2024 – 2025 Privacy – Terms</p>
       </footer>
     </>

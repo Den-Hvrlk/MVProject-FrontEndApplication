@@ -1,11 +1,50 @@
-import { Link } from "react-router-dom";
 import "./Header.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useEffect, useRef, useState } from "react";
+import { logoutUser } from "../../api/users";
+import { useToast } from "../../hooks/useToast";
 
 const UpHeader: React.FC = () => {
+  console.log("UpHeader");
+
   const email: string = import.meta.env.VITE_EMAIL;
   const phone: string = import.meta.env.VITE_PHONE;
 
-  console.log("UpHeader");
+  const { auth, setAuth } = useAuth();
+  const { showToast } = useToast();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const response = await logoutUser();
+
+      setAuth({});
+
+      showToast(response.message, "success");
+
+      navigate("/Auth");
+    } catch (err) {
+      console.error("Logout error", err);
+    }
+  };
+
   return (
     <div className="top-bar">
       <div className="contact-info">
@@ -24,10 +63,35 @@ const UpHeader: React.FC = () => {
             <img src="/images/facebook.png" alt="Facebook" />
           </a>
         </div>
-        <div className="log-in-container">
-          <Link to="/Auth">
-            <p className="log-in">УВІЙТИ</p>
-          </Link>
+        <div className="log-in-container" ref={dropdownRef}>
+          {!auth?.accessToken ? (
+            <Link to="/Auth">
+              <p className="log-in">УВІЙТИ</p>
+            </Link>
+          ) : (
+            <div className="user-dropdown">
+              <p
+                className="user-name"
+                onClick={() => setIsOpen((prev) => !prev)}
+                style={{ cursor: "pointer" }}
+              >
+                {auth.userName}
+              </p>
+              {isOpen && (
+                <div className="dropdown-menu">
+                  <Link to="/profile" className="dropdown-item">
+                    Профіль
+                  </Link>
+                  <button
+                    className="dropdown-item logout"
+                    onClick={handleLogout}
+                  >
+                    Вийти
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

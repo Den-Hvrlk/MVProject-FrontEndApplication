@@ -33,3 +33,11 @@ export const loginUser = async (email: string, password: string) => {
 
   return response.data;
 };
+
+export const logoutUser = async () => {
+  const response = await axios.post("/auth/logout", null, {
+    withCredentials: true,
+  });
+
+  return response.data;
+};

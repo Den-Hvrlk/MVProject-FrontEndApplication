@@ -30,7 +30,7 @@ const UserProfile: React.FC = () => {
     const fetchUser = async () => {
       try {
         setIsLoading(true);
-        const userData = await getUser(auth.id, auth.accessToken);
+        const userData = await getUser(auth.accessToken);
         setUser(userData);
       } catch (error) {
         showToast("Не вдалося отримати дані користувача", "error");

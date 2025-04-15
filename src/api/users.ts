@@ -42,8 +42,8 @@ export const logoutUser = async () => {
   return response.data;
 };
 
-export const getUser = async (id: number, token: string) => {
-  const response = await axios.get(`/api/users/${id}`, {
+export const getUser = async (token: string) => {
+  const response = await axios.get(`/api/users/profile`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

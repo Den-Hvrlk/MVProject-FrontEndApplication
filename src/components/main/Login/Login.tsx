@@ -63,11 +63,11 @@ const Login: React.FC = () => {
     try {
       const response = await loginUser(email, password);
 
-      console.log(JSON.stringify(response?.data));
+      const id = response?.id;
       const accessToken = response?.accessToken;
       const roles = response?.roles;
       const userName = response?.userName;
-      setAuth({ email, roles, accessToken, userName });
+      setAuth({ id, email, roles, accessToken, userName });
 
       showToast(
         "Ви успішно авторизувались!\nВітаю, " + response?.userName + "!",

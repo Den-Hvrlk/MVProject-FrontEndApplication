@@ -91,11 +91,10 @@ const Registration: React.FC = () => {
       const response = await createUser(email, user, password);
 
       showToast("Реєстрація успішна", "success");
-      navigate("/Auth");
+      navigate("/login");
 
       console.log("RESPONSE", response);
       console.log(response.data);
-      // console.log(response.data.accessToken);
     } catch (err: any) {
       setIsAnotherTryRequest(true);
 

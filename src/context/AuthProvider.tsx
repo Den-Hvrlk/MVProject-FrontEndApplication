@@ -2,10 +2,11 @@ import { createContext, useState, useEffect, ReactNode } from "react";
 import axios from "../api/axios";
 
 interface AuthData {
-  email?: string;
-  roles?: string[];
-  accessToken?: string;
-  userName?: string;
+  id: number;
+  userName: string;
+  email: string;
+  roles: number[];
+  accessToken: string;
 }
 
 interface AuthContextType {
@@ -18,8 +19,18 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 );
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [auth, setAuth] = useState<AuthData>({});
+  const [auth, setAuth] = useState<AuthData>({
+    id: 0,
+    email: "",
+    roles: [],
+    accessToken: "",
+    userName: "",
+  });
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log("Auth was updated:", auth);
+  }, [auth]);
 
   useEffect(() => {
     const verifyRefreshToken = async () => {
@@ -29,6 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         });
 
         setAuth({
+          id: response.data.id,
           accessToken: response.data.accessToken,
           email: response.data.email,
           roles: response.data.roles,

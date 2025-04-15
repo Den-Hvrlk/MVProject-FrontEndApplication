@@ -10,8 +10,10 @@ const useRefreshToken = () => {
         withCredentials: true,
       });
       setAuth({
+        id: response.data.id,
         accessToken: response.data.accessToken,
         email: response.data.email,
+        roles: response.data.roles,
         userName: response.data.userName,
       });
       return response.data.accessToken;

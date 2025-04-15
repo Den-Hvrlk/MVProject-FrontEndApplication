@@ -35,7 +35,13 @@ const UpHeader: React.FC = () => {
     try {
       const response = await logoutUser();
 
-      setAuth({});
+      setAuth({
+        id: 0,
+        email: "",
+        roles: [],
+        accessToken: "",
+        userName: "",
+      });
 
       showToast(response.message, "success");
 
@@ -78,8 +84,8 @@ const UpHeader: React.FC = () => {
                 {auth.userName}
               </p>
               {isOpen && (
-                <div className="dropdown-menu">
-                  <Link to="/profile" className="dropdown-item">
+                <div className="dropdown-menu" onClick={() => setIsOpen(false)}>
+                  <Link to="/user-profile" className="dropdown-item">
                     Профіль
                   </Link>
                   <button

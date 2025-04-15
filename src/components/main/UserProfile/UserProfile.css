@@ -1,0 +1,104 @@
+.user-profile-container {
+  background-color: #eaeaea;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  max-width: 1100px;
+  display: flex;
+  gap: 16px;
+  align-items: stretch; /* ключевое свойство для одинаковой высоты */
+}
+
+/* Левая панель */
+.user-profile-container-left {
+  margin-left: 10px;
+  flex: 1;
+  max-width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Обёртки аватара и кнопки */
+.user-profile-container-left div {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-profile-edit-button {
+  width: 100%;
+}
+
+.user-profile-edit-button button {
+  width: 50%;
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  transition: background-color 0.2s ease;
+}
+
+.user-profile-edit-button button:hover {
+  background-color: #f0f0f0;
+}
+
+.user-profile-edit-button button:active {
+  background-color: #e0e0e0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  transform: scale(0.98);
+}
+
+/* Аватар */
+.user-profile-avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #f7f7f7;
+}
+
+.user-profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: #eaeaea;
+  text-align: center;
+}
+
+/* Правая панель */
+.user-profile-container-right {
+  flex: 2;
+  max-width: 66%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+/* Внутренний блок с информацией */
+.user-profile-container-right div {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+}

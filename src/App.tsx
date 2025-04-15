@@ -14,6 +14,8 @@ import ConfidentialityPolicy from "./components/main/ConfidentialityPolicy/Confi
 import Support from "./components/main/Support/Support.tsx";
 import Registration from "./components/main/Registration/Registration.tsx";
 import Missing from "./components/Missing.tsx";
+import UserProfile from "./components/main/UserProfile/UserProfile.tsx";
+import RequireAuth from "./components/RequireAuth.tsx";
 
 function App() {
   console.log("App");
@@ -23,20 +25,27 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Fundraising />} />
-            <Route path="/fundraising" element={<Fundraising />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/registration" element={<Registration />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/about-us" element={<About />} />
+
+            <Route path="/fundraising" element={<Fundraising />} />
+            <Route path="/volunteer-projects" element={<VolunteerProjects />} />
             <Route path="/military-groups" element={<MilitaryGroups />} />
             <Route path="/volunteer-funds" element={<VolunteerFunds />} />
-            <Route path="/volunteer-projects" element={<VolunteerProjects />} />
-            <Route path="/about-us" element={<About />} />
             <Route path="/reports" element={<Reports />} />
+
+            <Route element={<RequireAuth allowedRoles={[1000]} />}>
+              <Route path="/user-profile" element={<UserProfile />} />
+            </Route>
+
             <Route
               path="/confidentiality-policy"
               element={<ConfidentialityPolicy />}
             />
             <Route path="/support" element={<Support />} />
+
             <Route path="*" element={<Missing />} />
           </Route>
         </Routes>

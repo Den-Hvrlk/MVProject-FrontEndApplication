@@ -41,3 +41,13 @@ export const logoutUser = async () => {
 
   return response.data;
 };
+
+export const getUser = async (id: number, token: string) => {
+  const response = await axios.get(`/api/users/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};

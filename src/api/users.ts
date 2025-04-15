@@ -1,4 +1,4 @@
-import axios from "./axios";
+import axios, { axiosPrivate } from "./axios";
 
 export const createUser = async (
   email: string,
@@ -43,7 +43,7 @@ export const logoutUser = async () => {
 };
 
 export const getUser = async (token: string) => {
-  const response = await axios.get(`/api/users/profile`, {
+  const response = await axiosPrivate.get(`/users/profile`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

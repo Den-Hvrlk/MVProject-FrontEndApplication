@@ -20,7 +20,7 @@ const UserProfile: React.FC = () => {
   const [user, setUser] = useState<UserProfileProps>({
     email: "",
     userName: "",
-    sex: "",
+    sex: "None",
     birthDate: "",
     phoneNumber: "",
     avatarpath: "",
@@ -49,18 +49,9 @@ const UserProfile: React.FC = () => {
       <h1>Профіль</h1>
       <section id="user-profile-container">
         {isLoading ? (
-          <div
-            className="spinner"
-            style={{
-              display: "inline-block",
-              width: "20px",
-              height: "20px",
-              border: "2px solid #f3f3f3",
-              borderTop: "2px solid #007bff",
-              borderRadius: "50%",
-              animation: "spin 0.8s linear infinite",
-            }}
-          ></div>
+          <div className="spinner-wrapper">
+            <div className="spinner"></div>
+          </div>
         ) : (
           <>
             <div className="user-profile-container">

@@ -102,3 +102,27 @@
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   margin: 5px;
 }
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* или 100% если контейнер уже с высотой */
+  width: 100%;
+}
+
+.spinner {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

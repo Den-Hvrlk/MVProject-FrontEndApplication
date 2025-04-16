@@ -1,7 +1,7 @@
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { logoutUser } from "../../api/users";
 import { useToast } from "../../hooks/useToast";
 
@@ -17,18 +17,6 @@ const UpHeader: React.FC = () => {
   const [isCacheReady, setIsCacheReady] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (
-      !persist &&
-      !auth.accessToken &&
-      localStorage.getItem("cachedUserName")
-    ) {
-      localStorage.removeItem("cachedUserName");
-    }
-
-    setIsCacheReady(true);
-  }, [persist, auth.accessToken]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -67,9 +55,24 @@ const UpHeader: React.FC = () => {
     }
   };
 
-  const cachedUserName = localStorage.getItem("cachedUserName");
-  const displayName = auth.userName || cachedUserName;
-  const isLoggedIn = !!auth.accessToken || !!cachedUserName;
+  useEffect(() => {
+    if (
+      !persist &&
+      !auth.accessToken &&
+      localStorage.getItem("cachedUserName")
+    ) {
+      localStorage.removeItem("cachedUserName");
+    }
+
+    setIsCacheReady(true);
+  }, [persist, auth.accessToken]);
+
+  let userName: string;
+  if (!auth?.accessToken) {
+    userName = localStorage.getItem("cachedUserName")!;
+  } else {
+    userName = auth.userName;
+  }
 
   if (!isCacheReady) return null;
 
@@ -92,7 +95,7 @@ const UpHeader: React.FC = () => {
           </a>
         </div>
         <div className="log-in-container" ref={dropdownRef}>
-          {!isLoggedIn ? (
+          {!userName ? (
             <Link to="/login">
               <p className="log-in">УВІЙТИ</p>
             </Link>
@@ -103,7 +106,7 @@ const UpHeader: React.FC = () => {
                 onClick={() => setIsOpen((prev) => !prev)}
                 style={{ cursor: "pointer" }}
               >
-                {displayName}
+                {userName}
               </p>
               {isOpen && (
                 <div className="dropdown-menu" onClick={() => setIsOpen(false)}>
@@ -126,4 +129,4 @@ const UpHeader: React.FC = () => {
   );
 };
 
-export default UpHeader;
+export default React.memo(UpHeader);

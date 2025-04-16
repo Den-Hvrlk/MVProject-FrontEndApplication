@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode, useEffect } from "react";
+import { createContext, useState, ReactNode, useEffect, useMemo } from "react";
 
 interface AuthData {
   id: number;
@@ -37,17 +37,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("persist", JSON.stringify(persist));
   }, [persist]);
 
+  const contextValue = useMemo(
+    () => ({
+      auth,
+      setAuth,
+      persist,
+      setPersist,
+    }),
+    [auth, persist]
+  );
+
   return (
-    <AuthContext.Provider
-      value={{
-        auth,
-        setAuth,
-        persist,
-        setPersist,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 

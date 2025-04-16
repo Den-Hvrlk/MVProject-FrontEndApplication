@@ -14,6 +14,7 @@ type UserProfileProps = {
 };
 
 const UserProfile: React.FC = () => {
+  console.log("UserProfile");
   const { auth } = useAuth();
   const { showToast } = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);

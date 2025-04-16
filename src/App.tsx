@@ -1,5 +1,4 @@
 import "./App.css";
-import { ToastProvider } from "./context/ToastContext.tsx";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout.tsx";
 import Fundraising from "./components/main/Fundraisings/Fundraising.tsx";
@@ -22,37 +21,35 @@ function App() {
   console.log("App");
   return (
     <div className="app">
-      <ToastProvider>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Fundraising />} />
-            <Route path="/registration" element={<Registration />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/donate" element={<Donate />} />
-            <Route path="/about-us" element={<About />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Fundraising />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/donate" element={<Donate />} />
+          <Route path="/about-us" element={<About />} />
 
-            <Route path="/fundraising" element={<Fundraising />} />
-            <Route path="/volunteer-projects" element={<VolunteerProjects />} />
-            <Route path="/military-groups" element={<MilitaryGroups />} />
-            <Route path="/volunteer-funds" element={<VolunteerFunds />} />
-            <Route path="/reports" element={<Reports />} />
+          <Route path="/fundraising" element={<Fundraising />} />
+          <Route path="/volunteer-projects" element={<VolunteerProjects />} />
+          <Route path="/military-groups" element={<MilitaryGroups />} />
+          <Route path="/volunteer-funds" element={<VolunteerFunds />} />
+          <Route path="/reports" element={<Reports />} />
 
-            <Route element={<PersistLogin />}>
-              <Route element={<RequireAuth allowedRoles={[1000]} />}>
-                <Route path="/user-profile" element={<UserProfile />} />
-              </Route>
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth allowedRoles={[1000]} />}>
+              <Route path="/user-profile" element={<UserProfile />} />
             </Route>
-
-            <Route
-              path="/confidentiality-policy"
-              element={<ConfidentialityPolicy />}
-            />
-            <Route path="/support" element={<Support />} />
-
-            <Route path="*" element={<Missing />} />
           </Route>
-        </Routes>
-      </ToastProvider>
+
+          <Route
+            path="/confidentiality-policy"
+            element={<ConfidentialityPolicy />}
+          />
+          <Route path="/support" element={<Support />} />
+
+          <Route path="*" element={<Missing />} />
+        </Route>
+      </Routes>
     </div>
   );
 }

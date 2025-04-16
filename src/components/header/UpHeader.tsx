@@ -5,16 +5,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { logoutUser } from "../../api/users";
 import { useToast } from "../../hooks/useToast";
 
-const UpHeader: React.FC = () => {
+const UpHeader: React.FC = React.memo(() => {
   console.log("UpHeader");
 
   const email: string = import.meta.env.VITE_EMAIL;
   const phone: string = import.meta.env.VITE_PHONE;
 
-  const { auth, setAuth, persist } = useAuth();
+  const { auth, setAuth } = useAuth();
   const { showToast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
-  const [isCacheReady, setIsCacheReady] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -55,27 +54,6 @@ const UpHeader: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (
-      !persist &&
-      !auth.accessToken &&
-      localStorage.getItem("cachedUserName")
-    ) {
-      localStorage.removeItem("cachedUserName");
-    }
-
-    setIsCacheReady(true);
-  }, [persist, auth.accessToken]);
-
-  let userName: string;
-  if (!auth?.accessToken) {
-    userName = localStorage.getItem("cachedUserName")!;
-  } else {
-    userName = auth.userName;
-  }
-
-  if (!isCacheReady) return null;
-
   return (
     <div className="top-bar">
       <div className="contact-info">
@@ -95,7 +73,7 @@ const UpHeader: React.FC = () => {
           </a>
         </div>
         <div className="log-in-container" ref={dropdownRef}>
-          {!userName ? (
+          {!auth.userName ? (
             <Link to="/login">
               <p className="log-in">УВІЙТИ</p>
             </Link>
@@ -106,7 +84,7 @@ const UpHeader: React.FC = () => {
                 onClick={() => setIsOpen((prev) => !prev)}
                 style={{ cursor: "pointer" }}
               >
-                {userName}
+                {auth.userName}
               </p>
               {isOpen && (
                 <div className="dropdown-menu" onClick={() => setIsOpen(false)}>
@@ -127,6 +105,6 @@ const UpHeader: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
-export default React.memo(UpHeader);
+export default UpHeader;

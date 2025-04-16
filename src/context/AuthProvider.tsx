@@ -35,21 +35,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     localStorage.setItem("persist", JSON.stringify(persist));
+    console.log("persist", persist);
   }, [persist]);
 
-  const contextValue = useMemo(
-    () => ({
-      auth,
-      setAuth,
-      persist,
-      setPersist,
-    }),
+  const value = useMemo(
+    () => ({ auth, setAuth, persist, setPersist }),
     [auth, persist]
   );
 
-  return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export default AuthContext;

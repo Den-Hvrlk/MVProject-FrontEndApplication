@@ -103,10 +103,6 @@ const Login: React.FC = () => {
     setPersist((prev) => !prev);
   };
 
-  useEffect(() => {
-    localStorage.setItem("persist", JSON.stringify(persist));
-  }, [persist]);
-
   return (
     <section className="auth-container">
       <p

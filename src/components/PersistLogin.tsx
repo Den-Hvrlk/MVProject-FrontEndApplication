@@ -44,10 +44,6 @@ const PersistLogin = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("Auth was updated:", auth);
-  }, [auth]);
-
   return !persist ? (
     <Outlet />
   ) : isLoading ? (

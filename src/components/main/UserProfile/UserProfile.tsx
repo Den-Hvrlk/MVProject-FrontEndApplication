@@ -43,7 +43,7 @@ const UserProfile: React.FC = () => {
     if (auth?.email && auth?.accessToken) {
       fetchUser();
     }
-  }, [auth, showToast]);
+  }, []);
 
   return (
     <div className="user-profile">

@@ -139,10 +139,23 @@ a:visited {
 
 /* Авторизація */
 .user-name {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
   font-weight: bold;
-  color: #007bff;
-  font-size: 0.95rem;
-  position: relative;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.user-name:hover {
+  background-color: #333;
+  transform: scale(1.05);
+  color: #6c8ee6;
 }
 
 .user-dropdown {

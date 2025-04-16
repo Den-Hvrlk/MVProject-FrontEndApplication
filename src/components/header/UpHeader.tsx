@@ -28,7 +28,10 @@ const UpHeader: React.FC = React.memo(() => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      setIsOpen(false);
+    };
   }, []);
 
   const handleLogout = async () => {

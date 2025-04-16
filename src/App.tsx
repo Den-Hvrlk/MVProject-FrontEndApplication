@@ -16,11 +16,14 @@ import Missing from "./components/Missing.tsx";
 import UserProfile from "./components/main/UserProfile/UserProfile.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import PersistLogin from "./components/PersistLogin.tsx";
+import Footer from "./components/footer/Footer.tsx";
+import HeaderComponent from "./components/header/HeaderComponent.tsx";
 
 function App() {
   console.log("App");
   return (
     <div className="app">
+      <HeaderComponent />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Fundraising />} />
@@ -50,6 +53,7 @@ function App() {
           <Route path="*" element={<Missing />} />
         </Route>
       </Routes>
+      <Footer />
     </div>
   );
 }

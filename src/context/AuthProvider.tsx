@@ -1,5 +1,4 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
-import axios from "../api/axios";
+import { createContext, useState, ReactNode, useEffect } from "react";
 
 interface AuthData {
   id: number;
@@ -12,6 +11,8 @@ interface AuthData {
 interface AuthContextType {
   auth: AuthData;
   setAuth: React.Dispatch<React.SetStateAction<AuthData>>;
+  persist: boolean;
+  setPersist: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -26,40 +27,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     accessToken: "",
     userName: "",
   });
-  const [loading, setLoading] = useState(true);
+
+  const [persist, setPersist] = useState<boolean>(() => {
+    const stored = localStorage.getItem("persist");
+    return stored ? JSON.parse(stored) : false;
+  });
 
   useEffect(() => {
-    console.log("Auth was updated:", auth);
-  }, [auth]);
-
-  useEffect(() => {
-    const verifyRefreshToken = async () => {
-      try {
-        const response = await axios.post("/auth/refresh", null, {
-          withCredentials: true,
-        });
-
-        setAuth({
-          id: response.data.id,
-          accessToken: response.data.accessToken,
-          email: response.data.email,
-          roles: response.data.roles,
-          userName: response.data.userName,
-        });
-      } catch (err) {
-        console.error("⚠️ Could not refresh session", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    verifyRefreshToken();
-  }, []);
-
-  if (loading) return null;
+    localStorage.setItem("persist", JSON.stringify(persist));
+  }, [persist]);
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider
+      value={{
+        auth,
+        setAuth,
+        persist,
+        setPersist,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

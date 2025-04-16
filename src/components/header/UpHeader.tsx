@@ -11,11 +11,24 @@ const UpHeader: React.FC = () => {
   const email: string = import.meta.env.VITE_EMAIL;
   const phone: string = import.meta.env.VITE_PHONE;
 
-  const { auth, setAuth } = useAuth();
+  const { auth, setAuth, persist } = useAuth();
   const { showToast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
+  const [isCacheReady, setIsCacheReady] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      !persist &&
+      !auth.accessToken &&
+      localStorage.getItem("cachedUserName")
+    ) {
+      localStorage.removeItem("cachedUserName");
+    }
+
+    setIsCacheReady(true);
+  }, [persist, auth.accessToken]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -35,6 +48,7 @@ const UpHeader: React.FC = () => {
     try {
       const response = await logoutUser();
 
+      localStorage.removeItem("persist");
       setAuth({
         id: 0,
         email: "",
@@ -43,6 +57,8 @@ const UpHeader: React.FC = () => {
         userName: "",
       });
 
+      localStorage.removeItem("cachedUserName");
+
       showToast(response.message, "success");
 
       navigate("/login");
@@ -50,6 +66,12 @@ const UpHeader: React.FC = () => {
       console.error("Logout error", err);
     }
   };
+
+  const cachedUserName = localStorage.getItem("cachedUserName");
+  const displayName = auth.userName || cachedUserName;
+  const isLoggedIn = !!auth.accessToken || !!cachedUserName;
+
+  if (!isCacheReady) return null;
 
   return (
     <div className="top-bar">
@@ -70,7 +92,7 @@ const UpHeader: React.FC = () => {
           </a>
         </div>
         <div className="log-in-container" ref={dropdownRef}>
-          {!auth?.accessToken ? (
+          {!isLoggedIn ? (
             <Link to="/login">
               <p className="log-in">УВІЙТИ</p>
             </Link>
@@ -81,7 +103,7 @@ const UpHeader: React.FC = () => {
                 onClick={() => setIsOpen((prev) => !prev)}
                 style={{ cursor: "pointer" }}
               >
-                {auth.userName}
+                {displayName}
               </p>
               {isOpen && (
                 <div className="dropdown-menu" onClick={() => setIsOpen(false)}>

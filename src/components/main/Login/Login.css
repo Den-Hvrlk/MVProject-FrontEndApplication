@@ -89,3 +89,18 @@
 .auth-container a:hover {
   text-decoration: underline;
 }
+
+.persist-check {
+  margin-top: 12px; /* ✅ Добавим отступ сверху */
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Немного пространства между чекбоксом и лейблом */
+  font-size: 14px;
+  justify-content: center;
+}
+
+.persist-check input[type="checkbox"] {
+  height: 18px;
+  width: 18px;
+  margin: 0; /* убираем лишние отступы */
+}

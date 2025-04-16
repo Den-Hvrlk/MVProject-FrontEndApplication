@@ -15,7 +15,7 @@ import { loginUser } from "../../../api/users";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Login: React.FC = () => {
-  const { auth, setAuth } = useAuth();
+  const { auth, setAuth, persist, setPersist } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -68,6 +68,7 @@ const Login: React.FC = () => {
       const roles = response?.roles;
       const userName = response?.userName;
       setAuth({ id, email, roles, accessToken, userName });
+      localStorage.setItem("cachedUserName", userName);
 
       showToast(
         "Ви успішно авторизувались!\nВітаю, " + response?.userName + "!",
@@ -97,6 +98,14 @@ const Login: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+  const togglePersist = () => {
+    setPersist((prev) => !prev);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("persist", JSON.stringify(persist));
+  }, [persist]);
 
   return (
     <section className="auth-container">
@@ -179,6 +188,15 @@ const Login: React.FC = () => {
             "Увійти"
           )}
         </button>
+        <div className="persist-check">
+          <input
+            type="checkbox"
+            id="persist"
+            onChange={togglePersist}
+            checked={persist}
+          />
+          <label htmlFor="persist">Довіряти цьому пристрою</label>
+        </div>
       </form>
       <p>
         Немає аккаунту?{" "}

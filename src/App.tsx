@@ -16,6 +16,7 @@ import Registration from "./components/main/Registration/Registration.tsx";
 import Missing from "./components/Missing.tsx";
 import UserProfile from "./components/main/UserProfile/UserProfile.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
+import PersistLogin from "./components/PersistLogin.tsx";
 
 function App() {
   console.log("App");
@@ -36,8 +37,10 @@ function App() {
             <Route path="/volunteer-funds" element={<VolunteerFunds />} />
             <Route path="/reports" element={<Reports />} />
 
-            <Route element={<RequireAuth allowedRoles={[1000]} />}>
-              <Route path="/user-profile" element={<UserProfile />} />
+            <Route element={<PersistLogin />}>
+              <Route element={<RequireAuth allowedRoles={[1000]} />}>
+                <Route path="/user-profile" element={<UserProfile />} />
+              </Route>
             </Route>
 
             <Route

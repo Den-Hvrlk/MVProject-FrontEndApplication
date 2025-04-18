@@ -38,7 +38,7 @@ function Footer() {
           </div>
 
           <div className="footer-row row-2 logo-container">
-            <img src="/images/Logo2.ico" className="logo" alt="Logo" />
+            <img src="/images/Logo.ico" className="logo" alt="Logo" />
           </div>
 
           <div className="footer-row row-3">

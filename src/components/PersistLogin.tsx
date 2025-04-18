@@ -16,16 +16,12 @@ const PersistLogin = () => {
       } catch (err) {
         console.error("⚠️ Could not refresh session", err);
       } finally {
-        isMounted && setIsLoading(false);
+        if (isMounted) setIsLoading(false);
       }
     };
 
-    if (!auth?.accessToken) {
-      if (persist) {
-        verifyRefreshToken();
-      } else {
-        setIsLoading(false);
-      }
+    if (!auth?.accessToken && persist) {
+      verifyRefreshToken();
     } else {
       setIsLoading(false);
     }

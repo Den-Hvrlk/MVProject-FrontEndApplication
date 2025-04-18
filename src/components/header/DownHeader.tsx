@@ -7,7 +7,7 @@ const DownHeader: React.FC = () => {
     <nav>
       <div className="left-section">
         <img
-          src="/images/Logo2.ico"
+          src="/images/Logo.ico"
           style={{ width: "64px", height: "64px", borderRadius: "50%" }}
           className="logo"
         />

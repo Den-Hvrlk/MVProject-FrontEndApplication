@@ -155,8 +155,10 @@ const UserProfile: React.FC = () => {
                     {/* Email */}
                     <div className="form-row">
                       <label htmlFor="email">Пошта:</label>
-                      <div id="email" className="readonly-field">
-                        {state.user.email}
+                      <div id="email" className="form-input-block">
+                        <div className="readonly-field mobile-center-only">
+                          {state.user.email}
+                        </div>
                       </div>
                     </div>
 

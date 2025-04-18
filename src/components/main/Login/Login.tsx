@@ -68,7 +68,6 @@ const Login: React.FC = () => {
       const roles = response?.roles;
       const userName = response?.userName;
       setAuth({ id, email, roles, accessToken, userName });
-      localStorage.setItem("cachedUserName", userName);
 
       showToast(
         "Ви успішно авторизувались!\nВітаю, " + response?.userName + "!",

@@ -15,6 +15,7 @@ import { loginUser } from "../../../api/users";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Login: React.FC = () => {
+  console.log("Login");
   const { auth, setAuth, persist, setPersist } = useAuth();
 
   const navigate = useNavigate();
@@ -126,7 +127,6 @@ const Login: React.FC = () => {
           <input
             type="email"
             id="email"
-            name="email"
             ref={userRef}
             value={email}
             autoComplete="off"

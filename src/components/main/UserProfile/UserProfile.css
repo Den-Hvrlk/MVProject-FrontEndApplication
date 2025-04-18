@@ -1,3 +1,11 @@
+.user-profile {
+  padding-bottom: 40px;
+}
+
+h1 {
+  padding-bottom: 40px;
+}
+
 .user-profile-container {
   background-color: #eaeaea;
   padding: 16px;
@@ -6,18 +14,16 @@
   margin: 0 auto;
   max-width: 1100px;
   display: flex;
-  gap: 16px;
-  align-items: stretch; /* ключевое свойство для одинаковой высоты */
+  gap: 26px;
 }
 
 /* Левая панель */
 .user-profile-container-left {
-  margin-left: 10px;
   flex: 1;
   max-width: 33%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; /* это важно */
   align-items: center;
 }
 
@@ -27,25 +33,28 @@
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-  margin: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .user-profile-edit-button {
+  margin-top: auto; /* гарантирует прижатие вниз */
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
   width: 100%;
 }
 
 .user-profile-edit-button button {
-  width: 50%;
-  padding: 4px 6px;
-  font-size: 16px;
+  padding: 6px 12px;
+  font-size: 15px;
   cursor: pointer;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: white;
   transition: background-color 0.2s ease;
+  white-space: nowrap; /* чтобы текст не переносился */
 }
 
 .user-profile-edit-button button:hover {
@@ -60,14 +69,14 @@
 
 /* Аватар */
 .user-profile-avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
+  width: 192px; /* фиксированная ширина */
+  height: 192px; /* та же высота = квадрат */
+  border-radius: 50%; /* круг */
   border: 2px solid #ccc;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   background-color: #f7f7f7;
 }
 
@@ -86,21 +95,79 @@
   max-width: 66%;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
 }
 
 /* Внутренний блок с информацией */
-.user-profile-container-right div {
+.user-profile-info {
   flex: 1;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  background: white;
+  padding: 45px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.user-profile-edit-button {
   background: white;
   padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-  margin: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+.user-profile-info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-row label {
+  width: 140px; /* ширина для выравнивания по левой стороне */
+  font-weight: 500;
+  font-size: 15px;
+  text-align: left;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  max-width: 300px;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border 0.3s ease;
+}
+
+.user-profile-info-text input,
+.user-profile-info-text select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border 0.3s ease;
+}
+
+.user-profile-info-text input:focus,
+.user-profile-info-text select:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
 .spinner-wrapper {
@@ -124,5 +191,68 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .user-profile-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-profile-container-left {
+    gap: 10px;
+  }
+
+  .user-profile-container-left,
+  .user-profile-container-right {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .user-profile-info {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .user-profile-avatar {
+    width: 192px;
+    height: 192px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-row label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .form-row input,
+  .form-row select {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .user-profile-edit-button {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .user-profile-avatar {
+    margin: 0 auto;
+  }
+
+  .user-profile-container-left {
+    align-items: center;
+  }
+
+  .user-profile-info {
+    width: 100%;
   }
 }

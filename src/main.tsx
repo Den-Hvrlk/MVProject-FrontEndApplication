@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { AuthProvider } from "./context/AuthProvider.tsx";
@@ -7,17 +6,15 @@ import { ToastProvider } from "./context/ToastContext.tsx";
 import PersistLogin from "./components/PersistLogin.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <ToastProvider>
-      <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            <Route element={<PersistLogin />}>
-              <Route path="/*" element={<App />} />
-            </Route>
-          </Routes>
-        </AuthProvider>
-      </BrowserRouter>
-    </ToastProvider>
-  </StrictMode>
+  <ToastProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route element={<PersistLogin />}>
+            <Route path="/*" element={<App />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
+  </ToastProvider>
 );

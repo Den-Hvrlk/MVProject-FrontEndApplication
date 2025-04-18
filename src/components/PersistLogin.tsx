@@ -38,8 +38,9 @@ const PersistLogin = () => {
   return !persist ? (
     <Outlet />
   ) : isLoading ? (
-    <div className="spinner-wrapper">
+    <div className="spinner-wrapper" style={{ gap: 5 }}>
       <div className="spinner"></div>
+      Refreshing ...
     </div>
   ) : (
     <Outlet />

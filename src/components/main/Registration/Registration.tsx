@@ -145,6 +145,7 @@ const Registration: React.FC = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            autoComplete="on"
           />
         </div>
 
@@ -161,7 +162,7 @@ const Registration: React.FC = () => {
           <input
             type="text"
             id="username"
-            autoComplete="off"
+            autoComplete="on"
             onChange={(e) => setUser(e.target.value)}
             value={user}
             required
@@ -207,6 +208,7 @@ const Registration: React.FC = () => {
               aria-invalid={validPassword ? "false" : "true"}
               aria-describedby="passwordnote"
               style={{ paddingRight: "40px" }} // место под глазик
+              autoComplete="on"
             />
             <span
               onClick={() => setShowPassword((prev) => !prev)}
@@ -272,6 +274,7 @@ const Registration: React.FC = () => {
               aria-invalid={validMatch ? "false" : "true"}
               aria-describedby="confirmnote"
               style={{ paddingRight: "40px" }}
+              autoComplete="on"
             />
             <span
               onClick={() => setShowConfirmPassword((prev) => !prev)}

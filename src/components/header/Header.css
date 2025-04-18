@@ -108,7 +108,7 @@ nav {
   justify-content: flex-end;
   align-items: center;
   gap: 24px 40px;
-  max-width: 800px;
+  max-width: 100%;
 }
 
 .right-links li {
@@ -134,7 +134,6 @@ nav {
 a,
 a:visited {
   text-decoration: none;
-  color: #6c8ee6;
 }
 
 /* Авторизація */
@@ -192,6 +191,7 @@ a:visited {
 
 .dropdown-item:hover {
   background-color: #f5f5f5;
+  color: #6c8ee6;
 }
 
 .dropdown-item.logout {
@@ -298,5 +298,42 @@ a:visited {
 
   .right-links li {
     flex: none;
+  }
+}
+
+@media (max-width: 1400px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-section,
+  .right-section {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+  }
+
+  .left-links,
+  .right-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 20px;
+  }
+
+  .right-links li,
+  .left-links li {
+    min-width: max-content;
+    text-align: center;
+  }
+
+  .a-link {
+    font-size: 14px;
+  }
+
+  .donate-a {
+    font-size: 14px;
+    padding: 4px 10px;
   }
 }

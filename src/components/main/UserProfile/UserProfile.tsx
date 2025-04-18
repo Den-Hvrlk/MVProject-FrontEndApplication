@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useToast } from "../../../hooks/useToast";
 import { getUser } from "../../../api/users";
-import "./UserProfile.css";
 import { useAuth } from "../../../hooks/useAuth";
+import "./UserProfile.css";
 
 type UserProfileProps = {
   email: string;
@@ -71,6 +71,13 @@ const UserProfile: React.FC = () => {
                   <p>Стать: {user.sex}</p>
                   <p>Дата народження: {user.birthDate}</p>
                   <p>Телефон: {user.phoneNumber}</p>
+                  <br />
+                  <div>Мої волонтерські фонди</div>
+                  <br />
+                  <div>Мої військові угруповання</div>
+                  <br />
+                  <br />
+                  <button>Редагувати</button>
                 </div>
               </div>
             </div>

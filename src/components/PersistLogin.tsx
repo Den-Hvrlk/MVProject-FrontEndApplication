@@ -1,27 +1,18 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { Outlet } from "react-router-dom";
-import axios from "../api/axios";
+import useRefreshToken from "../hooks/useRefreshToken";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { auth, setAuth, persist } = useAuth();
+  const refresh = useRefreshToken();
+  const { auth, persist } = useAuth();
 
   useEffect(() => {
     let isMounted = true;
     const verifyRefreshToken = async () => {
       try {
-        const response = await axios.post("/auth/refresh", null, {
-          withCredentials: true,
-        });
-
-        setAuth({
-          id: response.data.id,
-          accessToken: response.data.accessToken,
-          email: response.data.email,
-          roles: response.data.roles,
-          userName: response.data.userName,
-        });
+        await refresh();
       } catch (err) {
         console.error("⚠️ Could not refresh session", err);
       } finally {

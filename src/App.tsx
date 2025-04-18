@@ -15,7 +15,6 @@ import Registration from "./components/main/Registration/Registration.tsx";
 import Missing from "./components/Missing.tsx";
 import UserProfile from "./components/main/UserProfile/UserProfile.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
-import PersistLogin from "./components/PersistLogin.tsx";
 import Footer from "./components/footer/Footer.tsx";
 import HeaderComponent from "./components/header/HeaderComponent.tsx";
 
@@ -38,10 +37,8 @@ function App() {
           <Route path="/volunteer-funds" element={<VolunteerFunds />} />
           <Route path="/reports" element={<Reports />} />
 
-          <Route element={<PersistLogin />}>
-            <Route element={<RequireAuth allowedRoles={[1000]} />}>
-              <Route path="/user-profile" element={<UserProfile />} />
-            </Route>
+          <Route element={<RequireAuth allowedRoles={[1000]} />}>
+            <Route path="/user-profile" element={<UserProfile />} />
           </Route>
 
           <Route

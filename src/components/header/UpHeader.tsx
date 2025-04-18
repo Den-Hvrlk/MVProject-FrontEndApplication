@@ -1,9 +1,8 @@
 import "./Header.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import React, { useEffect, useRef, useState } from "react";
-import { logoutUser } from "../../api/users";
-import { useToast } from "../../hooks/useToast";
+import useLogout from "../../hooks/useLogout";
 
 const UpHeader: React.FC = React.memo(() => {
   console.log("UpHeader");
@@ -11,11 +10,20 @@ const UpHeader: React.FC = React.memo(() => {
   const email: string = import.meta.env.VITE_EMAIL;
   const phone: string = import.meta.env.VITE_PHONE;
 
-  const { auth, setAuth } = useAuth();
-  const { showToast } = useToast();
+  const { auth } = useAuth();
+  const logout = useLogout();
+
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
+  const isOpenRef = useRef(isOpen);
+
+  const signOut = async () => {
+    await logout();
+  };
+
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -23,39 +31,15 @@ const UpHeader: React.FC = React.memo(() => {
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        setIsOpen(false);
+        if (isOpenRef.current) setIsOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      setIsOpen(false);
     };
   }, []);
-
-  const handleLogout = async () => {
-    try {
-      const response = await logoutUser();
-
-      localStorage.removeItem("persist");
-      setAuth({
-        id: 0,
-        email: "",
-        roles: [],
-        accessToken: "",
-        userName: "",
-      });
-
-      localStorage.removeItem("cachedUserName");
-
-      showToast(response.message, "success");
-
-      navigate("/login");
-    } catch (err) {
-      console.error("Logout error", err);
-    }
-  };
 
   return (
     <div className="top-bar">
@@ -94,10 +78,7 @@ const UpHeader: React.FC = React.memo(() => {
                   <Link to="/user-profile" className="dropdown-item">
                     Профіль
                   </Link>
-                  <button
-                    className="dropdown-item logout"
-                    onClick={handleLogout}
-                  >
+                  <button className="dropdown-item logout" onClick={signOut}>
                     Вийти
                   </button>
                 </div>

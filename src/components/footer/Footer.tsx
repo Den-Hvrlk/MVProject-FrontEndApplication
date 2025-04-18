@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
+  console.log("Footer");
   return (
     <>
       <footer>

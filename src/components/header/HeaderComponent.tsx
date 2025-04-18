@@ -1,8 +1,9 @@
 import UpHeader from "./UpHeader.tsx";
 import DownHeader from "./DownHeader.tsx";
+import React from "react";
 import "./Header.css";
 
-export default function Header() {
+const Header: React.FC = React.memo(() => {
   console.log("HeaderComponent");
   return (
     <>
@@ -12,4 +13,6 @@ export default function Header() {
       </header>
     </>
   );
-}
+});
+
+export default Header;

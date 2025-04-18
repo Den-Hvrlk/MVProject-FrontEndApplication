@@ -6,7 +6,11 @@ const Fundraising: React.FC = function () {
     <>
       <h1>АКТИВНІ ЗБОРИ КОШТІВ</h1>
       <div className="fundraising-filter">
-        <input type="text" placeholder="Пошук зборів коштів"></input>
+        <input
+          id="fundraising-filter"
+          type="text"
+          placeholder="Пошук зборів коштів"
+        ></input>
         <p>
           Хочете створити збір коштів?{" "}
           <a href="https://google.com">Зареєструйте свій фонд</a>

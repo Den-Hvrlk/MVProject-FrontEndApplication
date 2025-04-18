@@ -5,7 +5,11 @@ const VolunteerProjects: React.FC = () => {
     <>
       <h1>ВОЛОНТЕРСЬКІ ПРОЕКТИ</h1>
       <div className="volunteer-projects-filter">
-        <input type="text" placeholder="Пошук влонтерських проектів"></input>
+        <input
+          id="volunteer-projects-filter"
+          type="text"
+          placeholder="Пошук влонтерських проектів"
+        ></input>
       </div>
 
       <section id="volunteer-projects-list">

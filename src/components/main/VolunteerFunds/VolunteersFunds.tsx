@@ -5,7 +5,11 @@ const VolunteerFunds: React.FC = () => {
     <>
       <h1>ВОЛОНТЕРСЬКІ ФОНДИ</h1>
       <div className="volunteer-funds-filter">
-        <input type="text" placeholder="Пошук влонтерських проектів"></input>
+        <input
+          id="volunteer-funds-filter"
+          type="text"
+          placeholder="Пошук влонтерських проектів"
+        ></input>
         <p>
           <a href="https://google.com">Зареєструвати волонтерський фонд</a>
         </p>

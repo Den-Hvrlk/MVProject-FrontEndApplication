@@ -43,6 +43,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     [auth, persist]
   );
 
+  console.log("📦 useAuth:", auth);
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

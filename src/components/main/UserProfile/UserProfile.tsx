@@ -3,6 +3,18 @@ import { useToast } from "../../../hooks/useToast";
 import { getUser } from "../../../api/users";
 import { useAuth } from "../../../hooks/useAuth";
 import "./UserProfile.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faInfoCircle,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  validateUserName,
+  validatePhoneNumber,
+  validateBirthDate,
+  validateSex,
+} from "../../../utils/validation";
 
 type UserProfileProps = {
   email: string;
@@ -22,6 +34,14 @@ const UserProfile: React.FC = () => {
   console.log("UserProfile");
   const { auth } = useAuth();
   const { showToast } = useToast();
+  const [userDataToUpdate, setUserDataToUpdate] = useState<UserProfileProps>({
+    email: "",
+    userName: "",
+    sex: "",
+    birthDate: "",
+    phoneNumber: "",
+    avatarpath: "",
+  });
   const [state, setState] = useState<UserProfileState>({
     isLoading: true,
     user: {
@@ -33,6 +53,41 @@ const UserProfile: React.FC = () => {
       avatarpath: "",
     },
   });
+
+  const [validUserName, setValidUserName] = useState<boolean>(false);
+  const [validPhoneNumber, setValidPhoneNumber] = useState<boolean>(false);
+  const [validSex, setValidSex] = useState<boolean>(false);
+  const [validBirthDate, setValidBirthDate] = useState<boolean>(false);
+
+  useEffect(() => {
+    setValidUserName(validateUserName(userDataToUpdate.userName));
+  }, [userDataToUpdate.userName]);
+
+  useEffect(() => {
+    setValidPhoneNumber(validatePhoneNumber(userDataToUpdate.phoneNumber));
+  }, [userDataToUpdate.phoneNumber]);
+
+  useEffect(() => {
+    if (
+      validateBirthDate(userDataToUpdate.birthDate) &&
+      userDataToUpdate.birthDate <= new Date().toISOString().split("T")[0]
+    ) {
+      setValidBirthDate(true);
+    } else {
+      setValidBirthDate(false);
+    }
+  }, [userDataToUpdate.birthDate]);
+
+  useEffect(() => {
+    setValidSex(validateSex(userDataToUpdate.sex));
+  }, [userDataToUpdate.sex]);
+
+  const [editMode, setEditMode] = useState(false);
+
+  const toggleEditMode = () => {
+    setEditMode(!editMode);
+    setUserDataToUpdate(state.user);
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -84,113 +139,280 @@ const UserProfile: React.FC = () => {
                   />
                 </div>
                 <div className="user-profile-edit-button">
-                  <button>Редагувати</button>
+                  <button
+                    className={editMode ? "active-edit-mode" : ""}
+                    onClick={toggleEditMode}
+                  >
+                    {editMode
+                      ? "Закрити режим редагування"
+                      : "Увімкнути режим редагування"}
+                  </button>
                 </div>
               </div>
               <div className="user-profile-container-right">
                 <div className="user-profile-info">
                   <div className="user-profile-info-text">
+                    {/* Email */}
                     <div className="form-row">
                       <label htmlFor="email">Пошта:</label>
-                      <input
-                        id="email"
-                        type="email"
-                        value={state.user.email}
-                        onChange={(e) =>
-                          setState((prev) => ({
-                            ...prev,
-                            user: {
-                              ...prev.user,
-                              email: e.target.value,
-                            },
-                          }))
-                        }
-                        autoComplete="true"
-                      />
+                      <div id="email" className="readonly-field">
+                        {state.user.email}
+                      </div>
                     </div>
+
+                    {/* UserName */}
                     <div className="form-row">
                       <label htmlFor="userName">Ім'я:</label>
-                      <input
-                        id="userName"
-                        type="text"
-                        value={state.user.userName}
-                        placeholder="Введіть ім'я"
-                        onChange={(e) =>
-                          setState((prev) => ({
-                            ...prev,
-                            user: {
-                              ...prev.user,
-                              userName: e.target.value,
-                            },
-                          }))
-                        }
-                        autoComplete="true"
-                      />
+                      {editMode ? (
+                        <div className="form-input-block">
+                          <div className="form-input-without-instructions-block">
+                            <input
+                              id="userName"
+                              type="text"
+                              value={userDataToUpdate.userName}
+                              placeholder="Введіть ім'я"
+                              onChange={(e) =>
+                                setUserDataToUpdate((prev) => ({
+                                  ...prev,
+                                  userName: e.target.value,
+                                }))
+                              }
+                              autoComplete="true"
+                              aria-invalid={validUserName ? "false" : "true"}
+                              aria-describedby="usernamenote"
+                            />
+                            <div className="icon-right">
+                              <FontAwesomeIcon
+                                icon={validUserName ? faCheck : faTimes}
+                                className={validUserName ? "valid" : "invalid"}
+                              />
+                            </div>
+                          </div>
+
+                          <div
+                            id="usernamenote"
+                            className={
+                              !validUserName && userDataToUpdate.userName
+                                ? "instructions"
+                                : "offscreen"
+                            }
+                            style={{
+                              textAlign: "center",
+                              gap: "4px",
+                              margin: "4px",
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            Ім'я користувача повинен складатися:
+                            <ul style={{ textAlign: "left", gap: "4px" }}>
+                              <li>Із 4 до 24 символів</li>
+                              <li>Повинен починатись з букви</li>
+                              <li>
+                                Допускаються літери, цифри, підкреслення, дефіси
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="readonly-field">
+                          {state.user.userName}
+                        </div>
+                      )}
                     </div>
+
+                    {/* Стать */}
                     <div className="form-row">
                       <label htmlFor="sex">Стать:</label>
-                      <select
-                        id="sex"
-                        value={state.user.sex}
-                        onChange={(e) =>
-                          setState((prev) => ({
-                            ...prev,
-                            user: {
-                              ...prev.user,
-                              sex: e.target.value,
-                            },
-                          }))
-                        }
-                      >
-                        <option value="None">Не вказувати</option>
-                        <option value="M">Чоловіча</option>
-                        <option value="F">Жіноча</option>
-                      </select>
+                      {editMode ? (
+                        <div className="form-input-block">
+                          <div className="form-input-without-instructions-block">
+                            <select
+                              id="sex"
+                              value={userDataToUpdate.sex}
+                              onChange={(e) =>
+                                setUserDataToUpdate((prev) => ({
+                                  ...prev,
+                                  sex: e.target.value,
+                                }))
+                              }
+                              aria-invalid={validSex ? "false" : "true"}
+                              aria-describedby="sexnote"
+                            >
+                              <option value="None">Не вказувати</option>
+                              <option value="M">Чоловіча</option>
+                              <option value="F">Жіноча</option>
+                            </select>
+                            <div className="icon-right">
+                              <FontAwesomeIcon
+                                icon={validSex ? faCheck : faTimes}
+                                className={validSex ? "valid" : "invalid"}
+                              />
+                            </div>
+                          </div>
+                          <div
+                            id="sexnote"
+                            className={
+                              !validSex && userDataToUpdate.sex
+                                ? "instructions"
+                                : "offscreen"
+                            }
+                            style={{
+                              textAlign: "center",
+                              gap: "4px",
+                              margin: "4px",
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            Стать повинна бути вказана:
+                            <ul style={{ textAlign: "left", gap: "4px" }}>
+                              <li>Чоловіча</li>
+                              <li>Жіноча</li>
+                              <li>Або не вказано</li>
+                            </ul>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="readonly-field">
+                          {
+                            {
+                              None: "Не вказано",
+                              M: "Чоловіча",
+                              F: "Жіноча",
+                            }[state.user.sex]
+                          }
+                        </div>
+                      )}
                     </div>
+
+                    {/* Дата народження */}
                     <div className="form-row">
                       <label htmlFor="birthDate">Дата народження:</label>
-                      <input
-                        id="birthDate"
-                        type="date"
-                        value={state.user.birthDate}
-                        onChange={(e) =>
-                          setState((prev) => ({
-                            ...prev,
-                            user: {
-                              ...prev.user,
-                              birthDate: e.target.value,
-                            },
-                          }))
-                        }
-                      />
+                      {editMode ? (
+                        <div className="form-input-block">
+                          <div className="form-input-without-instructions-block">
+                            <input
+                              id="birthDate"
+                              type="date"
+                              value={userDataToUpdate.birthDate}
+                              onChange={(e) =>
+                                setUserDataToUpdate((prev) => ({
+                                  ...prev,
+                                  birthDate: e.target.value,
+                                }))
+                              }
+                              aria-invalid={validBirthDate ? "false" : "true"}
+                              aria-describedby="birthdatenote"
+                            />
+                            {userDataToUpdate.birthDate && (
+                              <div className="icon-right">
+                                <FontAwesomeIcon
+                                  icon={validBirthDate ? faCheck : faTimes}
+                                  className={
+                                    validBirthDate ? "valid" : "invalid"
+                                  }
+                                />
+                              </div>
+                            )}
+                          </div>
+                          <div
+                            id="birthdatenote"
+                            className={
+                              !validBirthDate && userDataToUpdate.birthDate
+                                ? "instructions"
+                                : "offscreen"
+                            }
+                            style={{
+                              textAlign: "center",
+                              gap: "4px",
+                              margin: "4px",
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            Дата повинна:
+                            <ul style={{ textAlign: "left", gap: "4px" }}>
+                              <li>Мати формат РРРР-ММ-ДД</li>
+                              <li>Не бути пізніше сьогоднішньої дати</li>
+                            </ul>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="readonly-field">
+                          {state.user.birthDate || "—"}
+                        </div>
+                      )}
                     </div>
+
+                    {/* Телефон */}
                     <div className="form-row">
                       <label htmlFor="phoneNumber">Телефон:</label>
-                      <input
-                        id="phoneNumber"
-                        type="text"
-                        value={state.user.phoneNumber}
-                        placeholder="Введіть телефон"
-                        onChange={(e) =>
-                          setState((prev) => ({
-                            ...prev,
-                            user: {
-                              ...prev.user,
-                              phoneNumber: e.target.value,
-                            },
-                          }))
-                        }
-                      />
+                      {editMode ? (
+                        <div className="form-input-block">
+                          <div className="form-input-without-instructions-block">
+                            <input
+                              id="phoneNumber"
+                              type="text"
+                              value={userDataToUpdate.phoneNumber}
+                              onChange={(e) =>
+                                setUserDataToUpdate((prev) => ({
+                                  ...prev,
+                                  phoneNumber: e.target.value,
+                                }))
+                              }
+                              placeholder="Введіть телефон"
+                              aria-invalid={validPhoneNumber ? "false" : "true"}
+                              aria-describedby="phonenumbernote"
+                            />
+                            {userDataToUpdate.phoneNumber && (
+                              <div className="icon-right">
+                                <FontAwesomeIcon
+                                  icon={validPhoneNumber ? faCheck : faTimes}
+                                  className={
+                                    validPhoneNumber ? "valid" : "invalid"
+                                  }
+                                />
+                              </div>
+                            )}
+                          </div>
+                          <div
+                            id="phonenumbernote"
+                            className={
+                              !validPhoneNumber && userDataToUpdate.phoneNumber
+                                ? "instructions"
+                                : "offscreen"
+                            }
+                            style={{
+                              textAlign: "center",
+                              gap: "4px",
+                              margin: "4px",
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            Номер телефону повинен мати формат +380XXXXXXXXX:
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="readonly-field">
+                          {state.user.phoneNumber || "—"}
+                        </div>
+                      )}
                     </div>
                   </div>
+
                   <br />
                   <br />
+
                   <div>Мої волонтерські фонди</div>
+                  <div>—</div>
                   <br />
                   <div>Мої військові угруповання</div>
+                  <div>—</div>
+
+                  {editMode && (
+                    <div className="button-wrapper">
+                      <button className="edit-button">Редагувати</button>
+                    </div>
+                  )}
                 </div>
-                <br />
-                <button>Редагувати</button>
               </div>
             </div>
           </>

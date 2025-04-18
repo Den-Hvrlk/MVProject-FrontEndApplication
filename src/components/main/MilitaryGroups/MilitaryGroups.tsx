@@ -5,7 +5,11 @@ const MilitaryGroups: React.FC = () => {
     <>
       <h1>ВІЙСЬКОВІ УГРУПОВАННЯ</h1>
       <div className="military-group-filter">
-        <input type="text" placeholder="Пошук військових угруповань"></input>
+        <input
+          id="military-group-filter"
+          type="text"
+          placeholder="Пошук військових угруповань"
+        ></input>
         <p>
           <a href="https://google.com">Зареєструвати військове угруповання</a>
         </p>

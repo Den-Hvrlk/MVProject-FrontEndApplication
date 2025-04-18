@@ -14,6 +14,7 @@ h1 {
   margin: 0 auto;
   max-width: 1100px;
   display: flex;
+  height: auto;
   gap: 26px;
 }
 
@@ -25,6 +26,10 @@ h1 {
   flex-direction: column;
   justify-content: space-between; /* это важно */
   align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 16px; /* 👈 добавим отступы как у основного контейнера */
+  box-sizing: border-box;
 }
 
 /* Обёртки аватара и кнопки */
@@ -39,11 +44,15 @@ h1 {
 }
 
 .user-profile-edit-button {
-  margin-top: auto; /* гарантирует прижатие вниз */
+  margin-top: auto;
   padding: 10px 0;
   display: flex;
   justify-content: center;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .user-profile-edit-button button {
@@ -65,6 +74,13 @@ h1 {
   background-color: #e0e0e0;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
   transform: scale(0.98);
+}
+
+.user-profile-edit-button button.active-edit-mode {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
 /* Аватар */
@@ -93,7 +109,6 @@ h1 {
 .user-profile-container-right {
   flex: 2;
   max-width: 66%;
-  display: flex;
   flex-direction: column;
 }
 
@@ -103,12 +118,15 @@ h1 {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: white;
-  padding: 45px;
+  padding-left: 45px;
+  padding-top: 45px;
+  padding-right: 45px;
+  padding-bottom: 25px;
   border-radius: 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   box-sizing: border-box;
+  background: white;
 }
 
 .user-profile-edit-button {
@@ -123,13 +141,15 @@ h1 {
 .user-profile-info-text {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .form-row {
   display: flex;
+  min-height: 48px;
   align-items: center;
   gap: 12px;
+  align-items: flex-start;
 }
 
 .form-row label {
@@ -137,13 +157,75 @@ h1 {
   font-weight: 500;
   font-size: 15px;
   text-align: left;
+  padding-top: 12px;
+}
+
+.readonly-field {
+  flex: 1;
+  max-width: 300px;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid transparent; /* имитируем input */
+  border-radius: 8px;
+  min-height: 38px; /* чтобы совпадало с input */
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .form-row input,
 .form-row select {
+  max-width: 300px;
+}
+
+.form-input-block {
+  display: block;
+  flex-direction: column;
+  gap: 4px;
   flex: 1;
   max-width: 300px;
   width: 100%;
+  position: relative;
+}
+
+.form-input-without-instructions-block {
+  display: flex;
+  flex-direction: row;
+  margin: 4px;
+  width: 100%;
+}
+
+.form-input-without-instructions-block input,
+.form-input-without-instructions-block select {
+  flex: 1;
+  max-width: 300px; /* добавим место под иконку */
+}
+
+.form-input-without-instructions-block .valid,
+.form-input-without-instructions-block .invalid {
+  position: absolute;
+  left: 310px;
+  top: 44px;
+  transform: translateY(-200%);
+  margin: 0;
+  font-size: 16px;
+}
+
+.icon-right {
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 16px;
+}
+
+.user-profile-info-text input {
   padding: 8px 12px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -153,9 +235,8 @@ h1 {
   transition: border 0.3s ease;
 }
 
-.user-profile-info-text input,
 .user-profile-info-text select {
-  padding: 8px 12px;
+  padding: 8px 8px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -167,6 +248,7 @@ h1 {
 .user-profile-info-text input:focus,
 .user-profile-info-text select:focus {
   border-color: #007bff;
+  box-shadow: 0 0 5px rgba(108, 142, 230, 0.6);
   outline: none;
 }
 
@@ -186,6 +268,81 @@ h1 {
   border-top: 3px solid #007bff;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+}
+
+.edit-button {
+  padding: 10px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1.5px solid black;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+  margin-top: 45px;
+}
+
+.edit-button:hover {
+  background-color: #e0e0e0;
+}
+
+.edit-button:active {
+  background-color: #d4d4d4;
+  transform: scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.valid {
+  color: green;
+  margin-left: 6px;
+}
+
+.invalid {
+  color: red;
+  margin-left: 6px;
+}
+
+.hide {
+  display: none;
+}
+
+.instructions {
+  background-color: #eef6ff;
+  color: #0a58ca;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 6px;
+  border: 1px solid #b6d4fe;
+}
+
+.instructions ul {
+  margin-top: 6px;
+  margin-left: 20px;
+  padding-left: 0;
+  list-style-type: disc;
+}
+
+.instructions li {
+  margin-bottom: 4px;
+}
+
+.instructions span {
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
 }
 
 @keyframes spin {

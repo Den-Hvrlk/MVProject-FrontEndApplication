@@ -11,9 +11,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "../../../hooks/useToast";
 import {
-  validateUsername,
   validatePassword,
   validateEmail,
+  validateUserName,
 } from "../../../utils/validation";
 import { createUser } from "../../../api/users";
 
@@ -62,7 +62,7 @@ const Registration: React.FC = () => {
   }, [email]);
 
   useEffect(() => {
-    setValidName(validateUsername(user));
+    setValidName(validateUserName(user));
   }, [user]);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const Registration: React.FC = () => {
 
     setErrorMessage("");
 
-    if (!validateUsername(user) || !validatePassword(password)) {
+    if (!validateUserName(user) || !validatePassword(password)) {
       setErrorMessage("Invalid Entry");
       return;
     }

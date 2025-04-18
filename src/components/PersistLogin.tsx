@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import useRefreshToken from "../hooks/useRefreshToken";
 
 const PersistLogin = () => {
+  console.log("🔄 PersistLogin");
   const [isLoading, setIsLoading] = useState(true);
   const refresh = useRefreshToken();
   const { auth, persist } = useAuth();

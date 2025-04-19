@@ -209,7 +209,7 @@ h1 {
 .form-input-without-instructions-block .valid,
 .form-input-without-instructions-block .invalid {
   position: absolute;
-  left: 310px;
+  left: 105%;
   top: 44px;
   transform: translateY(-200%);
   margin: 0;
@@ -359,7 +359,7 @@ h1 {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
   .mobile-center-only {
     text-align: center;
     justify-content: center;

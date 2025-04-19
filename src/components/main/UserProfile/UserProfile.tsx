@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useToast } from "../../../hooks/useToast";
 import { getUserProfile, updateUserProfile } from "../../../api/users";
 import { useAuth } from "../../../hooks/useAuth";
@@ -36,6 +36,7 @@ const UserProfile: React.FC = () => {
   const { auth } = useAuth();
   const [isLoadingUpdateProfile, setIsLoadingUpdateProfile] = useState(false);
   const { showToast } = useToast();
+  const userProfileRef = useRef<HTMLDivElement>(null);
   const [userDataToUpdate, setUserDataToUpdate] = useState<UserProfileProps>({
     email: "",
     userName: "",
@@ -94,6 +95,7 @@ const UserProfile: React.FC = () => {
   };
 
   useEffect(() => {
+    userProfileRef.current?.scrollIntoView({ behavior: "smooth" });
     const fetchUser = async () => {
       try {
         const userData = await getUserProfile(auth.accessToken);
@@ -138,7 +140,7 @@ const UserProfile: React.FC = () => {
   };
 
   return (
-    <div className="user-profile">
+    <div className="user-profile" ref={userProfileRef}>
       <h1>ПРОФІЛЬ</h1>
       <section id="user-profile-container">
         {state.isLoading ? (

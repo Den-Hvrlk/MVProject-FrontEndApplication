@@ -34,6 +34,7 @@ type UserProfileState = {
 const UserProfile: React.FC = () => {
   console.log("UserProfile");
   const { auth } = useAuth();
+  const [isLoadingUpdateProfile, setIsLoadingUpdateProfile] = useState(false);
   const { showToast } = useToast();
   const [userDataToUpdate, setUserDataToUpdate] = useState<UserProfileProps>({
     email: "",
@@ -120,16 +121,19 @@ const UserProfile: React.FC = () => {
   }, []);
 
   const handleSave = async () => {
-    console.log(userDataToUpdate);
     try {
+      setIsLoadingUpdateProfile(true);
       const result = await updateUserProfile(
         auth.accessToken,
         userDataToUpdate
       );
       setState({ isLoading: false, user: userDataToUpdate });
+      setEditMode(false);
       showToast(result, "success");
     } catch (error) {
       showToast(error, "error");
+    } finally {
+      setIsLoadingUpdateProfile(false);
     }
   };
 
@@ -428,11 +432,18 @@ const UserProfile: React.FC = () => {
                   <div>—</div>
 
                   {editMode && (
-                    <div className="button-wrapper">
-                      <button className="edit-button" onClick={handleSave}>
-                        Редагувати
-                      </button>
-                    </div>
+                    <>
+                      <div className="button-wrapper">
+                        <button className="edit-button" onClick={handleSave}>
+                          Редагувати
+                        </button>
+                      </div>
+                      {isLoadingUpdateProfile && (
+                        <div className="spinner-wrapper-update-profile">
+                          <div className="spinner"></div>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               </div>

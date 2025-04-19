@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useToast } from "../../../hooks/useToast";
-import { getUser } from "../../../api/users";
+import { getUserProfile, updateUserProfile } from "../../../api/users";
 import { useAuth } from "../../../hooks/useAuth";
 import "./UserProfile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,9 +16,10 @@ import {
   validateSex,
 } from "../../../utils/validation";
 
-type UserProfileProps = {
+export type UserProfileProps = {
   email: string;
   userName: string;
+  hashpassword: string;
   sex: string;
   birthDate: string;
   phoneNumber: string;
@@ -37,6 +38,7 @@ const UserProfile: React.FC = () => {
   const [userDataToUpdate, setUserDataToUpdate] = useState<UserProfileProps>({
     email: "",
     userName: "",
+    hashpassword: "",
     sex: "",
     birthDate: "",
     phoneNumber: "",
@@ -47,6 +49,7 @@ const UserProfile: React.FC = () => {
     user: {
       email: "",
       userName: "",
+      hashpassword: "",
       sex: "",
       birthDate: "",
       phoneNumber: "",
@@ -92,13 +95,14 @@ const UserProfile: React.FC = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userData = await getUser(auth.accessToken);
+        const userData = await getUserProfile(auth.accessToken);
 
         setState({
           isLoading: false,
           user: {
             email: userData.email ?? "",
             userName: userData.userName ?? "",
+            hashpassword: userData.hashpassword ?? "",
             sex: userData.sex ?? "None",
             birthDate: userData.birthDate ?? "",
             phoneNumber: userData.phoneNumber ?? "",
@@ -114,6 +118,20 @@ const UserProfile: React.FC = () => {
       fetchUser();
     }
   }, []);
+
+  const handleSave = async () => {
+    console.log(userDataToUpdate);
+    try {
+      const result = await updateUserProfile(
+        auth.accessToken,
+        userDataToUpdate
+      );
+      setState({ isLoading: false, user: userDataToUpdate });
+      showToast(result, "success");
+    } catch (error) {
+      showToast(error, "error");
+    }
+  };
 
   return (
     <div className="user-profile">
@@ -241,8 +259,8 @@ const UserProfile: React.FC = () => {
                               aria-describedby="sexnote"
                             >
                               <option value="None">Не вказувати</option>
-                              <option value="M">Чоловіча</option>
-                              <option value="F">Жіноча</option>
+                              <option value="Male">Чоловіча</option>
+                              <option value="Female">Жіноча</option>
                             </select>
                             <div className="icon-right">
                               <FontAwesomeIcon
@@ -278,8 +296,8 @@ const UserProfile: React.FC = () => {
                           {
                             {
                               None: "Не вказано",
-                              M: "Чоловіча",
-                              F: "Жіноча",
+                              Male: "Чоловіча",
+                              Female: "Жіноча",
                             }[state.user.sex]
                           }
                         </div>
@@ -411,7 +429,9 @@ const UserProfile: React.FC = () => {
 
                   {editMode && (
                     <div className="button-wrapper">
-                      <button className="edit-button">Редагувати</button>
+                      <button className="edit-button" onClick={handleSave}>
+                        Редагувати
+                      </button>
                     </div>
                   )}
                 </div>

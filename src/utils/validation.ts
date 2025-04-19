@@ -4,7 +4,7 @@ export const PASSWORD_REGEX =
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const PHONE_REGEX = /^\+380\d{9}$/;
 export const BIRTHDATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
-export const SEX_VALUES = ["M", "F", "None"];
+export const SEX_VALUES = ["Male", "Female", "None"];
 
 export const validateUserName = (value: string): boolean =>
   USERNAME_REGEX.test(value);

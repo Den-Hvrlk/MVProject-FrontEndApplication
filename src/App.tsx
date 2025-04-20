@@ -17,6 +17,7 @@ import UserProfile from "./components/main/UserProfile/UserProfile.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import Footer from "./components/footer/Footer.tsx";
 import HeaderComponent from "./components/header/HeaderComponent.tsx";
+import RegisterFund from "./components/main/RegisterFund/RegisterFund.tsx";
 
 function App() {
   console.log("App");
@@ -31,7 +32,7 @@ function App() {
           <Route path="/donate" element={<Donate />} />
           <Route path="/about-us" element={<About />} />
 
-          <Route path="/fundraising" element={<Fundraising />} />
+          <Route path="/fundraisings" element={<Fundraising />} />
           <Route path="/volunteer-projects" element={<VolunteerProjects />} />
           <Route path="/military-groups" element={<MilitaryGroups />} />
           <Route path="/volunteer-funds" element={<VolunteerFunds />} />
@@ -39,6 +40,7 @@ function App() {
 
           <Route element={<RequireAuth allowedRoles={[1000]} />}>
             <Route path="/user-profile" element={<UserProfile />} />
+            <Route path="/register-fund" element={<RegisterFund />} />
           </Route>
 
           <Route

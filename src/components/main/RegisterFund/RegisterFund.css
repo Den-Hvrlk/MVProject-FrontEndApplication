@@ -1,0 +1,154 @@
+.register-fund-page {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.register-fund-container {
+  width: 90%;
+  max-width: none;
+  margin: 0 auto;
+  background-color: #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.register-fund-form {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  max-width: 100%;
+  padding: 10px;
+}
+
+.register-fund-form-avatar {
+  width: 25%;
+  height: 100%;
+}
+
+.avatar-image img {
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.register-fund-form-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 75%;
+  height: 100%;
+  gap: 24px;
+}
+
+.register-fund-form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.register-fund-form-info input,
+.register-fund-form-info textarea {
+  width: 100%;
+  max-width: 100%;
+  font-size: 16px;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.register-fund-form-description {
+  min-height: 100px;
+  height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.register-fund-form-button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-fund-form-button button {
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.register-fund-form-button button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 800px) {
+  .register-fund-form {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 20px;
+  }
+
+  .register-fund-form-avatar {
+    width: 33%;
+    height: 100%;
+    flex: 1;
+  }
+
+  .avatar-image img {
+    width: 100%;
+    max-width: 200px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .register-fund-form-info {
+    width: 100%;
+    flex: none;
+    background: transparent;
+    padding: 0 10px;
+  }
+
+  .register-fund-form-field {
+    width: 100%;
+    background: transparent;
+  }
+
+  .register-fund-form-info input,
+  .register-fund-form-info textarea {
+    font-size: 16px;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .register-fund-form-button {
+    padding: 10px;
+    width: 100%;
+    background: transparent;
+  }
+
+  .register-fund-form-button button {
+    width: 100%;
+    max-width: 300px;
+    font-size: 16px;
+  }
+}

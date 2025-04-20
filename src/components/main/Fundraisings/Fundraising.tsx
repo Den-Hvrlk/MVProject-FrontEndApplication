@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Fundraising.css";
 
 const Fundraising: React.FC = function () {
@@ -13,7 +14,7 @@ const Fundraising: React.FC = function () {
         ></input>
         <p>
           Хочете створити збір коштів?{" "}
-          <a href="https://google.com">Зареєструйте свій фонд</a>
+          <Link to="/register-fund">Зареєструйте свій фонд</Link>
         </p>
       </div>
 

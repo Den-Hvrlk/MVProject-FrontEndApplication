@@ -15,7 +15,7 @@ import {
   validateEmail,
   validateUserName,
 } from "../../../utils/validation";
-import { createUser } from "../../../api/users";
+import { registerUser } from "../../../api/users";
 
 const Registration: React.FC = () => {
   const userRef = useRef<HTMLInputElement>(null);
@@ -88,7 +88,7 @@ const Registration: React.FC = () => {
     setRequestedEmail(email);
 
     try {
-      const response = await createUser(email, user, password);
+      const response = await registerUser(email, user, password);
 
       showToast("Реєстрація успішна", "success");
       navigate("/login");

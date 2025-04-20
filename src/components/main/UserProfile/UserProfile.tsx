@@ -157,7 +157,7 @@ const UserProfile: React.FC = () => {
                       state.user.avatarpath &&
                       state.user.avatarpath.trim() !== ""
                         ? state.user.avatarpath
-                        : "/images/default-avatar.svg"
+                        : "/images/default-user-avatar.svg"
                     }
                     alt="avatar"
                   />
@@ -436,7 +436,11 @@ const UserProfile: React.FC = () => {
                   {editMode && (
                     <>
                       <div className="button-wrapper">
-                        <button className="edit-button" onClick={handleSave}>
+                        <button
+                          className="edit-button"
+                          onClick={handleSave}
+                          disabled={isLoadingUpdateProfile}
+                        >
                           Редагувати
                         </button>
                       </div>

@@ -1,7 +1,7 @@
 import { UserProfileProps } from "../components/main/UserProfile/UserProfile";
 import axios, { axiosPrivate } from "./axios";
 
-export const createUser = async (
+export const registerUser = async (
   email: string,
   username: string,
   password: string

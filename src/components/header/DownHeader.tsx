@@ -27,7 +27,7 @@ const DownHeader: React.FC = () => {
       <div className="right-section">
         <ul className="right-links">
           <li>
-            <Link to="/fundraising">
+            <Link to="/fundraisings">
               <p className="a-link">ЗБОРИ КОШТІВ</p>
             </Link>
           </li>

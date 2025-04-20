@@ -58,6 +58,22 @@
   width: 100%;
 }
 
+.register-fund-inputs-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.register-fund-name,
+.register-fund-code {
+  flex: 1;
+}
+
+.register-fund-name input,
+.register-fund-code input {
+  width: 100%;
+}
+
 .register-fund-form-info input,
 .register-fund-form-info textarea {
   width: 100%;
@@ -131,6 +147,10 @@
   .register-fund-form-field {
     width: 100%;
     background: transparent;
+  }
+
+  .register-fund-inputs-row {
+    flex-direction: column;
   }
 
   .register-fund-form-info input,

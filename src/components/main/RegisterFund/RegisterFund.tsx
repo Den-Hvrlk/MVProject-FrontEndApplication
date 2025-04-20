@@ -7,10 +7,12 @@ import "./RegisterFund.css";
 
 export type RegisterFundProps = {
   name: string;
+  code: string;
   desctiption: string;
 };
 
 const RegisterFund = () => {
+  console.log("RegisterFund");
   const navigate = useNavigate();
   const { auth } = useAuth();
   const { showToast } = useToast();
@@ -19,6 +21,7 @@ const RegisterFund = () => {
   const fundNameRef = useRef<HTMLInputElement>(null);
   const [registerForm, setRegisterForm] = useState<RegisterFundProps>({
     name: "",
+    code: "",
     desctiption: "",
   });
 
@@ -67,21 +70,41 @@ const RegisterFund = () => {
             </div>
             <div className="register-fund-form-info">
               <div className="register-fund-form-field">
-                <label htmlFor="fundname">Назва фонду</label>
-                <input
-                  ref={fundNameRef}
-                  className="register-fund-form-name"
-                  type="text"
-                  name="fundnamelabelname"
-                  id="fundname"
-                  value={registerForm.name}
-                  onChange={(e) =>
-                    setRegisterForm(() => ({
-                      ...registerForm,
-                      name: e.target.value,
-                    }))
-                  }
-                />
+                <div className="register-fund-inputs-row">
+                  <div className="register-fund-name">
+                    <label htmlFor="fundname">Назва фонду</label>
+                    <input
+                      ref={fundNameRef}
+                      className="register-fund-form-name"
+                      type="text"
+                      name="fundnameinputname"
+                      id="fundname"
+                      value={registerForm.name}
+                      onChange={(e) =>
+                        setRegisterForm(() => ({
+                          ...registerForm,
+                          name: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                  <div className="register-fund-code">
+                    <label htmlFor="fundcode">Код ЄДРПОУ</label>
+                    <input
+                      className="register-fund-form-name"
+                      type="text"
+                      name="fundnameinputcode"
+                      id="fundcode"
+                      value={registerForm.code}
+                      onChange={(e) =>
+                        setRegisterForm(() => ({
+                          ...registerForm,
+                          code: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                </div>
               </div>
               <div className="register-fund-form-field">
                 <label htmlFor="funddescription">Опис фонду</label>

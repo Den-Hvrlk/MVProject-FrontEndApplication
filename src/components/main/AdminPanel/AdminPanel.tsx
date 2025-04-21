@@ -1,12 +1,18 @@
 import { useState, useEffect, useRef } from "react";
-import { getRegistrationFundRequests } from "../../../api/funds";
+import {
+  getRegistrationFundRequests,
+  resolveRequest,
+  rejectRequest,
+} from "../../../api/funds";
 import { useAuth } from "../../../hooks/useAuth";
 import "./AdminPanel.css";
+import { useToast } from "../../../hooks/useToast";
 
 const AdminPanel: React.FC = () => {
   console.log("AdminPanel");
   const panelRef = useRef<HTMLDivElement>(null);
   const { auth } = useAuth();
+  const { showToast } = useToast();
 
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -60,6 +66,26 @@ const AdminPanel: React.FC = () => {
     fetchNotifications();
   }, []);
 
+  const handleResolveRequest = async (id: string) => {
+    try {
+      const response = await resolveRequest(auth.accessToken, id);
+      setNotifications((prev) => prev.filter((n) => n.id_key !== id));
+      showToast(response, "success");
+    } catch (error) {
+      showToast(error, "error");
+    }
+  };
+
+  const handleRejectRequest = async (id: string) => {
+    try {
+      const response = await rejectRequest(auth.accessToken, id);
+      setNotifications((prev) => prev.filter((n) => n.id_key !== id));
+      showToast(response, "success");
+    } catch (error) {
+      showToast(error, "error");
+    }
+  };
+
   return (
     <>
       <section className="admin-panel" ref={panelRef}>
@@ -97,8 +123,18 @@ const AdminPanel: React.FC = () => {
                     </td>
                     <td>{notification.date}</td>
                     <td>
-                      <button>✔️ Прийняти</button>
-                      <button>❌ Відхилити</button>
+                      <button
+                        onClick={() =>
+                          handleResolveRequest(notification.id_key)
+                        }
+                      >
+                        ✔️ Прийняти
+                      </button>
+                      <button
+                        onClick={() => handleRejectRequest(notification.id_key)}
+                      >
+                        ❌ Відхилити
+                      </button>
                     </td>
                   </tr>
                 ))}

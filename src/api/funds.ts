@@ -43,3 +43,31 @@ export const getRegistrationFundRequests = async (token: string) => {
 
   return response.data;
 };
+
+export const resolveRequest = async (token: string, id: string) => {
+  const response = await axiosPrivate.post(
+    `/funds/resolve-register/${id}`,
+    null,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return response.data;
+};
+
+export const rejectRequest = async (token: string, id: string) => {
+  const response = await axiosPrivate.put(
+    `/funds/reject-register/${id}`,
+    null,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return response.data;
+};

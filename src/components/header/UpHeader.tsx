@@ -48,11 +48,11 @@ const UpHeader: React.FC = React.memo(() => {
         <span>Email: {email}</span>
         <span>Phone: {phone}</span>
       </div>
-      {
+      {auth.roles.includes(1001) && (
         <div>
           <Link to="/admin-panel">Адмін панель</Link>
         </div>
-      }
+      )}
       <div className="social-container">
         <div className="social-links">
           <a href="#">

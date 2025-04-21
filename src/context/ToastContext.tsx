@@ -20,7 +20,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <ToastContainer closeButton={false} autoClose={3000} />
+      <ToastContainer closeButton={true} autoClose={3000} />
     </ToastContext.Provider>
   );
 };

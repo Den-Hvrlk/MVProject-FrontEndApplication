@@ -115,6 +115,11 @@
   background-color: #0056b3;
 }
 
+.register-fund-form-button button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 @media (max-width: 800px) {
   .register-fund-form {
     flex-direction: column;

@@ -143,6 +143,7 @@ const Registration: React.FC = () => {
             id="email"
             ref={userRef}
             value={email}
+            maxLength={255}
             onChange={(e) => setEmail(e.target.value)}
             required
             autoComplete="on"
@@ -165,6 +166,7 @@ const Registration: React.FC = () => {
             autoComplete="on"
             onChange={(e) => setUser(e.target.value)}
             value={user}
+            maxLength={255}
             required
             aria-invalid={validName ? "false" : "true"}
             aria-describedby="uidnote"
@@ -181,9 +183,11 @@ const Registration: React.FC = () => {
             <FontAwesomeIcon icon={faInfoCircle} />
             Ім'я користувача повинен складатися:
             <ul style={{ textAlign: "left", gap: "4px" }}>
-              <li>Із 4 до 24 символів</li>
+              <li>Від 4 до 24 символів</li>
               <li>Повинен починатись з букви</li>
-              <li>Допускаються літери, цифри, підкреслення, дефіси</li>
+              <li>
+                Допускаються англійські літери, цифри, підкреслення, дефіси
+              </li>
             </ul>
           </div>
         </div>
@@ -243,7 +247,7 @@ const Registration: React.FC = () => {
             <FontAwesomeIcon icon={faInfoCircle} />
             Пароль повинен складатися: <br />
             <ul style={{ textAlign: "left", gap: "4px" }}>
-              <li>Із 8 до 24 символів</li>
+              <li>Від 8 до 95 символів</li>
               <li>
                 Хоча б одна цифра, одна мала і одна велика літера, а також один
                 спецсимвол

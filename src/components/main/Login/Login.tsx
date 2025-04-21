@@ -129,6 +129,7 @@ const Login: React.FC = () => {
             id="email"
             ref={userRef}
             value={email}
+            maxLength={255}
             autoComplete="off"
             onChange={(e) => setEmail(e.target.value)}
             required

@@ -1,28 +1,28 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../hooks/useAuth";
 import { useToast } from "../../../hooks/useToast";
-import { registerFund } from "../../../api/funds";
+import { createRequest } from "../../../api/funds";
 import "./RegisterFund.css";
+import { useAuth } from "../../../hooks/useAuth";
 
 export type RegisterFundProps = {
-  name: string;
-  code: string;
-  desctiption: string;
+  FundName: string;
+  CodeUSR: string;
+  FundDescription: string;
 };
 
 const RegisterFund = () => {
   console.log("RegisterFund");
   const navigate = useNavigate();
-  const { auth } = useAuth();
   const { showToast } = useToast();
+  const { auth } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const fundNameRef = useRef<HTMLInputElement>(null);
   const [registerForm, setRegisterForm] = useState<RegisterFundProps>({
-    name: "",
-    code: "",
-    desctiption: "",
+    FundName: "",
+    CodeUSR: "",
+    FundDescription: "",
   });
 
   useEffect(() => {
@@ -32,19 +32,13 @@ const RegisterFund = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (!auth?.accessToken) {
-      navigate("/login");
-    }
-  }, [auth, navigate]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
+    console.log("registerForm", registerForm);
     try {
-      await registerFund(registerForm);
-      showToast("Фонд успішно створений", "success");
+      const result = await createRequest(auth.accessToken, registerForm);
+      showToast(result, "success");
       navigate("/volunteer-funds");
     } catch (err: any) {
       console.error(err);
@@ -79,11 +73,11 @@ const RegisterFund = () => {
                       type="text"
                       name="fundnameinputname"
                       id="fundname"
-                      value={registerForm.name}
+                      value={registerForm.FundName}
                       onChange={(e) =>
                         setRegisterForm(() => ({
                           ...registerForm,
-                          name: e.target.value,
+                          FundName: e.target.value,
                         }))
                       }
                     />
@@ -95,11 +89,11 @@ const RegisterFund = () => {
                       type="text"
                       name="fundnameinputcode"
                       id="fundcode"
-                      value={registerForm.code}
+                      value={registerForm.CodeUSR}
                       onChange={(e) =>
                         setRegisterForm(() => ({
                           ...registerForm,
-                          code: e.target.value,
+                          CodeUSR: e.target.value,
                         }))
                       }
                     />
@@ -111,12 +105,12 @@ const RegisterFund = () => {
                 <textarea
                   name="funddescriptionlabelname"
                   id="funddescription"
-                  value={registerForm.desctiption}
+                  value={registerForm.FundDescription}
                   className="register-fund-form-description"
                   onChange={(e) =>
                     setRegisterForm(() => ({
                       ...registerForm,
-                      desctiption: e.target.value,
+                      FundDescription: e.target.value,
                     }))
                   }
                 />
@@ -124,7 +118,9 @@ const RegisterFund = () => {
             </div>
           </div>
           <div className="register-fund-form-button">
-            <button type="submit">Створити волонтерський фонд</button>
+            <button type="submit">
+              Відправити запит на створення волонтерського фонду
+            </button>
             {isLoading && (
               <div className="spinner-wrapper">
                 <div className="spinner"></div>

@@ -18,6 +18,7 @@ import RequireAuth from "./components/RequireAuth.tsx";
 import Footer from "./components/footer/Footer.tsx";
 import HeaderComponent from "./components/header/HeaderComponent.tsx";
 import RegisterFund from "./components/main/RegisterFund/RegisterFund.tsx";
+import AdminPanel from "./components/main/AdminPanel/AdminPanel.tsx";
 
 function App() {
   console.log("App");
@@ -41,6 +42,10 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[1000]} />}>
             <Route path="/user-profile" element={<UserProfile />} />
             <Route path="/register-fund" element={<RegisterFund />} />
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={[1000, 1001]} />}>
+            <Route path="/admin-panel" element={<AdminPanel />} />
           </Route>
 
           <Route

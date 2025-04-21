@@ -19,6 +19,7 @@ const UpHeader: React.FC = React.memo(() => {
 
   const signOut = async () => {
     await logout();
+    localStorage.removeItem("persist");
   };
 
   useEffect(() => {
@@ -47,6 +48,11 @@ const UpHeader: React.FC = React.memo(() => {
         <span>Email: {email}</span>
         <span>Phone: {phone}</span>
       </div>
+      {
+        <div>
+          <Link to="/admin-panel">Адмін панель</Link>
+        </div>
+      }
       <div className="social-container">
         <div className="social-links">
           <a href="#">

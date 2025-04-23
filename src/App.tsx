@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout.tsx";
-import Fundraising from "./components/main/Fundraisings/Fundraising.tsx";
 import Login from "./components/main/Login/Login.tsx";
 import Donate from "./components/main/Donate/Donate.tsx";
 import MilitaryGroups from "./components/main/MilitaryGroups/MilitaryGroups.tsx";
@@ -19,6 +18,7 @@ import Footer from "./components/footer/Footer.tsx";
 import HeaderComponent from "./components/header/HeaderComponent.tsx";
 import RegisterFund from "./components/main/RegisterFund/RegisterFund.tsx";
 import AdminPanel from "./components/main/AdminPanel/AdminPanel.tsx";
+import Fundraisings from "./components/main/Fundraisings/Fundraising.tsx";
 
 function App() {
   console.log("App");
@@ -27,13 +27,13 @@ function App() {
       <HeaderComponent />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Fundraising />} />
+          <Route path="/" element={<Fundraisings />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/login" element={<Login />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/about-us" element={<About />} />
 
-          <Route path="/fundraisings" element={<Fundraising />} />
+          <Route path="/fundraisings" element={<Fundraisings />} />
           <Route path="/volunteer-projects" element={<VolunteerProjects />} />
           <Route path="/military-groups" element={<MilitaryGroups />} />
           <Route path="/volunteer-funds" element={<VolunteerFunds />} />

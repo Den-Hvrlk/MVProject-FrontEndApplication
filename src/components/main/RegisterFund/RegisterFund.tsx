@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "../../../hooks/useToast";
 import { createRequest } from "../../../api/funds";
 import "./RegisterFund.css";
-import { useAuth } from "../../../hooks/useAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
@@ -11,6 +10,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { validateCodeUSR, validateFundName } from "../../../utils/validation";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 export type RegisterFundProps = {
   FundName: string;
@@ -22,7 +22,7 @@ const RegisterFund = () => {
   console.log("RegisterFund");
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const errRef = useRef<HTMLInputElement>(null);
@@ -62,7 +62,7 @@ const RegisterFund = () => {
     setIsLoading(true);
     console.log("registerForm", registerForm);
     try {
-      const result = await createRequest(auth.accessToken, registerForm);
+      const result = await createRequest(axiosPrivate, registerForm);
       showToast(result, "success");
       navigate("/volunteer-funds");
     } catch (err: any) {

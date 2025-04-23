@@ -4,14 +4,14 @@ import {
   resolveRequest,
   rejectRequest,
 } from "../../../api/funds";
-import { useAuth } from "../../../hooks/useAuth";
 import "./AdminPanel.css";
 import { useToast } from "../../../hooks/useToast";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 const AdminPanel: React.FC = () => {
   console.log("AdminPanel");
   const panelRef = useRef<HTMLDivElement>(null);
-  const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
   const { showToast } = useToast();
 
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -34,7 +34,7 @@ const AdminPanel: React.FC = () => {
     const fetchNotifications = async () => {
       try {
         setIsLoading(true);
-        const data = await getRegistrationFundRequests(auth.accessToken);
+        const data = await getRegistrationFundRequests(axiosPrivate);
         if (typeof data !== "string") {
           console.log("От сервера получено сообщение:", data);
           const processedData: Notification[] = data.map(
@@ -68,7 +68,7 @@ const AdminPanel: React.FC = () => {
 
   const handleResolveRequest = async (id: string) => {
     try {
-      const response = await resolveRequest(auth.accessToken, id);
+      const response = await resolveRequest(axiosPrivate, id);
       setNotifications((prev) => prev.filter((n) => n.id_key !== id));
       showToast(response, "success");
     } catch (error) {
@@ -78,7 +78,7 @@ const AdminPanel: React.FC = () => {
 
   const handleRejectRequest = async (id: string) => {
     try {
-      const response = await rejectRequest(auth.accessToken, id);
+      const response = await rejectRequest(axiosPrivate, id);
       setNotifications((prev) => prev.filter((n) => n.id_key !== id));
       showToast(response, "success");
     } catch (error) {

@@ -15,6 +15,7 @@ import {
   validateBirthDate,
   validateSex,
 } from "../../../utils/validation";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 export type UserProfileProps = {
   email: string;
@@ -36,6 +37,7 @@ const UserProfile: React.FC = () => {
   const { auth } = useAuth();
   const [isLoadingUpdateProfile, setIsLoadingUpdateProfile] = useState(false);
   const { showToast } = useToast();
+  const axiosPrivate = useAxiosPrivate();
   const userProfileRef = useRef<HTMLDivElement>(null);
   const [userDataToUpdate, setUserDataToUpdate] = useState<UserProfileProps>({
     email: "",
@@ -98,7 +100,7 @@ const UserProfile: React.FC = () => {
     userProfileRef.current?.scrollIntoView({ behavior: "smooth" });
     const fetchUser = async () => {
       try {
-        const userData = await getUserProfile(auth.accessToken);
+        const userData = await getUserProfile(axiosPrivate);
 
         setState({
           isLoading: false,
@@ -125,10 +127,7 @@ const UserProfile: React.FC = () => {
   const handleSave = async () => {
     try {
       setIsLoadingUpdateProfile(true);
-      const result = await updateUserProfile(
-        auth.accessToken,
-        userDataToUpdate
-      );
+      const result = await updateUserProfile(axiosPrivate, userDataToUpdate);
       setState({ isLoading: false, user: userDataToUpdate });
       setEditMode(false);
       showToast(result, "success");

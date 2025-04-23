@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Fundraising.css";
 
-const Fundraising: React.FC = function () {
+const Fundraisings: React.FC = function () {
   console.log("Fundraising");
   return (
     <>
@@ -39,4 +39,4 @@ const Fundraising: React.FC = function () {
   );
 };
 
-export default Fundraising;
+export default Fundraisings;

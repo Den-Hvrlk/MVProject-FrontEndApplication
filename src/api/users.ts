@@ -1,5 +1,6 @@
+import { AxiosInstance } from "axios";
 import { UserProfileProps } from "../components/main/UserProfile/UserProfile";
-import axios, { axiosPrivate } from "./axios";
+import axios from "./axios";
 
 export const registerUser = async (
   email: string,
@@ -43,28 +44,15 @@ export const logoutUser = async () => {
   return response.data;
 };
 
-export const getUserProfile = async (token: string) => {
-  const response = await axiosPrivate.get(`/users/profile`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
+export const getUserProfile = async (axiosInstance: AxiosInstance) => {
+  const response = await axiosInstance.get(`/users/profile`);
   return response.data;
 };
-export const updateUserProfile = async (
-  token: string,
-  newProfile: UserProfileProps
-) => {
-  const response = await axiosPrivate.put(
-    `/users/updateuserprofile`,
-    newProfile,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
 
+export const updateUserProfile = async (
+  axiosInstance: AxiosInstance,
+  data: UserProfileProps
+) => {
+  const response = await axiosInstance.put(`/users/updateuserprofile`, data);
   return response.data;
 };

@@ -13,6 +13,7 @@ const PersistLogin = () => {
     let isMounted = true;
     const verifyRefreshToken = async () => {
       try {
+        console.log("🔄 verifying refresh token");
         await refresh();
       } catch (err) {
         console.error("⚠️ Could not refresh session", err);

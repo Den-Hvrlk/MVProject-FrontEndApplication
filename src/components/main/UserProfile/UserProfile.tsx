@@ -122,7 +122,7 @@ const UserProfile: React.FC = () => {
     if (auth?.email && auth?.accessToken) {
       fetchUser();
     }
-  }, []);
+  }, [auth.accessToken]);
 
   const handleSave = async () => {
     try {

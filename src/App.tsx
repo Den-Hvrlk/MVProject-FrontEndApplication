@@ -44,7 +44,7 @@ function App() {
             <Route path="/register-fund" element={<RegisterFund />} />
           </Route>
 
-          <Route element={<RequireAuth allowedRoles={[1000, 1001]} />}>
+          <Route element={<RequireAuth allowedRoles={[1001]} />}>
             <Route path="/admin-panel" element={<AdminPanel />} />
           </Route>
 

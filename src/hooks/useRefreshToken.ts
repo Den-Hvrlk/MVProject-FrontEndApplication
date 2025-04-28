@@ -16,6 +16,8 @@ const useRefreshToken = () => {
         email: response.data.email,
         roles: response.data.roles,
         userName: response.data.userName,
+        userFunds: response.data.userFunds,
+        userGroups: response.data.userGroups,
       });
       return response.data.accessToken;
     } catch (err) {

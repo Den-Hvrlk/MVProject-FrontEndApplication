@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./VolunteerProjects.css";
 
 const VolunteerProjects: React.FC = () => {
@@ -10,6 +11,10 @@ const VolunteerProjects: React.FC = () => {
           type="text"
           placeholder="Пошук влонтерських проектів"
         ></input>
+        <p>
+          Хочете опублікувати волонтерський проект?{" "}
+          <Link to="/register-fund">Зареєструйте свій фонд</Link>
+        </p>
       </div>
 
       <section id="volunteer-projects-list">

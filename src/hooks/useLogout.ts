@@ -12,6 +12,9 @@ const useLogout = () => {
       roles: [],
       accessToken: "",
       userName: "",
+
+      userFunds: [],
+      userGroups: [],
     });
     try {
       const response = await logoutUser();

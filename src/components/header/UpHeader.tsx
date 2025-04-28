@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import React, { useEffect, useRef, useState } from "react";
 import useLogout from "../../hooks/useLogout";
+import DropdownBox from "./DropdownBox";
 
 const UpHeader: React.FC = React.memo(() => {
   console.log("UpHeader");
@@ -42,6 +43,8 @@ const UpHeader: React.FC = React.memo(() => {
     };
   }, []);
 
+  console.log("auth", auth);
+
   return (
     <div className="top-bar">
       <div className="contact-info">
@@ -54,6 +57,20 @@ const UpHeader: React.FC = React.memo(() => {
         </div>
       )}
       <div className="social-container">
+        {auth.roles.includes(1000) && (
+          <>
+            <DropdownBox
+              title="МОЇ УГРУПОВАННЯ"
+              items={auth.userGroups?.map((g) => g.groupName) || []}
+              createLink="/register-group"
+            />
+            <DropdownBox
+              title="МОЇ ФОНДИ"
+              items={auth.userFunds?.map((f) => f.fundName) || []}
+              createLink="/register-fund"
+            />
+          </>
+        )}
         <div className="social-links">
           <a href="#">
             <img src="/images/telegram.png" alt="Telegram" />

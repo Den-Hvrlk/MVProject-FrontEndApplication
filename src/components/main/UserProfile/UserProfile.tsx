@@ -16,6 +16,7 @@ import {
   validateSex,
 } from "../../../utils/validation";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { UserFunds, UserGroups } from "../../../context/AuthProvider";
 
 export type UserProfileProps = {
   email: string;
@@ -25,6 +26,9 @@ export type UserProfileProps = {
   birthDate: string;
   phoneNumber: string;
   avatarpath: string;
+
+  userFunds: UserFunds[];
+  userGroups: UserGroups[];
 };
 
 type UserProfileState = {
@@ -47,6 +51,9 @@ const UserProfile: React.FC = () => {
     birthDate: "",
     phoneNumber: "",
     avatarpath: "",
+
+    userFunds: [],
+    userGroups: [],
   });
   const [state, setState] = useState<UserProfileState>({
     isLoading: true,
@@ -58,6 +65,8 @@ const UserProfile: React.FC = () => {
       birthDate: "",
       phoneNumber: "",
       avatarpath: "",
+      userFunds: [],
+      userGroups: [],
     },
   });
 
@@ -112,6 +121,9 @@ const UserProfile: React.FC = () => {
             birthDate: userData.birthDate ?? "",
             phoneNumber: userData.phoneNumber ?? "",
             avatarpath: userData.avatarpath ?? "",
+
+            userFunds: userData.userFunds ?? [],
+            userGroups: userData.userGroups ?? [],
           },
         });
       } catch (error) {
@@ -427,10 +439,18 @@ const UserProfile: React.FC = () => {
                   <br />
 
                   <div>Мої волонтерські фонди</div>
-                  <div>—</div>
+                  <ul>
+                    {state.user.userFunds.map((f) => (
+                      <li key={f.fundId}>{f.fundName}</li>
+                    ))}
+                  </ul>
                   <br />
                   <div>Мої військові угруповання</div>
-                  <div>—</div>
+                  <ul>
+                    {state.user.userGroups.map((g) => (
+                      <li key={g.groupId}>{g.groupName}</li>
+                    ))}
+                  </ul>
 
                   {editMode && (
                     <>

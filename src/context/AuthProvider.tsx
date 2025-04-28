@@ -6,7 +6,20 @@ interface AuthData {
   email: string;
   roles: number[];
   accessToken: string;
+  userFunds: UserFunds[];
+  userGroups: UserGroups[];
 }
+
+export type UserFunds = {
+  fundId: number;
+  fundName: string;
+  codeUSR: string;
+};
+
+export type UserGroups = {
+  groupId: number;
+  groupName: string;
+};
 
 interface AuthContextType {
   auth: AuthData;
@@ -26,6 +39,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     roles: [],
     accessToken: "",
     userName: "",
+
+    userFunds: [],
+    userGroups: [],
   });
 
   const [persist, setPersist] = useState<boolean>(() => {

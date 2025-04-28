@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./VolunteersFunds.css";
 
 const VolunteerFunds: React.FC = () => {
@@ -11,7 +12,7 @@ const VolunteerFunds: React.FC = () => {
           placeholder="Пошук влонтерських проектів"
         ></input>
         <p>
-          <a href="https://google.com">Зареєструвати волонтерський фонд</a>
+          <Link to="/register-fund">Зареєструвати волонтерський фонд</Link>
         </p>
       </div>
 

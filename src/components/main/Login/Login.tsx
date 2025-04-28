@@ -68,7 +68,17 @@ const Login: React.FC = () => {
       const accessToken = response?.accessToken;
       const roles = response?.roles;
       const userName = response?.userName;
-      setAuth({ id, email, roles, accessToken, userName });
+      const userFunds = response?.userFunds;
+      const userGroups = response?.userGroups;
+      setAuth({
+        id,
+        email,
+        roles,
+        accessToken,
+        userName,
+        userFunds,
+        userGroups,
+      });
 
       showToast(
         "Ви успішно авторизувались!\nВітаю, " + response?.userName + "!",

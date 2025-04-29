@@ -38,6 +38,7 @@ const Reports: React.FC = () => {
     fundReports: [],
     groupReports: [],
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchReports = async () => {
@@ -46,9 +47,10 @@ const Reports: React.FC = () => {
         setReports(response.data);
       } catch (error) {
         console.error("Failed to fetch reports:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
-
     fetchReports();
   }, []);
 
@@ -56,48 +58,60 @@ const Reports: React.FC = () => {
     <div className="reports-page">
       <h1>Звіти</h1>
 
-      <section className="reports-section" id="fund-reports">
-        <h2>Звіти фондів</h2>
-        {reports.fundReports.length === 0 ? (
-          <p>Немає звітів фондів.</p>
-        ) : (
-          <div className="reports-list">
-            {reports.fundReports.map((report) => (
-              <div key={report.iD_FundReport} className="report-card">
-                <h3>{report.fundName}</h3>
-                <p>Період: {new Date(report.period).toLocaleDateString()}</p>
-                <p>Виконані запити: {report.completedRequestsCount}</p>
-                <p>Закриті збори: {report.completedFundraisingCount}</p>
-                <p>Мета зборів: {report.totalGoals} грн</p>
-                <p>Отримано коштів: {report.totalRaised} грн</p>
+      {isLoading ? (
+        <div className="spinner-wrapper">
+          <div className="spinner"></div>
+        </div>
+      ) : (
+        <>
+          <section className="reports-section" id="fund-reports">
+            <h2>Звіти фондів</h2>
+            {reports.fundReports.length === 0 ? (
+              <p>Немає звітів фондів.</p>
+            ) : (
+              <div className="reports-list">
+                {reports.fundReports.map((report) => (
+                  <div key={report.iD_FundReport} className="report-card">
+                    <h3>{report.fundName}</h3>
+                    <p>
+                      Період: {new Date(report.period).toLocaleDateString()}
+                    </p>
+                    <p>Виконані запити: {report.completedRequestsCount}</p>
+                    <p>Закриті збори: {report.completedFundraisingCount}</p>
+                    <p>Мета зборів: {report.totalGoals} грн</p>
+                    <p>Отримано коштів: {report.totalRaised} грн</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        )}
-      </section>
+            )}
+          </section>
 
-      <section className="reports-section" id="group-reports">
-        <h2>Звіти військових груп</h2>
-        {reports.groupReports.length === 0 ? (
-          <p>Немає звітів груп.</p>
-        ) : (
-          <div className="reports-list">
-            {reports.groupReports.map((report) => (
-              <div key={report.iD_GroupReport} className="report-card">
-                <h3>{report.groupName}</h3>
-                <p>Період: {new Date(report.period).toLocaleDateString()}</p>
-                <p>Усього зборів: {report.fundraisingCount}</p>
-                <p>Закрито зборів: {report.closedFundraisingCount}</p>
-                <p>Цілі зборів: {report.goalToBeRecieved} грн</p>
-                <p>Отримано коштів: {report.fundsReceived} грн</p>
-                <p>Усього запитів: {report.allRequestCount}</p>
-                <p>Виконано: {report.completedRequestCount}</p>
-                <p>Не виконано: {report.incompleteRequestCount}</p>
+          <section className="reports-section" id="group-reports">
+            <h2>Звіти військових груп</h2>
+            {reports.groupReports.length === 0 ? (
+              <p>Немає звітів груп.</p>
+            ) : (
+              <div className="reports-list">
+                {reports.groupReports.map((report) => (
+                  <div key={report.iD_GroupReport} className="report-card">
+                    <h3>{report.groupName}</h3>
+                    <p>
+                      Період: {new Date(report.period).toLocaleDateString()}
+                    </p>
+                    <p>Усього зборів: {report.fundraisingCount}</p>
+                    <p>Закрито зборів: {report.closedFundraisingCount}</p>
+                    <p>Цілі зборів: {report.goalToBeRecieved} грн</p>
+                    <p>Отримано коштів: {report.fundsReceived} грн</p>
+                    <p>Усього запитів: {report.allRequestCount}</p>
+                    <p>Виконано: {report.completedRequestCount}</p>
+                    <p>Не виконано: {report.incompleteRequestCount}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        )}
-      </section>
+            )}
+          </section>
+        </>
+      )}
     </div>
   );
 };

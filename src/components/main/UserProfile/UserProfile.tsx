@@ -172,6 +172,7 @@ const UserProfile: React.FC = () => {
                     }
                     alt="avatar"
                   />
+                  <button>Завантажити свій аватар</button>
                 </div>
                 <div className="user-profile-edit-button">
                   <button
@@ -191,7 +192,7 @@ const UserProfile: React.FC = () => {
                     <div className="form-row">
                       <label htmlFor="email">Пошта:</label>
                       <div id="email" className="form-input-block">
-                        <div className="readonly-field mobile-center-only">
+                        <div className="mobile-center-only">
                           {state.user.email}
                         </div>
                       </div>
@@ -438,18 +439,34 @@ const UserProfile: React.FC = () => {
                   <br />
                   <br />
 
-                  <div>Мої волонтерські фонди</div>
+                  <div>Мої волонтерські фонди:</div>
                   <ul>
-                    {state.user.userFunds.map((f) => (
-                      <li key={f.fundId}>{f.fundName}</li>
-                    ))}
+                    {state.user.userFunds.length > 0 ? (
+                      state.user.userFunds.map((f) => (
+                        <li className="organization-item" key={f.fundId}>
+                          {f.fundName}
+                        </li>
+                      ))
+                    ) : (
+                      <div className="organization-item">
+                        У вас немає волонтерських фондів
+                      </div>
+                    )}
                   </ul>
                   <br />
-                  <div>Мої військові угруповання</div>
+                  <div>Мої військові угруповання:</div>
                   <ul>
-                    {state.user.userGroups.map((g) => (
-                      <li key={g.groupId}>{g.groupName}</li>
-                    ))}
+                    {state.user.userGroups.length > 0 ? (
+                      state.user.userGroups.map((g) => (
+                        <li className="organization-item" key={g.groupId}>
+                          {g.groupName}
+                        </li>
+                      ))
+                    ) : (
+                      <div className="organization-item">
+                        У вас поки що немає військових угруповань
+                      </div>
+                    )}
                   </ul>
 
                   {editMode && (

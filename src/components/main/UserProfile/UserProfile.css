@@ -1,21 +1,34 @@
 .user-profile {
   padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  background-color: #f5f7fa;
+  color: #222;
+  font-family: "Segoe UI", sans-serif;
 }
 
-h1 {
-  padding-bottom: 40px;
+.user-profile h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1e2a38;
+}
+
+#user-profile-container {
+  width: 100%;
+  max-width: 1100px;
+  background: #eaeaea;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .user-profile-container {
-  background-color: #eaeaea;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  max-width: 1100px;
   display: flex;
-  height: auto;
-  gap: 26px;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 /* Левая панель */
@@ -24,7 +37,6 @@ h1 {
   max-width: 33%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* это важно */
   align-items: center;
   width: 100%;
   max-width: 100%;
@@ -44,30 +56,23 @@ h1 {
 }
 
 .user-profile-edit-button {
-  margin-top: auto;
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  padding-left: 16px;
-  padding-right: 16px;
+  margin-top: 1rem;
+  text-align: center;
 }
 
 .user-profile-edit-button button {
-  padding: 6px 12px;
-  font-size: 15px;
-  cursor: pointer;
-  border: 1px solid #ccc;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
   border-radius: 6px;
-  background-color: white;
-  transition: background-color 0.2s ease;
-  white-space: nowrap; /* чтобы текст не переносился */
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .user-profile-edit-button button:hover {
-  background-color: #f0f0f0;
+  background: #0056b3;
 }
 
 .user-profile-edit-button button:active {
@@ -76,17 +81,14 @@ h1 {
   transform: scale(0.98);
 }
 
-.user-profile-edit-button button.active-edit-mode {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+.active-edit-mode {
+  background-color: #dc3545 !important;
 }
 
 /* Аватар */
 .user-profile-avatar {
-  width: 192px; /* фиксированная ширина */
-  height: 192px; /* та же высота = квадрат */
+  width: 288px; /* фиксированная ширина */
+  height: 288px; /* та же высота = квадрат */
   border-radius: 50%; /* круг */
   border: 2px solid #ccc;
   overflow: hidden;
@@ -94,11 +96,12 @@ h1 {
   justify-content: center;
   align-items: center;
   background-color: #f7f7f7;
+  gap: 30px;
 }
 
 .user-profile-avatar img {
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   object-fit: cover;
   border-radius: 50%;
   background-color: #eaeaea;
@@ -146,36 +149,24 @@ h1 {
 
 .form-row {
   display: flex;
-  min-height: 48px;
-  align-items: center;
-  gap: 12px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .form-row label {
-  width: 140px; /* ширина для выравнивания по левой стороне */
-  font-weight: 500;
-  font-size: 15px;
-  text-align: left;
-  padding-top: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-input-block,
+.readonly-field {
+  background-color: #f0f2f5;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
 }
 
 .readonly-field {
-  flex: 1;
-  max-width: 300px;
-  width: 100%;
-  padding: 8px 12px;
-  font-size: 14px;
-  border: 1px solid transparent; /* имитируем input */
-  border-radius: 8px;
-  min-height: 38px; /* чтобы совпадало с input */
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #444;
 }
 
 .form-row input,
@@ -183,14 +174,16 @@ h1 {
   max-width: 300px;
 }
 
-.form-input-block {
-  display: block;
-  flex-direction: column;
-  gap: 4px;
-  flex: 1;
-  max-width: 300px;
-  width: 100%;
-  position: relative;
+.mobile-center-only {
+  text-align: center;
+}
+
+.form-input-block,
+.readonly-field {
+  background-color: #f0f2f5;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .form-input-without-instructions-block {
@@ -227,7 +220,7 @@ h1 {
 
 .user-profile-info-text input {
   padding: 8px 12px;
-  font-size: 14px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
   width: 100%;
@@ -237,7 +230,7 @@ h1 {
 
 .user-profile-info-text select {
   padding: 8px 8px;
-  font-size: 14px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
   width: 100%;
@@ -353,6 +346,15 @@ h1 {
   left: -9999px;
 }
 
+.organization-item {
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f0f2f5;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -360,78 +362,24 @@ h1 {
 }
 
 @media (max-width: 850px) {
-  .mobile-center-only {
-    text-align: center;
-    justify-content: center;
-  }
-
   .user-profile-container {
     flex-direction: column;
     align-items: center;
   }
 
-  .user-profile-container-left {
-    gap: 10px;
+  .user-profile-avatar img {
+    width: 80%;
+    height: 80%;
   }
 
-  .user-profile-container-left,
-  .user-profile-container-right {
+  .edit-button,
+  .user-profile-edit-button button {
     width: 100%;
-    max-width: 500px;
+    max-width: 300px;
   }
 
-  .user-profile-info {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .user-profile-avatar {
-    width: 192px;
-    height: 192px;
-    margin: 0 auto;
-  }
-
-  .user-profile-container-left {
-    gap: 10px;
-    align-items: center;
-  }
-
-  .form-row {
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    gap: 8px;
-    text-align: center;
-  }
-
-  .form-row label {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 5px;
-  }
-
-  .form-row input,
-  .form-row select {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .user-profile-edit-button {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  .user-profile-avatar {
-    margin: 0 auto;
-  }
-
-  .user-profile-container-left {
-    align-items: center;
-  }
-
-  .user-profile-info {
-    width: 100%;
+  .form-input-block,
+  .readonly-field {
+    text-align: left;
   }
 }

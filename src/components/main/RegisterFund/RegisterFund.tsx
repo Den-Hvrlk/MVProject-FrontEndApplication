@@ -230,13 +230,13 @@ const RegisterFund = () => {
             >
               Відправити запит на створення волонтерського фонду
             </button>
-            {isLoading && (
-              <div className="spinner-wrapper">
-                <div className="spinner"></div>
-              </div>
-            )}
           </div>
         </form>
+        {isLoading && (
+          <div className="spinner-wrapper">
+            <div className="spinner"></div>
+          </div>
+        )}
       </div>
     </section>
   );

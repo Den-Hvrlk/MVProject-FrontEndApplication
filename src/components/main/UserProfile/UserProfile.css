@@ -367,6 +367,20 @@
     align-items: center;
   }
 
+  .user-profile-container-right {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .user-profile-info {
+    padding: 16px !important;
+  }
+
+  .user-profile,
+  .user-profile * {
+    font-size: 12px !important;
+  }
+
   .user-profile-avatar img {
     width: 80%;
     height: 80%;

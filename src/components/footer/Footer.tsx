@@ -9,7 +9,7 @@ function Footer() {
         <div className="footer-links">
           <div className="footer-row row-1">
             <div className="footer-item">
-              <Link to="/fundraising">
+              <Link to="/fundraisings">
                 <p className="a-link">
                   Збори
                   <br />
